@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'/>
+    <link href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      body {
+    margin-top: 80px; /* Sesuaikan dengan tinggi header */
+}
+      
+header {
+    border-bottom: 1px solid #D1D5DB; /* Warna abu-abu terang */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Shadow dengan efek blur */
+}
+
+.social-icons {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            border-bottom: 1px solid #D1D5DB;
+            text-align: center;
+        }
+
+.social-icons p {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+      footer {
+        background-color: #1D4ED8;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+      }
+      
+    a {
+        transition: color 0.3s ease;
+    }
+    
+    
+
+    </style>
+ 
+
+  </head>
+  <body>
+    
+<header class="bg-white fixed w-full top-0 z-10" style="border-bottom: 1px solid #D1D5DB; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);">
+    <div class="container mx-auto flex items-center justify-between p-4">
+        <!-- Tulisan AY INJECTOR di kiri -->
+    <a href="/index.html"><div class="text-blue-600 font-bold text-xl">
+            AY INJECTOR
+        </div>
+        </a>
+        <!-- Logo di kanan -->
+        <div>
+            <a href="/index.html"><img src="https://i.ibb.co.com/p0gy8Yg/icon-removebg-preview.png" alt="Logo" class="h-11 border border-4 border-blue-600 rounded-full">
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Social Media Icons -->
+<div class="social-icons">
+    <p>AY TOOLS INJECTOR SOSIAL MEDIA</p>
+    <a href="https://www.youtube.com" target="_blank" class="text-blue-600 text-xl mx-4">
+        <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://www.instagram.com" target="_blank" class="text-pink-600 text-xl mx-4">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.tiktok.com" target="_blank" class="text-black text-xl mx-4">
+        <i class="fab fa-tiktok"></i>
+    </a>
+</div>
+
+
+    
+<div class='container mx-auto p-2 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6' style='margin-top: 20px;'>
+    <!-- Original Skin -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Original Skin' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQULKxdP7uXsWMptLAosgCv47Zc3MAkSX4eZlhfjfSjlch9DJ1r5MxvRA&s=10'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Original Skin</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Skin.json')">View</button>
+        </div>
+    </div>
+    <!-- Upgrade Skin -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Upgrade Skin' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIhQkjH62Wdld-YCDr8C6b8fyBVvDOkxEpDQ&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Upgrade Skin</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Upgrade.json')">View</button>
+        </div>
+    </div>
+    <!-- Custom Skin -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Custom Skin' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWdgtqoA6NkFHtCeG3dFkCI3egblT5jObihQ&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Custom Skin</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Custom.json')">View</button>
+        </div>
+    </div>
+    <!-- Painted Skin -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Painted Skin' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6fSomD2nqxdQM1TeNsgxJ5J_wm3s2Z5cYhA&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Painted Skin</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Painted.json')">View</button>
+        </div>
+    </div>
+    <!-- Recall Animation -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Recall Animation' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwynRhGBYW_piueXA82dDlJmr9OjPq14M8SxQa9YvdloHdTGF25CTNqxI0&s=10'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Recall Animation</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Recal.json')">View</button>
+        </div>
+    </div>
+    <!-- Battle Emote -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Battle Emote' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI74xL8cMMjEpGD1B36wHjjW6VnLP56sAENQ&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Battle Emote</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Emote.json')">View</button>
+        </div>
+    </div>
+    <!-- Spawn Effect -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Spawn Effect' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVFd58AqHDakOVhqxBg4OT1qxl16VJ8XiQ7A&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Spawn Effect</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Spawn.json')">View</button>
+        </div>
+    </div>
+    <!-- Elimination Effect -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Elimination Effect' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5xyhh1nGbhJuFdUCskmK_kXdOS-bWDdSsBA&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Elimination Effect</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('Elimin.json')">View</button>
+        </div>
+    </div>
+    <!-- Fix Bug -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='Fix Bug' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA7l4R0DbVRJgaagYGVy_8iRllPIvE6GqeTA&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>Fix Bug</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('bugfix')">Fix Bug</button>
+        </div>
+    </div>
+    <!-- New Update -->
+    <div class='bg-white p-2 rounded-tr-lg rounded-bl-lg shadow-lg border-2 border-solid border-blue-600'>
+        <img alt='New Update' class='w-full rounded-tr-lg rounded-bl-lg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx1OMTFHinTZzu4TBW28tErYBHr5bprH3rdw&usqp=CAU'/>
+        <h4 class='mt-2 text-center font-semibold text-sm'>New Update</h4>
+        <div class='flex justify-center mt-4'>
+            <button class='bg-blue-800 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600' onclick="openInNewTab('infoupdate')">View</button>
+        </div>
+    </div>
+</div>
+
+
+    <footer class="bg-blue-800 text-white py-4">
+      <div class="container mx-auto text-center">
+        <p class="text-sm">
+          &copy; <span id="current-year"></span> Agung Developer. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+<script>
+    // Script untuk mengupdate tahun otomatis
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+
+<script>
+function openInNewTab(jsonFileName) {
+    if (jsonFileName === 'bugfix') {
+        window.location.href = "custom://fixBug";
+    } else if (jsonFileName === 'infoupdate') {
+        window.open('infoupdate.html', '_self');
+    } else {
+        sessionStorage.setItem('data', jsonFileName);
+        
+        // Array URL yang akan diacak
+        const urls = '/pagedata.html';
+       
+     
+        // Membuka URL acak
+        window.open(urls, '_self');
+    }
+}
+</script>
+  </body>
+</html>
