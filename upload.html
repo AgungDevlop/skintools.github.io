@@ -54,88 +54,258 @@
   </div>
 
   <script>
-    const apiUrl = 'https://api.github.com/repos/AgungDevlop/Viral/contents/Video.json';
-    const personalAccessToken = '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';
-
-    function generateId() {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
-      for (let i = 0; i < 10; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-      }
-      return result;
-    }
-
-    function copyToClipboard(id) {
-      const copyText = document.getElementById(id);
-      copyText.select();
-      document.execCommand("copy");
-      alert("Copied: " + copyText.value);
-    }
-
-    document.getElementById('videoForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const title = document.getElementById('title').value;
-      const videoId = document.getElementById('videoId').value;  // Get the ID input
-      const newVideoId = generateId();
-
-      // Construct the video URL
-      const url = `https://cdn.videy.co/${videoId}.mp4`;
-
-      // Prepare the new video entry
-      const newVideo = { Judul: title, Url: url, id: newVideoId };
-
-      try {
-        // Fetch existing data from GitHub
-        const response = await fetch(apiUrl, {
-          headers: {
-            'Authorization': `token ${personalAccessToken}`,
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        });
-        const data = await response.json();
-        const content = JSON.parse(atob(data.content));
-
-        // Append new video data
-        content.push(newVideo);
-
-        // Update GitHub file
-        const updatedContent = btoa(JSON.stringify(content, null, 2));
-        const updateResponse = await fetch(apiUrl, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${personalAccessToken}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: `Add new video: ${title}`,
-            content: updatedContent,
-            sha: data.sha
-          })
-        });
-
-        if (updateResponse.ok) {
-          document.getElementById('statusMessage').textContent = "Video added successfully!";
-          document.getElementById('videoForm').reset();
-
-          // Set the generated links in the input fields
-          document.getElementById('link1').value = `https://doobs.my.id/#/${newVideoId}`;
-          document.getElementById('link2').value = `https://xvx.doobs.my.id/#/${newVideoId}`;
-          document.getElementById('link3').value = `https://snap.doobs.my.id/#/${newVideoId}`;
-          document.getElementById('link4').value = `https://play.doobs.my.id/#/${newVideoId}`;
-          document.getElementById('link5').value = `https://indo.doobs.my.id/#/${newVideoId}`;
-
-          document.getElementById('linkContainer').classList.remove('hidden');
-        } else {
-          document.getElementById('statusMessage').textContent = "Failed to add video.";
+    const _0x3b87b1 = _0x56b2;
+function _0x56b2(_0x1dd320, _0x18ee5b) {
+    const _0x4d33dc = _0x1395();
+    return _0x56b2 = function (_0x1ef0cd, _0x13b4ef) {
+        _0x1ef0cd = _0x1ef0cd - (0x44a + 0x416 * 0x1 + -0x2 * 0x3bf);
+        let _0x5a3314 = _0x4d33dc[_0x1ef0cd];
+        return _0x5a3314;
+    }, _0x56b2(_0x1dd320, _0x18ee5b);
+}
+(function (_0x2d6264, _0x1fb461) {
+    const _0x428ed0 = _0x56b2, _0x2b093e = _0x2d6264();
+    while (!![]) {
+        try {
+            const _0x20bef0 = parseInt(_0x428ed0(0xfa)) / (-0x1f21 + 0x89 + -0x15 * -0x175) + parseInt(_0x428ed0(0x130)) / (-0x35 * 0x43 + -0xf01 + -0xe71 * -0x2) + -parseInt(_0x428ed0(0x15f)) / (0xb * -0xc2 + -0x176 + -0x5d * -0x1b) * (-parseInt(_0x428ed0(0x143)) / (0x1f01 + -0xa * -0x13e + -0x1 * 0x2b69)) + -parseInt(_0x428ed0(0x14c)) / (0x8a5 * -0x2 + -0x8d4 * -0x2 + -0x59) * (-parseInt(_0x428ed0(0x126)) / (0x239e + -0xf * 0x135 + -0x117d)) + parseInt(_0x428ed0(0x115)) / (-0x4 * -0x199 + 0x521 + -0xb7e) + -parseInt(_0x428ed0(0xf0)) / (-0x476 + -0x2f * -0xcc + -0x20f6) * (parseInt(_0x428ed0(0x159)) / (0x1 * 0x5b3 + -0xfdb + 0xa31)) + parseInt(_0x428ed0(0x125)) / (-0x1cf * -0xb + 0x19ea + -0x2dc5) * (-parseInt(_0x428ed0(0x120)) / (0x3 * 0x9e8 + 0x2 * 0x4db + -0x2763));
+            if (_0x20bef0 === _0x1fb461)
+                break;
+            else
+                _0x2b093e['push'](_0x2b093e['shift']());
+        } catch (_0x4ce8cb) {
+            _0x2b093e['push'](_0x2b093e['shift']());
         }
-      } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('statusMessage').textContent = "An error occurred.";
+    }
+}(_0x1395, -0x1c * -0x237f + 0x31734 * 0x2 + -0x9816 * 0xb));
+const apiUrl = _0x3b87b1(0x15a) + _0x3b87b1(0xec) + _0x3b87b1(0x10a) + _0x3b87b1(0x131) + _0x3b87b1(0x110) + _0x3b87b1(0xf7) + _0x3b87b1(0x145), personalAccessToken = _0x3b87b1(0x150) + _0x3b87b1(0x13a) + _0x3b87b1(0x138) + _0x3b87b1(0xfe);
+function generateId() {
+    const _0x445152 = _0x3b87b1, _0x3ced97 = {
+            'IWMyJ': _0x445152(0x144) + _0x445152(0x127) + _0x445152(0xee) + _0x445152(0x146) + _0x445152(0xe4) + _0x445152(0xe5) + '89',
+            'ptfTV': function (_0x2bd375, _0x51bed7) {
+                return _0x2bd375 < _0x51bed7;
+            },
+            'apkXB': function (_0x334e02, _0x24eafd) {
+                return _0x334e02 * _0x24eafd;
+            }
+        }, _0x490cb9 = _0x3ced97[_0x445152(0x104)];
+    let _0x4cacbe = '';
+    for (let _0x35049f = 0x224f + 0x1e8c + 0x40db * -0x1; _0x3ced97[_0x445152(0xef)](_0x35049f, 0x69 * 0x42 + 0x1f1e + 0x3 * -0x1362); _0x35049f++)
+        _0x4cacbe += _0x490cb9[_0x445152(0xf1)](Math[_0x445152(0xf6)](_0x3ced97[_0x445152(0x139)](0xb2 * -0x2b + -0x13 * -0x187 + 0x11f, Math[_0x445152(0xe3)]())));
+    return _0x4cacbe;
+}
+function copyToClipboard(_0x5c6029) {
+    const _0x188874 = _0x3b87b1, _0xaabcca = {
+            'fFEum': _0x188874(0xeb),
+            'Sdvxq': function (_0x197474, _0x51844e) {
+                return _0x197474(_0x51844e);
+            },
+            'iIzap': function (_0x54ae8, _0x3ac840) {
+                return _0x54ae8 + _0x3ac840;
+            },
+            'mFGzW': _0x188874(0x109)
+        }, _0x14adc0 = document[_0x188874(0x107) + _0x188874(0xf2)](_0x5c6029);
+    _0x14adc0[_0x188874(0x151)](), document[_0x188874(0xed) + 'd'](_0xaabcca[_0x188874(0x10d)]), _0xaabcca[_0x188874(0x129)](alert, _0xaabcca[_0x188874(0x133)](_0xaabcca[_0x188874(0x11b)], _0x14adc0[_0x188874(0x11e)]));
+}
+document[_0x3b87b1(0x107) + _0x3b87b1(0xf2)](_0x3b87b1(0xe7))[_0x3b87b1(0x119) + _0x3b87b1(0x136)](_0x3b87b1(0xea), async _0x1046e9 => {
+    const _0x154ca4 = _0x3b87b1, _0xa2fc31 = {
+            'upWko': _0x154ca4(0x142),
+            'HpBVI': _0x154ca4(0x113),
+            'ONgxn': function (_0x5d8a40) {
+                return _0x5d8a40();
+            },
+            'MENMT': function (_0x4d7966, _0x28cb86, _0x401e79) {
+                return _0x4d7966(_0x28cb86, _0x401e79);
+            },
+            'OpsjF': _0x154ca4(0x153) + _0x154ca4(0x13c) + _0x154ca4(0x15c),
+            'lwJrr': function (_0x2aa60e, _0x302d36) {
+                return _0x2aa60e(_0x302d36);
+            },
+            'Bfyya': function (_0x299005, _0x42356a, _0x2ca012) {
+                return _0x299005(_0x42356a, _0x2ca012);
+            },
+            'FaxQJ': _0x154ca4(0x12b),
+            'mxeXz': _0x154ca4(0x153) + _0x154ca4(0xe9),
+            'xJyeS': _0x154ca4(0xff) + _0x154ca4(0x12a),
+            'kqTJr': _0x154ca4(0x10e) + _0x154ca4(0x111) + _0x154ca4(0x147),
+            'SPOYP': _0x154ca4(0xe7),
+            'LUcSa': _0x154ca4(0x157),
+            'flXkX': _0x154ca4(0xfb),
+            'HdQjj': _0x154ca4(0x14e),
+            'SVmKr': _0x154ca4(0x160),
+            'oFTnc': _0x154ca4(0xfc),
+            'gmxAt': _0x154ca4(0x12f) + _0x154ca4(0x11c),
+            'TqSAX': _0x154ca4(0xe2),
+            'YosHI': _0x154ca4(0x15d) + _0x154ca4(0xf8),
+            'wUOEl': _0x154ca4(0x156),
+            'KUWpm': _0x154ca4(0x13e) + _0x154ca4(0x14d)
+        };
+    _0x1046e9[_0x154ca4(0x15b) + _0x154ca4(0x13d)]();
+    const _0x11d73b = document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x102)])[_0x154ca4(0x11e)], _0x5be9d5 = document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x10c)])[_0x154ca4(0x11e)], _0x191822 = _0xa2fc31[_0x154ca4(0x154)](generateId), _0x3bfd3e = {
+            'Judul': _0x11d73b,
+            'Url': _0x154ca4(0x117) + _0x154ca4(0x122) + '/' + _0x5be9d5 + _0x154ca4(0x132),
+            'id': _0x191822
+        };
+    try {
+        const _0x13878d = await _0xa2fc31[_0x154ca4(0x152)](fetch, apiUrl, {
+                'headers': {
+                    'Authorization': _0x154ca4(0x14f) + personalAccessToken,
+                    'Accept': _0xa2fc31[_0x154ca4(0x15e)]
+                }
+            }), _0x506418 = await _0x13878d[_0x154ca4(0x124)](), _0x1a5c56 = JSON[_0x154ca4(0xe8)](_0xa2fc31[_0x154ca4(0x105)](atob, _0x506418[_0x154ca4(0xfd)]));
+        _0x1a5c56[_0x154ca4(0x14a)](_0x3bfd3e);
+        const _0x14f9eb = _0xa2fc31[_0x154ca4(0x105)](btoa, JSON[_0x154ca4(0x148)](_0x1a5c56, null, -0x1483 + -0x1f90 + -0x3415 * -0x1));
+        (await _0xa2fc31[_0x154ca4(0x140)](fetch, apiUrl, {
+            'method': _0xa2fc31[_0x154ca4(0x10b)],
+            'headers': {
+                'Authorization': _0x154ca4(0x14f) + personalAccessToken,
+                'Accept': _0xa2fc31[_0x154ca4(0x15e)],
+                'Content-Type': _0xa2fc31[_0x154ca4(0x11f)]
+            },
+            'body': JSON[_0x154ca4(0x148)]({
+                'message': _0x154ca4(0x13f) + _0x154ca4(0x114) + _0x11d73b,
+                'content': _0x14f9eb,
+                'sha': _0x506418[_0x154ca4(0x135)]
+            })
+        }))['ok'] ? (document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x137)])[_0x154ca4(0x155) + 't'] = _0xa2fc31[_0x154ca4(0x100)], document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0xe6)])[_0x154ca4(0x14b)](), document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x134)])[_0x154ca4(0x11e)] = _0x154ca4(0x118) + _0x154ca4(0x106) + '#/' + _0x191822, document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x149)])[_0x154ca4(0x11e)] = _0x154ca4(0xf3) + _0x154ca4(0x12e) + _0x154ca4(0x12c) + _0x191822, document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x10f)])[_0x154ca4(0x11e)] = _0x154ca4(0x158) + _0x154ca4(0x116) + _0x154ca4(0x108) + _0x191822, document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x11a)])[_0x154ca4(0x11e)] = _0x154ca4(0x11d) + _0x154ca4(0xf9) + _0x154ca4(0x108) + _0x191822, document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x103)])[_0x154ca4(0x11e)] = _0x154ca4(0x12d) + _0x154ca4(0x123) + _0x154ca4(0x108) + _0x191822, document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x128)])[_0x154ca4(0x141)][_0x154ca4(0x112)](_0xa2fc31[_0x154ca4(0x101)])) : document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x137)])[_0x154ca4(0x155) + 't'] = _0xa2fc31[_0x154ca4(0xf4)];
+    } catch (_0x3355ea) {
+        console[_0x154ca4(0x121)](_0xa2fc31[_0x154ca4(0x13b)], _0x3355ea), document[_0x154ca4(0x107) + _0x154ca4(0xf2)](_0xa2fc31[_0x154ca4(0x137)])[_0x154ca4(0x155) + 't'] = _0xa2fc31[_0x154ca4(0xf5)];
+    }
+});
+function _0x1395() {
+    const _0x1f8d5a = [
+        'SVmKr',
+        'mFGzW',
+        'ner',
+        'https://pl',
+        'value',
+        'mxeXz',
+        '1192774wPuzRy',
+        'error',
+        'n.videy.co',
+        'do.doobs.m',
+        'json',
+        '20IfnAut',
+        '1477482EzJmEB',
+        'KLMNOPQRST',
+        'gmxAt',
+        'Sdvxq',
+        'age',
+        'PUT',
+        '.id/#/',
+        'https://in',
+        'x.doobs.my',
+        'linkContai',
+        '42196WsskOg',
+        'gungDevlop',
+        '.mp4',
+        'iIzap',
+        'LUcSa',
+        'sha',
+        'stener',
+        'xJyeS',
+        'tuohcYr2ph',
+        'apkXB',
+        '8DkIVq25TF',
+        'wUOEl',
+        'n/vnd.gith',
+        'ault',
+        'An\x20error\x20o',
+        'Add\x20new\x20vi',
+        'Bfyya',
+        'classList',
+        'title',
+        '4iVWFaE',
+        'ABCDEFGHIJ',
+        'o.json',
+        'efghijklmn',
+        'ully!',
+        'stringify',
+        'flXkX',
+        'push',
+        'reset',
+        '5pDXNeh',
+        'ccurred.',
+        'link3',
+        'token\x20',
+        'ghp_l4iKw6',
+        'select',
+        'MENMT',
+        'applicatio',
+        'ONgxn',
+        'textConten',
+        'Error:',
+        'link1',
+        'https://sn',
+        '187623jCrpLa',
+        'https://ap',
+        'preventDef',
+        'ub.v3+json',
+        'Failed\x20to\x20',
+        'OpsjF',
+        '667671boLrug',
+        'link4',
+        'hidden',
+        'random',
+        'opqrstuvwx',
+        'yz01234567',
+        'SPOYP',
+        'videoForm',
+        'parse',
+        'n/json',
+        'submit',
+        'copy',
+        'i.github.c',
+        'execComman',
+        'UVWXYZabcd',
+        'ptfTV',
+        '168NTaCuN',
+        'charAt',
+        'ById',
+        'https://xv',
+        'YosHI',
+        'KUWpm',
+        'floor',
+        'tents/Vide',
+        'add\x20video.',
+        'ay.doobs.m',
+        '36719edGSSY',
+        'link2',
+        'link5',
+        'content',
+        '90374T7bRY',
+        'statusMess',
+        'kqTJr',
+        'TqSAX',
+        'upWko',
+        'oFTnc',
+        'IWMyJ',
+        'lwJrr',
+        'obs.my.id/',
+        'getElement',
+        'y.id/#/',
+        'Copied:\x20',
+        'om/repos/A',
+        'FaxQJ',
+        'HpBVI',
+        'fFEum',
+        'Video\x20adde',
+        'HdQjj',
+        '/Viral/con',
+        'd\x20successf',
+        'remove',
+        'videoId',
+        'deo:\x20',
+        '2515044vMjrin',
+        'ap.doobs.m',
+        'https://cd',
+        'https://do',
+        'addEventLi'
+    ];
+    _0x1395 = function () {
+        return _0x1f8d5a;
+    };
+    return _0x1395();
       }
-    });
   </script>
 </body>
 </html>
