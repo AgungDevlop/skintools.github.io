@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Video</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md md:max-w-2xl lg:max-w-3xl">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800 text-center">Add Video</h2>
+    <form id="videoForm" class="space-y-4">
+      <div>
+        <label for="title" class="block text-sm font-medium text-gray-700">Video Title</label>
+        <input type="text" id="title" name="title" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <div>
+        <label for="videoId" class="block text-sm font-medium text-gray-700">Masukan ID</label>
+        <input type="text" id="videoId" name="videoId" required
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <button type="submit"
+        class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md">Add Video</button>
+    </form>
+    <p id="statusMessage" class="mt-4 text-sm text-gray-600 text-center"></p>
+    
+    <div id="linkContainer" class="mt-4 space-y-2 hidden">
+      <p class="text-lg font-medium text-gray-700 text-center">Access your links:</p>
+      <!-- Generated Links with Copy Button -->
+      <div class="grid gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="flex items-center space-x-2">
+          <input id="link1" type="text" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+          <button onclick="copyToClipboard('link1')" class="bg-blue-500 text-white px-3 py-1 rounded-md">Copy</button>
+        </div>
+        <div class="flex items-center space-x-2">
+          <input id="link2" type="text" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+          <button onclick="copyToClipboard('link2')" class="bg-blue-500 text-white px-3 py-1 rounded-md">Copy</button>
+        </div>
+        <div class="flex items-center space-x-2">
+          <input id="link3" type="text" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+          <button onclick="copyToClipboard('link3')" class="bg-blue-500 text-white px-3 py-1 rounded-md">Copy</button>
+        </div>
+        <div class="flex items-center space-x-2">
+          <input id="link4" type="text" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+          <button onclick="copyToClipboard('link4')" class="bg-blue-500 text-white px-3 py-1 rounded-md">Copy</button>
+        </div>
+        <div class="flex items-center space-x-2">
+          <input id="link5" type="text" readonly class="w-full px-3 py-2 border border-gray-300 rounded-md" />
+          <button onclick="copyToClipboard('link5')" class="bg-blue-500 text-white px-3 py-1 rounded-md">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const apiUrl = 'https://api.github.com/repos/AgungDevlop/Viral/contents/Video.json';
+    const personalAccessToken = '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';
+
+    function generateId() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < 10; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return result;
+    }
+
+    function copyToClipboard(id) {
+      const copyText = document.getElementById(id);
+      copyText.select();
+      document.execCommand("copy");
+      alert("Copied: " + copyText.value);
+    }
+
+    document.getElementById('videoForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const videoId = document.getElementById('videoId').value;  // Get the ID input
+      const newVideoId = generateId();
+
+      // Construct the video URL
+      const url = `https://cdn.videy.co/${videoId}.mp4`;
+
+      // Prepare the new video entry
+      const newVideo = { Judul: title, Url: url, id: newVideoId };
+
+      try {
+        // Fetch existing data from GitHub
+        const response = await fetch(apiUrl, {
+          headers: {
+            'Authorization': `token ${personalAccessToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        const data = await response.json();
+        const content = JSON.parse(atob(data.content));
+
+        // Append new video data
+        content.push(newVideo);
+
+        // Update GitHub file
+        const updatedContent = btoa(JSON.stringify(content, null, 2));
+        const updateResponse = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${personalAccessToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Add new video: ${title}`,
+            content: updatedContent,
+            sha: data.sha
+          })
+        });
+
+        if (updateResponse.ok) {
+          document.getElementById('statusMessage').textContent = "Video added successfully!";
+          document.getElementById('videoForm').reset();
+
+          // Set the generated links in the input fields
+          document.getElementById('link1').value = `https://doobs.my.id/#/${newVideoId}`;
+          document.getElementById('link2').value = `https://xvx.doobs.my.id/#/${newVideoId}`;
+          document.getElementById('link3').value = `https://snap.doobs.my.id/#/${newVideoId}`;
+          document.getElementById('link4').value = `https://play.doobs.my.id/#/${newVideoId}`;
+          document.getElementById('link5').value = `https://indo.doobs.my.id/#/${newVideoId}`;
+
+          document.getElementById('linkContainer').classList.remove('hidden');
+        } else {
+          document.getElementById('statusMessage').textContent = "Failed to add video.";
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('statusMessage').textContent = "An error occurred.";
+      }
+    });
+  </script>
+</body>
+</html>
