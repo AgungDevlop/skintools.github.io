@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Neon Magisk Modules</title>
+    <link rel="icon" type="image/webp" href="img/icon.webp" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 100%);
+        color: #e0e0e0;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+      #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .neon-teal {
+        color: #00ffd1;
+      }
+      .neon-shadow {
+        box-shadow: 0 0 10px rgba(0, 255, 209, 0.5);
+      }
+      .download-button {
+        background: linear-gradient(90deg, #00ffd1, #00b894);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 15px 40px;
+        border-radius: 30px;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+        cursor: pointer;
+      }
+      .download-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 255, 209, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="text-center p-8 bg-[#1b263b] rounded-lg shadow-xl neon-shadow" data-aos="zoom-in">
+      <h1 class="text-3xl md:text-4xl font-bold neon-teal mb-6">Download Page</h1>
+      <div id="download-section">
+        <p class="text-lg mb-8">Click the button below to download Neon Magisk Apk.</p>
+        <button id="final-download-btn" class="download-button">Download Neon Magisk Apk</button>
+      </div>
+      <div id="access-denied" class="hidden">
+        <p class="text-lg text-red-400 mb-8">Access Denied. Please go back to the <a href="index.html" class="underline neon-teal">homepage</a> to proceed with the download.</p>
+      </div>
+    </div>
+
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+      });
+
+      // Initialize Particles.js
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 40, density: { enable: true, value_area: 1200 } },
+          color: { value: '#00ffd1' },
+          shape: { type: 'circle' },
+          opacity: { value: 0.3, random: true },
+          size: { value: 2, random: true },
+          line_linked: { enable: true, distance: 200, color: '#00ffd1', opacity: 0.2, width: 1 },
+          move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false },
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+          modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 2 } },
+        },
+        retina_detect: true,
+      });
+
+      // --- MODIFIKASI DIMULAI DI SINI ---
+      const finalDownloadBtn = document.getElementById('final-download-btn');
+      const downloadSection = document.getElementById('download-section');
+      const accessDenied = document.getElementById('access-denied');
+      const directDownloadLink = "https://obqj2.com/4/9587058"; // Link yang akan dibuka saat tombol diklik
+      const apkDownloadLink = "/base.apk"; // Link untuk download APK
+
+      // Cek session storage
+      if (sessionStorage.getItem('download') === 'true') {
+        downloadSection.classList.remove('hidden');
+        accessDenied.classList.add('hidden');
+
+        finalDownloadBtn.addEventListener('click', () => {
+          // Open direct download link in new tab
+          window.open(directDownloadLink, '_blank');
+
+          // Trigger APK download after 2 seconds
+          setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = apkDownloadLink;
+            link.download = 'Neon_Magisk_Modules.apk'; // Nama file APK saat diunduh
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Bersihkan session storage setelah download selesai (opsional)
+            sessionStorage.removeItem('download');
+          }, 2000);
+        });
+      } else {
+        downloadSection.classList.add('hidden');
+        accessDenied.classList.remove('hidden');
+      }
+      // --- MODIFIKASI BERAKHIR DI SINI ---
+    </script>
+  </body>
+</html>
