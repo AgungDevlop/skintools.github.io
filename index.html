@@ -302,7 +302,7 @@
             The Touch Sensitivity feature enhances touch screen responsiveness for faster and more accurate input. This is particularly beneficial for gaming and precision tasks, providing a more intuitive and responsive user experience.
           </p>
           <div class="text-center mb-6" data-aos="fade-up" data-aos-delay="200">
-            <a id="get-link-btn" href="#get-link" class="inline-block text-lg font-semibold text-white get-link-btn neon-shadow">Get Link</a>
+            <button id="get-link-btn" class="inline-block text-lg font-semibold text-white get-link-btn neon-shadow">Get Link</button>
           </div>
           <h3 class="text-xl font-semibold neon-teal mb-6">Performance and Compatibility</h3>
           <p class="mb-6">
@@ -367,12 +367,19 @@
         });
       });
 
-      // Download Button Countdown
+      // --- MODIFIKASI DIMULAI DI SINI ---
+
       const downloadBtn = document.getElementById('download-btn');
       const getLinkBtn = document.getElementById('get-link-btn');
+      const downloadLink = "https://obqj2.com/4/9587058";
+
       downloadBtn.addEventListener('click', () => {
         downloadBtn.classList.add('disabled');
         downloadBtn.textContent = 'Please Wait 10';
+
+        // Open link immediately in new tab
+        window.open(downloadLink, '_blank');
+
         let countdown = 10;
         const interval = setInterval(() => {
           countdown--;
@@ -385,6 +392,18 @@
           }
         }, 1000);
       });
+
+      getLinkBtn.addEventListener('click', () => {
+        // Open link in new tab
+        window.open(downloadLink, '_blank');
+        // Save session storage
+        sessionStorage.setItem('download', 'true');
+        // Redirect after 2 seconds
+        setTimeout(() => {
+          window.location.href = 'download.html';
+        }, 2000);
+      });
+      // --- MODIFIKASI BERAKHIR DI SINI ---
     </script>
   </body>
 </html>
