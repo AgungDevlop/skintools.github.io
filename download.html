@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Download Neon Magisk Modules</title>
+    <title>Neon Magisk Modules - Get Your Download</title>
     <link rel="icon" type="image/webp" href="img/icon.webp" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
@@ -59,13 +59,14 @@
     <div id="particles-js"></div>
 
     <div class="text-center p-8 bg-[#1b263b] rounded-lg shadow-xl neon-shadow" data-aos="zoom-in">
-      <h1 class="text-3xl md:text-4xl font-bold neon-teal mb-6">Download Page</h1>
+      <img src="img/icon.webp" alt="Neon Magisk Modules Icon" class="w-24 h-24 mx-auto mb-6 rounded-lg neon-shadow" />
+      <h1 class="text-3xl md:text-4xl font-bold neon-teal mb-4">Your Download Is Ready!</h1>
+      <p class="text-lg mb-8">Click the button below to get **Neon Magisk Apk**.</p>
       <div id="download-section">
-        <p class="text-lg mb-8">Click the button below to download Neon Magisk Apk.</p>
         <button id="final-download-btn" class="download-button">Download Neon Magisk Apk</button>
       </div>
       <div id="access-denied" class="hidden">
-        <p class="text-lg text-red-400 mb-8">Access Denied. Please go back to the <a href="index.html" class="underline neon-teal">homepage</a> to proceed with the download.</p>
+        <p class="text-lg text-red-400 mb-8">Akses Ditolak. Mohon kembali ke <a href="index.html" class="underline neon-teal">halaman utama</a> untuk melanjutkan unduhan.</p>
       </div>
     </div>
 
@@ -96,7 +97,6 @@
         retina_detect: true,
       });
 
-      // --- MODIFIKASI DIMULAI DI SINI ---
       const finalDownloadBtn = document.getElementById('final-download-btn');
       const downloadSection = document.getElementById('download-section');
       const accessDenied = document.getElementById('access-denied');
@@ -129,7 +129,6 @@
         downloadSection.classList.add('hidden');
         accessDenied.classList.remove('hidden');
       }
-      // --- MODIFIKASI BERAKHIR DI SINI ---
     </script>
   </body>
 </html>
