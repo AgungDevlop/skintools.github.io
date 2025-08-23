@@ -177,7 +177,7 @@
                 <h3 class="text-lg font-semibold neon-teal">${module.ModuleName}</h3>
                 <p class="text-sm text-gray-400">Size: ${module.Size} | Author: ${module.Author}</p>
               </div>
-              <a href="${module.DownloadUrl}" target="_blank" class="text-white download-btn" data-download-url="${module.DownloadUrl}">Download</a>
+              <button class="text-white download-btn" data-download-url="${module.DownloadUrl}">Download</button>
             `;
             moduleList.appendChild(moduleItem);
           });
@@ -186,9 +186,7 @@
             button.addEventListener('click', () => {
               const downloadUrl = button.getAttribute('data-download-url');
               sessionStorage.setItem('download', downloadUrl);
-              setTimeout(() => {
-                window.location.href = '../download.html';
-              }, 1000);
+              window.location.replace('../download.html');
             });
           });
         })
