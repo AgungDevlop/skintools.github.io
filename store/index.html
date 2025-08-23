@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="monetag" content="d22eafaa4e1151646621f4ebc3947d81" />
     <title>Neon Magisk Modules Store - Download Optimization Modules</title>
-    <meta name="description" content="Explore and download Neon Magisk Modules to optimize your Android 11+ device's performance, gaming, and battery life. Curated modules by Agung Developer." />
+    <meta name="description" content="Discover and download Neon Magisk Modules to enhance your Android 11+ device's performance, gaming, and battery life. Curated by Agung Developer." />
     <meta name="keywords" content="Neon Magisk Modules, Magisk modules store, Android optimization, performance tweaks, gaming modules, battery saver, Android 11, Agung Developer" />
     <meta name="author" content="Agung Developer" />
     <meta name="robots" content="index, follow" />
     <meta property="og:title" content="Neon Magisk Modules Store - Download Optimization Modules" />
-    <meta property="og:description" content="Discover and download Neon Magisk Modules for enhanced Android performance, gaming, and battery optimization. Compatible with Android 11+." />
+    <meta property="og:description" content="Download Neon Magisk Modules for optimized Android performance, gaming, and battery life on Android 11+ devices." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://neonmagisk.my.id/store/" />
-    <meta property="og:image" content="../img/banner.webp" />
+    <meta property="og:image" content="img/banner.webp" />
     <meta property="og:site_name" content="Neon Magisk Modules Store" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Neon Magisk Modules Store - Download Optimization Modules" />
     <meta name="twitter:description" content="Download Neon Magisk Modules to boost your Android device's performance, gaming, and battery life with advanced tweaks by Agung Developer." />
-    <meta name="twitter:image" content="../img/banner.webp" />
+    <meta name="twitter:image" content="img/banner.webp" />
     <link rel="canonical" href="https://neonmagisk.my.id/store/" />
     <link rel="icon" type="image/webp" href="../img/icon.webp" />
     <script type="text/javascript">
@@ -44,7 +44,6 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/11.3.6/framer-motion.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
       body {
         background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 100%);
@@ -70,30 +69,29 @@
         font-weight: 700;
         letter-spacing: -0.025em;
       }
-      p, li {
-        font-weight: 400;
-        line-height: 1.75;
-        text-align: justify;
-      }
-      .module-card {
+      .module-list-item {
         background: #1b263b;
         border-radius: 12px;
-        padding: 20px;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
-      .module-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0 20px rgba(0, 255, 209, 0.7);
+      .module-list-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 15px rgba(0, 255, 209, 0.7);
       }
       .download-btn {
         background: linear-gradient(90deg, #00ffd1, #00b894);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        padding: 10px 30px;
+        padding: 8px 24px;
         border-radius: 20px;
+        font-size: 14px;
       }
       .download-btn:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(0, 255, 209, 0.7);
+        box-shadow: 0 0 15px rgba(0, 255, 209, 0.7);
       }
       .download-btn.disabled {
         pointer-events: none;
@@ -113,17 +111,10 @@
     <main class="container mx-auto px-4 py-12">
       <section class="mb-12 text-center" data-aos="fade-up">
         <h2 class="text-2xl font-semibold neon-teal mb-6">Available Modules</h2>
-        <p class="text-lg mb-6">Browse and download Neon Magisk Modules to optimize your Android device's performance, gaming, and battery life.</p>
       </section>
 
       <section class="mb-12" data-aos="fade-up" data-aos-delay="200">
-        <div id="module-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-      </section>
-
-      <section class="mb-12 text-center" data-aos="fade-up" data-aos-delay="400">
-        <p class="text-lg">
-          All modules are developed and tested by <span class="neon-teal font-semibold">Agung Developer</span> for compatibility with Android 11+ devices. Download now to enhance your Android experience!
-        </p>
+        <div id="module-list" class="space-y-4"></div>
       </section>
     </main>
 
@@ -132,14 +123,12 @@
     </footer>
 
     <script>
-      // Initialize AOS
       AOS.init({
         duration: 800,
         easing: 'ease-in-out',
         once: true,
       });
 
-      // Initialize Particles.js
       particlesJS('particles-js', {
         particles: {
           number: { value: 40, density: { enable: true, value_area: 1200 } },
@@ -158,21 +147,21 @@
         retina_detect: true,
       });
 
-      // Fetch and display modules from modulestore.json
       fetch('/store/modulestore.json')
         .then(response => response.json())
         .then(data => {
           const moduleList = document.getElementById('module-list');
           data.modules.forEach(module => {
-            const moduleCard = document.createElement('div');
-            moduleCard.className = 'module-card neon-shadow';
-            moduleCard.innerHTML = `
-              <h3 class="text-xl font-semibold neon-teal mb-4">${module.ModuleName}</h3>
-              <p class="mb-2"><strong>Size:</strong> ${module.Size}</p>
-              <p class="mb-4"><strong>Author:</strong> ${module.Author}</p>
-              <a href="${module.DownloadUrl}" target="_blank" class="inline-block text-white download-btn">Download Module</a>
+            const moduleItem = document.createElement('div');
+            moduleItem.className = 'module-list-item neon-shadow';
+            moduleItem.innerHTML = `
+              <div>
+                <h3 class="text-lg font-semibold neon-teal">${module.ModuleName}</h3>
+                <p class="text-sm text-gray-400">Size: ${module.Size} | Author: ${module.Author}</p>
+              </div>
+              <a href="${module.DownloadUrl}" target="_blank" class="text-white download-btn">Download</a>
             `;
-            moduleList.appendChild(moduleCard);
+            moduleList.appendChild(moduleItem);
           });
         })
         .catch(error => {
@@ -180,7 +169,6 @@
           document.getElementById('module-list').innerHTML = '<p class="text-center text-red-400">Failed to load modules. Please try again later.</p>';
         });
 
-      // Framer Motion hover effects
       document.querySelectorAll('a').forEach(link => {
         link.addEventListener('mouseenter', () => {
           link.style.transform = 'scale(1.1)';
