@@ -44,11 +44,18 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/11.3.6/framer-motion.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
       body {
         background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 100%);
         color: #e0e0e0;
         font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
         overflow-x: hidden;
       }
       #particles-js {
@@ -74,6 +81,7 @@
         border-radius: 12px;
         padding: 16px;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -97,6 +105,16 @@
         pointer-events: none;
         opacity: 0.7;
       }
+      main {
+        flex: 1 0 auto;
+      }
+      footer {
+        flex-shrink: 0;
+        background: #0d1b2a;
+        padding: 1.5rem 0;
+        text-align: center;
+        width: 100%;
+      }
     </style>
   </head>
   <body>
@@ -118,7 +136,7 @@
       </section>
     </main>
 
-    <footer class="bg-[#0d1b2a] py-6 text-center">
+    <footer>
       <p class="text-gray-400" data-aos="fade-up">Copyright © 2025 By Agung Developer</p>
     </footer>
 
@@ -159,9 +177,19 @@
                 <h3 class="text-lg font-semibold neon-teal">${module.ModuleName}</h3>
                 <p class="text-sm text-gray-400">Size: ${module.Size} | Author: ${module.Author}</p>
               </div>
-              <a href="${module.DownloadUrl}" target="_blank" class="text-white download-btn">Download</a>
+              <a href="${module.DownloadUrl}" target="_blank" class="text-white download-btn" data-download-url="${module.DownloadUrl}">Download</a>
             `;
             moduleList.appendChild(moduleItem);
+          });
+
+          document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', () => {
+              const downloadUrl = button.getAttribute('data-download-url');
+              sessionStorage.setItem('download', downloadUrl);
+              setTimeout(() => {
+                window.location.href = '../download.html';
+              }, 1000);
+            });
           });
         })
         .catch(error => {
