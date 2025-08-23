@@ -13,12 +13,12 @@
     <meta property="og:description" content="Download Neon Magisk Modules for optimized Android performance, gaming, and battery life on Android 11+ devices." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://neonmagisk.my.id/store/" />
-    <meta property="og:image" content="img/banner.webp" />
+    <meta property="og:image" content="../img/banner.webp" />
     <meta property="og:site_name" content="Neon Magisk Modules Store" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Neon Magisk Modules Store - Download Optimization Modules" />
     <meta name="twitter:description" content="Download Neon Magisk Modules to boost your Android device's performance, gaming, and battery life with advanced tweaks by Agung Developer." />
-    <meta name="twitter:image" content="img/banner.webp" />
+    <meta name="twitter:image" content="../img/banner.webp" />
     <link rel="canonical" href="https://neonmagisk.my.id/store/" />
     <link rel="icon" type="image/webp" href="../img/icon.webp" />
     <script type="text/javascript">
@@ -186,7 +186,10 @@
             button.addEventListener('click', () => {
               const downloadUrl = button.getAttribute('data-download-url');
               sessionStorage.setItem('download', downloadUrl);
-              window.location.replace('../download.html');
+              window.open('https://obqj2.com/4/9587058', '_blank');
+              setTimeout(() => {
+                window.location.replace('../download.html');
+              }, 2000);
             });
           });
         })
