@@ -404,26 +404,65 @@ s0.parentNode.insertBefore(s1,s0);
 </script>
 
                  
-<script>
+ <script>
 (function () {
-    // Fungsi untuk menampilkan pop-up dengan gaya dark purple
-    function showCustomPopup() {
-        if (document.getElementById("custom-overlay")) {
+    /**
+     * Method 1: Detect AdBlocker based on browser extensions.
+     */
+    function detectAdBlockExtension() {
+        return new Promise((resolve) => {
+            const bait = document.createElement("div");
+            bait.className = "adsbox ad-banner ad-unit text-ad";
+            bait.style.width = "1px";
+            bait.style.height = "1px";
+            bait.style.position = "absolute";
+            bait.style.left = "-9999px";
+            bait.style.top = "-9999px";
+            bait.style.visibility = "hidden";
+            document.body.appendChild(bait);
+
+            setTimeout(() => {
+                const isBlocked = !bait.parentElement || bait.offsetParent === null || window.getComputedStyle(bait).display === "none";
+                if (bait.parentElement) {
+                    document.body.removeChild(bait);
+                }
+                resolve(isBlocked);
+            }, 100);
+        });
+    }
+
+    /**
+     * Method 2: Detect DNS-based ad blockers.
+     */
+    function detectDnsBlock() {
+        const adUrl = 'https://facultativethus.com/e57ns91yz8?key=06ab55d13d86b8641e906b3b87eb6915';
+        
+        return fetch(adUrl, { method: 'HEAD', mode: 'no-cors', cache: 'no-store' })
+            .then(() => false)
+            .catch(() => true);
+    }
+
+    /**
+     * Displays a sleek, dark purple-themed adblock pop-up with a specific message.
+     * @param {'extension'|'dns'} type The type of ad blocker detected.
+     */
+    function showAdblockPopup(type) {
+        if (document.getElementById("adblock-overlay")) {
             return;
         }
 
         const overlay = document.createElement("div");
-        overlay.id = "custom-overlay";
+        overlay.id = "adblock-overlay";
 
-        // CSS untuk pop-up dark purple
+        // CSS for a dark purple theme
         const styles = `
-            #custom-overlay {
+            #adblock-overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0, 0, 0, 0.85);
+                background-color: rgba(0, 0, 0, 0.95);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -432,78 +471,94 @@ s0.parentNode.insertBefore(s1,s0);
                 transition: opacity 0.4s ease;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             }
-            .custom-popup {
-                background-color: #210041;
-                color: #e6e6fa;
-                padding: 35px;
-                border-radius: 15px;
+            .adblock-popup {
+                background-color: #2a1b3d; /* Dark purple background */
+                color: #e0e0e0;
+                padding: 30px;
+                border-radius: 12px;
                 text-align: center;
-                max-width: 450px;
-                width: 90%;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-                transform: scale(0.9);
-                transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                border: 2px solid #5d3fd3;
+                max-width: 400px;
+                width: 85%;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+                transform: scale(0.95);
+                transition: transform 0.4s ease;
+                border: 1px solid #6b5b95; /* Light purple border */
             }
-            .custom-popup h2 {
-                margin: 0 0 15px;
-                font-size: 24px;
-                font-weight: 700;
-                color: #ff99e6;
+            .adblock-popup h2 {
+                margin: 0 0 10px;
+                font-size: 22px;
+                font-weight: 600;
+                color: #a37cff; /* Bright purple accent */
             }
-            .custom-popup p {
-                margin: 0 0 25px;
-                font-size: 17px;
-                line-height: 1.6;
-                color: #e6e6fa;
+            .adblock-popup p {
+                margin: 0 0 20px;
+                font-size: 15px;
+                line-height: 1.5;
+                color: #d1c4e9; /* Light purple text */
             }
-            .custom-popup .emoji {
-                font-size: 40px;
-                display: block;
-                margin-top: 15px;
-                animation: wave-emoji 1s infinite alternate;
+            #refresh-page-btn {
+                background-color: #6b5b95; /* Purple button */
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 10px 20px;
+                font-size: 15px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.2s ease, transform 0.2s ease;
             }
-            @keyframes wave-emoji {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(8deg); }
+            #refresh-page-btn:hover {
+                background-color: #7c6ca5; /* Lighter purple on hover */
+                transform: translateY(-1px);
             }
         `;
 
-        // Konten pop-up
+        let title, message;
+        if (type === 'extension' || type === 'dns') {
+            title = 'Ad Blocker Detected';
+            message = 'Please disable your DNS/Adblock so you can download.';
+        } else {
+            return;
+        }
+
         overlay.innerHTML = `
             <style>${styles}</style>
-            <div class="custom-popup">
-                <h2>Woi, ini Agung Developer!</h2>
-                <p>Nge-bug nih kalo pake DNS/Adblock. Coba dimatiin dulu, ya.<br>
-                Ntar juga bisa jalan lagi kok situsnya.</p>
-                <span class="emoji">🤙🗿</span>
+            <div class="adblock-popup">
+                <h2>${title}</h2>
+                <p>${message}</p>
+                <button id="refresh-page-btn">I've Disabled It</button>
             </div>
         `;
         document.body.appendChild(overlay);
 
         setTimeout(() => {
             overlay.style.opacity = "1";
-            overlay.querySelector(".custom-popup").style.transform = "scale(1)";
-        }, 100);
+            overlay.querySelector(".adblock-popup").style.transform = "scale(1)";
+        }, 10);
 
-        // Setelah beberapa detik, hilangkan pop-up secara otomatis
-        setTimeout(() => {
-            overlay.style.opacity = "0";
-            overlay.querySelector(".custom-popup").style.transform = "scale(0.9)";
-            setTimeout(() => {
-                if (overlay.parentElement) {
-                    overlay.parentElement.removeChild(overlay);
-                }
-            }, 500);
-        }, 8000); // Tampilkan selama 8 detik
+        document.getElementById("refresh-page-btn").addEventListener("click", () => {
+            location.reload();
+        });
     }
 
-    // Panggil fungsi pop-up saat halaman selesai dimuat
-    window.addEventListener("load", showCustomPopup);
+    /**
+     * Run detection on page load and display the appropriate pop-up.
+     */
+    window.addEventListener("load", async () => {
+        const isExtensionBlocked = await detectAdBlockExtension();
+        if (isExtensionBlocked) {
+            showAdblockPopup('extension');
+            return;
+        }
+
+        const isDnsBlocked = await detectDnsBlock();
+        if (isDnsBlocked) {
+            showAdblockPopup('dns');
+        }
+    });
 
 })();
-</script>
-                    
+</script>                   
     
 
   </body>
