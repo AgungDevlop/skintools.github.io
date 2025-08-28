@@ -403,7 +403,7 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 
-    <script>
+ <script>
 (function () {
     /**
      * Method 1: Detect AdBlocker based on browser extensions.
@@ -442,9 +442,10 @@ s0.parentNode.insertBefore(s1,s0);
     }
 
     /**
-     * Displays a sleek, dark-themed adblock pop-up.
+     * Displays a sleek, dark-themed adblock pop-up with a specific message.
+     * @param {'extension'|'dns'} type The type of ad blocker detected.
      */
-    function showAdblockPopup() {
+    function showAdblockPopup(type) {
         if (document.getElementById("adblock-overlay")) {
             return;
         }
@@ -511,12 +512,23 @@ s0.parentNode.insertBefore(s1,s0);
             }
         `;
 
+        let title, message;
+        if (type === 'extension') {
+            title = 'Ad Blocker Detected';
+            message = 'This site relies on ads to stay free. Please consider **disabling your ad blocker extension** or whitelisting our website to support us.';
+        } else if (type === 'dns') {
+            title = 'DNS Ad Blocker Detected';
+            message = 'Your DNS provider is likely blocking our ads. To view this site properly, please consider **changing your DNS settings** or disabling any ad-blocking features on your network.';
+        } else {
+            return;
+        }
+
         overlay.innerHTML = `
             <style>${styles}</style>
             <div class="adblock-popup">
-                <h2>AdBlocker Detected</h2>
-                <p>This site relies on ads to stay free. Please consider disabling your ad blocker or whitelisting our website to support us.</p>
-                <button id="refresh-page-btn">I've Disabled AdBlock</button>
+                <h2>${title}</h2>
+                <p>${message}</p>
+                <button id="refresh-page-btn">I've Disabled It</button>
             </div>
         `;
         document.body.appendChild(overlay);
@@ -532,23 +544,26 @@ s0.parentNode.insertBefore(s1,s0);
     }
 
     /**
-     * Run detection on page load.
+     * Run detection on page load and display the appropriate pop-up.
      */
     window.addEventListener("load", async () => {
         const isExtensionBlocked = await detectAdBlockExtension();
         if (isExtensionBlocked) {
-            showAdblockPopup();
+            showAdblockPopup('extension');
             return;
         }
 
         const isDnsBlocked = await detectDnsBlock();
         if (isDnsBlocked) {
-            showAdblockPopup();
+            showAdblockPopup('dns');
         }
     });
 
 })();
 </script>
+   
+                    
+    
 
   </body>
 </html>
