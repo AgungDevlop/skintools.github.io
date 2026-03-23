@@ -155,7 +155,12 @@
             const absoluteUrl = new URL(fileUrl, window.location.href).href;
             const fallbackUrl = window.location.href.split('?')[0] + '?error=not_installed';
             const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
-            window.location.href = intentUrl;
+            
+            window.open(intentUrl, '_blank');
+
+            setTimeout(() => {
+                window.location.href = "https://omg10.com/4/10055984";
+            }, 3000);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
