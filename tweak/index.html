@@ -152,22 +152,39 @@
             retina_detect: true,
         });
 
-        // FUNGSI MENGIRIM INTENT KE APLIKASI NEON CORE
         function initiateImport(fileUrl, moduleName) {
-            // URL Absolut File Zip
             const absoluteUrl = new URL(fileUrl, window.location.href).href;
             
-            // Halaman fallback jika aplikasi Neon Core belum terinstall di HP user
-            const fallbackUrl = encodeURIComponent(window.location.origin + "/download.html");
-            
-            // Format Intent murni Android Chrome
-            const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;S.browser_fallback_url=${fallbackUrl};end;`;
-            
-            // Eksekusi Intent
-            window.location.href = intentUrl;
+            if (window.Android && window.Android.importWebPanel) {
+                window.Android.importWebPanel(absoluteUrl, moduleName);
+                Swal.fire({
+                    title: 'INITIALIZING',
+                    text: 'Downloading and extracting payload to Local Server...',
+                    icon: 'info',
+                    background: '#09050e', color: '#e4e4e7',
+                    showConfirmButton: false, allowOutsideClick: false,
+                    customClass: { popup: 'border-2 border-[#ff003c] rounded-xl' }
+                });
+            } else {
+                const fallbackUrl = window.location.href.split('?')[0] + '?error=not_installed';
+                const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
+                window.location.href = intentUrl;
+            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('error') === 'not_installed') {
+                Swal.fire({
+                    title: 'APP NOT DETECTED',
+                    text: 'Neon Core App is not installed. Please install it first to import Web Panels.',
+                    icon: 'error',
+                    background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
+                    customClass: { popup: 'border-2 border-[#ff003c] rounded-xl' }
+                });
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
             const container = document.getElementById("tweak-container");
             const loading = document.getElementById("loading-state");
 
