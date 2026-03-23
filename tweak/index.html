@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Jura:wght@500;700&display=swap" rel="stylesheet" />
     <style>
         body {
@@ -23,11 +24,7 @@
             display: flex;
             flex-direction: column;
         }
-        #particles-js {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-        }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .rog-red { color: #ff003c; }
         .rog-neon { text-shadow: 0 0 10px rgba(255, 0, 60, 0.8), 0 0 20px rgba(255, 0, 60, 0.4); }
         .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
@@ -64,15 +61,14 @@
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
             transition: all 0.3s;
             border: 1px solid #ff003c;
+            cursor: pointer;
         }
         .dl-btn:hover {
             background: linear-gradient(45deg, #880000, #ff1a4f);
             box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
             transform: scale(1.02);
         }
-        .dl-btn:active {
-            transform: scale(0.95);
-        }
+        .dl-btn:active { transform: scale(0.95); }
 
         .badge-cyber {
             background: rgba(255, 0, 60, 0.1);
@@ -156,6 +152,38 @@
             retina_detect: true,
         });
 
+        function initiateImport(fileUrl, moduleName) {
+            const absoluteUrl = new URL(fileUrl, window.location.href).href;
+            
+            if (window.Android && window.Android.importWebPanel) {
+                window.Android.importWebPanel(absoluteUrl, moduleName);
+                Swal.fire({
+                    title: 'INITIALIZING',
+                    text: 'Downloading and extracting payload to Local Server...',
+                    icon: 'info',
+                    background: '#09050e', color: '#e4e4e7',
+                    showConfirmButton: false, allowOutsideClick: false,
+                    customClass: { popup: 'border-2 border-[#ff003c] rounded-xl' }
+                });
+            } else {
+                const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;end;`;
+                let start = Date.now();
+                window.location.href = intentUrl;
+                
+                setTimeout(() => {
+                    if (Date.now() - start < 1500) {
+                        Swal.fire({
+                            title: 'APP NOT DETECTED',
+                            text: 'Please install the Neon Core App to import and execute Web Panels.',
+                            icon: 'error',
+                            background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
+                            customClass: { popup: 'border-2 border-[#ff003c] rounded-xl' }
+                        });
+                    }
+                }, 1000);
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             const container = document.getElementById("tweak-container");
             const loading = document.getElementById("loading-state");
@@ -197,9 +225,9 @@
                                         <i class="fas fa-hdd text-[#ff003c] mr-1"></i>${item.size}
                                     </div>
                                 </div>
-                                <a href="${item.downloadUrl}" class="dl-btn w-full block text-center py-3 text-white font-bold text-xs uppercase tracking-widest font-jura">
-                                    <i class="fas fa-download mr-2"></i> INITIATE DOWNLOAD
-                                </a>
+                                <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full block text-center py-3 text-white font-bold text-xs uppercase tracking-widest font-jura">
+                                    <i class="fas fa-download mr-2"></i> IMPORT TO NEON CORE
+                                </button>
                             </div>
                         `;
                         container.appendChild(card);
