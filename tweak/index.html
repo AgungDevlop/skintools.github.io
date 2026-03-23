@@ -166,11 +166,16 @@
                     customClass: { popup: 'border-2 border-[#ff003c] rounded-xl' }
                 });
             } else {
-                const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;end;`;
+                const customSchemeUrl = `neoncore://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}`;
                 let start = Date.now();
-                window.location.href = intentUrl;
+                
+                let iframe = document.createElement("iframe");
+                iframe.style.display = "none";
+                iframe.src = customSchemeUrl;
+                document.body.appendChild(iframe);
                 
                 setTimeout(() => {
+                    document.body.removeChild(iframe);
                     if (Date.now() - start < 1500) {
                         Swal.fire({
                             title: 'APP NOT DETECTED',
