@@ -121,8 +121,7 @@
             <p class="text-xs font-mono text-[#ff003c] tracking-widest uppercase">Fetching secure payload...</p>
         </div>
 
-        <div id="tweak-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
-        </div>
+        <div id="tweak-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
     </main>
 
     <footer class="bg-[#050000] py-6 text-center border-t border-[#ff003c]/20 mt-auto z-10">
@@ -154,8 +153,8 @@
 
         function initiateImport(fileUrl, moduleName) {
             const absoluteUrl = new URL(fileUrl, window.location.href).href;
-            const fallbackUrl = window.location.origin + window.location.pathname + "?error=not_installed";
-            const intentUrl = "intent://import?url=" + encodeURIComponent(absoluteUrl) + "&name=" + encodeURIComponent(moduleName) + "#Intent;scheme=neoncore;package=com.neon.magisk;S.browser_fallback_url=" + encodeURIComponent(fallbackUrl) + ";end;";
+            const fallbackUrl = window.location.href.split('?')[0] + '?error=not_installed';
+            const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
             window.location.href = intentUrl;
         }
 
@@ -164,7 +163,7 @@
             if (urlParams.get('error') === 'not_installed') {
                 Swal.fire({
                     title: 'APP NOT DETECTED',
-                    text: 'Neon Core App is not installed on this device.',
+                    text: 'Neon Core App is not installed. Please install it first to import Web Panels.',
                     icon: 'error',
                     background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
                     customClass: { popup: 'border-2 border-[#ff003c] rounded-xl' }
