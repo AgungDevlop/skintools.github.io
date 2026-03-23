@@ -1,240 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Agung Core | Ultimate Turbo</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="monetag" content="d22eafaa4e1151646621f4ebc3947d81" />
+    <title>Neon Core (Neon Magisk Modules) - Optimize Your Android Performance</title>
+    <meta name="description" content="Neon Magisk Modules is a powerful optimization suite for Android 11+ non-root devices, offering advanced tweaks for gaming, battery life, and system performance using the Shizuku framework." />
+    <meta name="keywords" content="Neon Core, Neon Magisk Modules, Android optimization, Non Root, Shizuku, performance tweaks, gaming performance, battery saver, Android 11, system optimization, Agung Developer" />
+    <meta name="author" content="Agung Developer" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Neon Core (Neon Magisk Modules) - Optimize Your Android Performance" />
+    <meta property="og:description" content="Boost your Android device's performance without root. Download Neon Core for advanced gaming and system optimizations on Android 11+ via Shizuku." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://neonmagisk.my.id" />
+    <meta property="og:image" content="img/banner.webp" /> 
+    <meta property="og:site_name" content="Neon Magisk Modules" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Neon Core (Neon Magisk Modules) - Optimize Your Android Performance" />
+    <meta name="twitter:description" content="Enhance your Android experience with Neon Core, featuring powerful tools for gaming and system performance without root." />
+    <meta name="twitter:image" content="img/banner.webp" />
+    <meta name="monetag" content="d8b84cfcbda715eb4332995567c30f86">
+    <link rel="canonical" href="https://neonmagisk.my.id" />
+    <link rel="icon" type="image/webp" href="img/icon.webp" /> 
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;700&family=Jura:wght@700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Jura:wght@500;700&display=swap" rel="stylesheet" />
+    
     <style>
-        body { 
-            background-color: #05020a; 
-            background-image: radial-gradient(circle at 50% 0%, #3b0764 0%, #05020a 70%), 
-                              repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(168, 85, 247, 0.03) 2px, rgba(168, 85, 247, 0.03) 4px);
-            background-attachment: fixed; 
-            color: #e4e4e7; 
-            font-family: 'Chakra Petch', sans-serif; 
-        }
-        .violet-panel { 
-            background: rgba(12, 6, 20, 0.85); 
-            backdrop-filter: blur(16px); 
-            border: 1px solid rgba(168, 85, 247, 0.3); 
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.05), 0 10px 30px rgba(0,0,0,0.8);
-        }
-        .violet-card {
-            background: linear-gradient(145deg, rgba(20, 10, 35, 0.9), rgba(0, 0, 0, 0.8));
-            border-left: 3px solid #a855f7;
-            border-right: 1px solid rgba(168, 85, 247, 0.2);
-            border-top: 1px solid rgba(168, 85, 247, 0.2);
-            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .violet-card:active { 
-            transform: scale(0.94); 
-            box-shadow: inset 0 0 15px rgba(168, 85, 247, 0.4); 
-            border-color: #d946ef; 
-        }
-        .neon-violet { font-family: 'Rajdhani', sans-serif; text-shadow: 0 0 10px #a855f7; }
-        .neon-fuchsia { font-family: 'Rajdhani', sans-serif; text-shadow: 0 0 10px #d946ef; }
-        .font-jura { font-family: 'Jura', sans-serif; }
-        
-        ::-webkit-scrollbar { width: 3px; height: 3px; } 
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.4); } 
-        ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 3px; }
-        
-        .toggle-checkbox:checked + .toggle-label { background-color: rgba(168,85,247,0.25); border-color: #a855f7; box-shadow: inset 0 0 10px rgba(168,85,247,0.5); }
-        .toggle-checkbox:checked + .toggle-label:after { transform: translateX(100%); background-color: #d946ef; box-shadow: 0 0 8px #d946ef; border-radius: 0;}
-        .toggle-label { border: 1px solid #3f3f46; background-color: #09090b; transition: all 0.3s; border-radius: 0; }
-        .toggle-label:after { background-color: #71717a; border: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 0;}
-        
-        .tab-btn { border-bottom: 2px solid transparent; opacity: 0.5; transition: all 0.3s; transform: skewX(-15deg); }
-        .tab-btn.active { opacity: 1; border-bottom: 2px solid #a855f7; background: linear-gradient(to top, rgba(168,85,247,0.2), transparent); color: #e879f9; text-shadow: 0 0 8px #a855f7; }
-        .tab-text { transform: skewX(15deg); display: inline-block; }
+      body {
+        background-color: #030303;
+        background-image: radial-gradient(circle at 50% 0%, #1a0000 0%, #030303 70%);
+        color: #d1d5db;
+        font-family: 'Chakra Petch', sans-serif;
+        overflow-x: hidden;
+      }
+      #particles-js {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1;
+      }
+      
+      /* ROG Typography & Colors */
+      .rog-red { color: #ff003c; }
+      .rog-neon { text-shadow: 0 0 10px rgba(255, 0, 60, 0.8), 0 0 20px rgba(255, 0, 60, 0.4); }
+      .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+      
+      /* ROG Clipped Elements */
+      .rog-btn {
+        background: linear-gradient(45deg, #660000, #ff003c);
+        clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
+        border: 1px solid #ff003c;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .rog-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 0, 60, 0.6);
+        background: linear-gradient(45deg, #880000, #ff1a4f);
+      }
+      .rog-btn.disabled {
+        pointer-events: none;
+        opacity: 0.6;
+        filter: grayscale(0.8);
+        box-shadow: none;
+        border-color: #555;
+      }
 
-        .btn-xmode {
-            background: linear-gradient(45deg, #4c1d95, #a855f7);
-            background-size: 200% 200%;
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), inset 0 2px 5px rgba(255,255,255,0.3);
-            transition: all 0.3s;
-        }
-        .btn-xmode:active { transform: scale(0.96); }
-        .xmode-active { animation: glowPulse 2s infinite, gradientShift 3s ease infinite; border: 1px solid #fff; }
+      .rog-card {
+        background: linear-gradient(145deg, #0f0000, #000000);
+        border-left: 3px solid #ff003c;
+        border-top: 1px solid rgba(255, 0, 60, 0.15);
+        border-bottom: 1px solid rgba(255, 0, 60, 0.15);
+        clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+        transition: all 0.3s;
+      }
+      .rog-card:hover {
+        box-shadow: inset 0 0 20px rgba(255, 0, 60, 0.2);
+        border-color: #ff003c;
+        transform: translateY(-3px);
+      }
 
-        .game-card-custom {
-            transition: all 0.3s; flex-shrink: 0; position: relative; overflow: hidden;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
-        .game-card-custom:active { transform: scale(0.90); }
+      .rog-table-container {
+        background: rgba(10, 0, 0, 0.8);
+        border: 1px solid rgba(255, 0, 60, 0.3);
+        clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        backdrop-filter: blur(10px);
+      }
+      
+      .phone-frame {
+        position: relative;
+        background: #050000;
+        border: 2px solid #330000;
+        padding: 15px;
+        clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        box-shadow: 0 0 25px rgba(255, 0, 60, 0.15);
+      }
+      .phone-frame img {
+        width: 100%; height: auto;
+        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      }
 
-        @keyframes glowPulse { 0% { box-shadow: 0 0 15px #a855f7; } 50% { box-shadow: 0 0 40px #d946ef, 0 0 60px #a855f7; } 100% { box-shadow: 0 0 15px #a855f7; } }
-        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes sweep { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .anim-sweep { background: conic-gradient(from 0deg, transparent 70%, rgba(217, 70, 239, 0.8) 100%); border-radius: 50%; width: 100%; height: 100%; position: absolute; animation: sweep 1.5s linear infinite; }
-        
-        .footer-glow { text-shadow: 0 0 5px #a855f7, 0 0 15px #d946ef; }
+      /* Swiper Overrides */
+      .swiper-button-next, .swiper-button-prev { color: #ff003c !important; text-shadow: 0 0 10px #ff003c; }
+      .swiper-pagination-bullet-active { background: #ff003c !important; box-shadow: 0 0 10px #ff003c; }
+      
+      #get-link-btn { display: none; }
     </style>
-</head>
-<body class="selection:bg-purple-900/50 h-screen w-screen flex flex-col overflow-hidden">
-    <div class="flex flex-col h-full w-full max-w-[1400px] mx-auto p-2 md:p-3 gap-2 md:gap-3">
-        
-        <header class="violet-panel p-2 md:p-3 flex items-center justify-between shrink-0">
-            <div class="flex items-center gap-2 md:gap-3">
-                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border-[2px] border-purple-500 bg-black flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_15px_rgba(168,85,247,0.6)]">
-                    <img id="anime-avatar" src="https://i.pinimg.com/736x/5b/c2/f7/5bc2f7f90b297b83f0af101cd67ed707.jpg" class="w-full h-full object-cover">
-                </div>
-                <div class="flex flex-col justify-center">
-                    <h1 class="text-sm md:text-xl font-bold text-purple-400 uppercase tracking-widest neon-violet leading-none">ARMOURY_CORE</h1>
-                    <p class="text-[8px] md:text-[10px] text-fuchsia-400 font-bold tracking-widest uppercase mt-1 md:mt-1.5"><i class="fas fa-link text-purple-400 animate-pulse mr-1"></i>NON-ROOT (SHIZUKU)</p>
-                </div>
-            </div>
-            <button onclick="toggleFloating()" class="bg-black/60 border border-purple-500/50 hover:bg-purple-500/30 text-purple-300 px-3 py-1.5 md:px-5 md:py-2 text-[8px] md:text-[10px] font-bold uppercase tracking-widest transition-all shrink-0" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
-                <i class="fas fa-external-link-alt"></i> <span class="hidden sm:inline ml-1.5">HUD OVERLAY</span>
-            </button>
-        </header>
+  </head>
+  <body>
+    <div id="particles-js"></div>
 
-        <div class="flex flex-col lg:flex-row gap-2 md:gap-3 flex-1 min-h-0 overflow-y-auto lg:overflow-hidden pb-2 lg:pb-0">
-            
-            <div class="flex flex-col gap-2 md:gap-3 w-full lg:w-[45%] shrink-0 h-auto lg:h-full">
-                
-                <div class="violet-panel p-3 flex flex-col items-center justify-center relative overflow-hidden shrink-0">
-                    <div class="w-full flex justify-between items-center border-b border-purple-500/30 pb-2 mb-2">
-                        <h2 class="text-[9px] md:text-xs font-bold text-white uppercase tracking-widest"><i class="fas fa-crosshairs text-purple-500 mr-1.5"></i>TELEMETRY MATRIX</h2>
-                        <span class="text-[7px] md:text-[9px] text-fuchsia-400 bg-fuchsia-500/10 px-1.5 py-0.5 border border-fuchsia-500/40 font-mono animate-pulse shadow-[0_0_8px_rgba(217,70,239,0.3)]">LIVE SYNC</span>
-                    </div>
-                    
-                    <div class="flex flex-row justify-around w-full py-1">
-                        <div class="relative w-[60px] h-[60px] sm:w-16 sm:h-16 md:w-24 md:h-24 flex items-center justify-center">
-                            <svg class="w-full h-full transform -rotate-90 absolute inset-0" viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="42" stroke="#2e1065" stroke-width="6" fill="transparent" />
-                                <circle id="circle-cpu" cx="50" cy="50" r="42" stroke="#a855f7" stroke-width="6" fill="transparent" stroke-dasharray="263.89" stroke-dashoffset="263.89" class="transition-all duration-500" style="filter: drop-shadow(0 0 5px #a855f7);" />
-                            </svg>
-                            <div class="flex flex-col items-center justify-center z-10">
-                                <span id="val-cpu" class="text-xs sm:text-sm md:text-xl font-bold text-white neon-violet">0%</span>
-                                <span class="text-[6px] md:text-[9px] text-purple-400 font-bold tracking-widest mt-0.5">CPU</span>
-                            </div>
-                        </div>
+    <header class="bg-[#030303]/80 backdrop-blur-md py-4 px-4 md:px-10 sticky top-0 z-50 border-b border-[#ff003c]/30 shadow-[0_4px_20px_rgba(255,0,60,0.15)]">
+      <div class="container mx-auto flex justify-center items-center">
+        <h1 class="text-2xl md:text-3xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.2em]" data-aos="fade-down">NEON CORE</h1>
+      </div>
+    </header>
 
-                        <div class="relative w-[70px] h-[70px] sm:w-20 sm:h-20 md:w-28 md:h-28 flex items-center justify-center -mt-1">
-                            <svg class="w-full h-full transform -rotate-90 absolute inset-0" viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="45" stroke="#2e1065" stroke-width="8" fill="transparent" />
-                                <circle id="circle-ram" cx="50" cy="50" r="45" stroke="#d946ef" stroke-width="8" fill="transparent" stroke-dasharray="282.74" stroke-dashoffset="282.74" class="transition-all duration-500" style="filter: drop-shadow(0 0 6px #d946ef);" />
-                            </svg>
-                            <div class="flex flex-col items-center justify-center z-10">
-                                <span id="val-ram" class="text-sm sm:text-base md:text-2xl font-bold text-white neon-fuchsia">0%</span>
-                                <span class="text-[8px] md:text-[10px] text-fuchsia-400 font-bold tracking-widest mt-1">RAM</span>
-                            </div>
-                        </div>
-
-                        <div class="relative w-[60px] h-[60px] sm:w-16 sm:h-16 md:w-24 md:h-24 flex items-center justify-center">
-                            <svg class="w-full h-full transform -rotate-90 absolute inset-0" viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="42" stroke="#2e1065" stroke-width="6" fill="transparent" />
-                                <circle id="circle-temp" cx="50" cy="50" r="42" stroke="#ec4899" stroke-width="6" fill="transparent" stroke-dasharray="263.89" stroke-dashoffset="263.89" class="transition-all duration-500" style="filter: drop-shadow(0 0 5px #ec4899);" />
-                            </svg>
-                            <div class="flex flex-col items-center justify-center z-10">
-                                <span id="val-temp" class="text-xs sm:text-sm md:text-xl font-bold text-white neon-fuchsia">0°</span>
-                                <span class="text-[6px] md:text-[9px] text-pink-400 font-bold tracking-widest mt-0.5">TEMP</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="violet-panel p-3 flex flex-col shrink-0">
-                    <h2 class="text-[9px] md:text-[11px] font-bold text-purple-300 uppercase tracking-widest mb-2 border-b border-purple-800 pb-1"><i class="fas fa-gamepad mr-1.5"></i>GAME VAULT (DETECTED)</h2>
-                    <div id="game-vault" class="flex gap-2 md:gap-3 overflow-x-auto pb-2 pt-1 items-center justify-start px-1">
-                        <div class="text-[10px] text-gray-500 font-mono italic w-full text-center py-2">Scanning installed apps...</div>
-                    </div>
-                </div>
-
-                <div class="violet-panel p-3 flex flex-col flex-1 min-h-[220px]">
-                    <h2 class="text-[9px] md:text-[11px] font-bold text-purple-300 uppercase tracking-widest mb-2 border-b border-purple-800 pb-1"><i class="fas fa-terminal mr-1.5"></i>COMMAND_CENTER</h2>
-                    
-                    <button id="btn-xmode" onclick="toggleXMode()" class="btn-xmode w-full py-3 md:py-4 text-white font-bold text-[10px] md:text-sm tracking-widest uppercase flex justify-center items-center gap-2 mb-2 shrink-0">
-                        <i class="fas fa-rocket text-sm md:text-lg"></i> X-MODE (OVERCLOCK)
-                    </button>
-
-                    <div class="overflow-y-auto pr-1 flex-1">
-                        <div class="grid grid-cols-2 gap-2 content-start pb-2">
-                            <button onclick="executeAction('ram')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-microchip text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">DEEP FLUSH</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Clear Memory</span></div>
-                            </button>
-                            <button onclick="executeAction('cache')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-trash-alt text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">WIPE CACHE</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Dalvik & Sys Cache</span></div>
-                            </button>
-                            <button onclick="executeAction('fstrim')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-hdd text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">NAND TRIM</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Optimize Storage</span></div>
-                            </button>
-                            <button onclick="executeAction('logs')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-file-code text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">LOG SHREDDER</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Delete Crash Logs</span></div>
-                            </button>
-                            <button onclick="executeAction('network')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-wifi text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">PING BOOST</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Reset Net Stack</span></div>
-                            </button>
-                            <button onclick="executeAction('audio')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-volume-up text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">AUDIO BOOST</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Bypass Safe Limit</span></div>
-                            </button>
-                            <button onclick="executeAction('immersive')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-expand text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">IMMERSIVE UI</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Hide Status Bar</span></div>
-                            </button>
-                            <button onclick="executeAction('brightlock')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-sun text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">BRIGHT LOCK</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Max Brightness</span></div>
-                            </button>
-                            <button onclick="executeAction('thermalrst')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-thermometer-empty text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">THERMAL RST</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Reset CPU Sensor</span></div>
-                            </button>
-                            <button onclick="executeAction('uirestart')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-sync-alt text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">UI RESTART</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Reload SystemUI</span></div>
-                            </button>
-                            <button onclick="executeAction('gms')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fab fa-google text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">GMS FREEZE</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Stop Play Services</span></div>
-                            </button>
-                            <button onclick="executeAction('dnd')" class="violet-card p-2 md:p-3 flex items-center gap-2">
-                                <div class="w-7 h-7 md:w-9 md:h-9 rounded bg-purple-900/50 flex items-center justify-center border border-purple-500/50 shrink-0"><i class="fas fa-bell-slash text-fuchsia-400 text-xs md:text-base"></i></div>
-                                <div class="text-left"><span class="block text-[9px] md:text-[11px] font-bold text-gray-200">ZEN MODE</span><span class="block text-[6px] md:text-[8px] text-purple-400 font-mono mt-0.5">Block Notifications</span></div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="violet-panel flex flex-col w-full lg:w-[55%] shrink-0 h-[400px] lg:h-full overflow-hidden relative">
-                <div class="flex overflow-x-auto border-b border-purple-500/30 shrink-0 bg-black/60 pt-1.5 px-1.5" id="tabs-container">
-                    <button class="tab-btn active px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('graphics', this)"><span class="tab-text"><i class="fas fa-desktop mr-1.5"></i>GFX</span></button>
-                    <button class="tab-btn px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('display_144hz', this)"><span class="tab-text"><i class="fas fa-tv mr-1.5"></i>144HZ</span></button>
-                    <button class="tab-btn px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('processor', this)"><span class="tab-text"><i class="fas fa-microchip mr-1.5"></i>CPU</span></button>
-                    <button class="tab-btn px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('memory', this)"><span class="tab-text"><i class="fas fa-memory mr-1.5"></i>RAM</span></button>
-                    <button class="tab-btn px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('network', this)"><span class="tab-text"><i class="fas fa-globe mr-1.5"></i>NET</span></button>
-                    <button class="tab-btn px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('power', this)"><span class="tab-text"><i class="fas fa-battery-full mr-1.5"></i>PWR</span></button>
-                    <button class="tab-btn px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('system', this)"><span class="tab-text"><i class="fas fa-cogs mr-1.5"></i>SYS</span></button>
-                    <button class="tab-btn px-3 py-2 md:px-4 md:py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-1" onclick="switchTab('touch', this)"><span class="tab-text"><i class="fas fa-hand-pointer mr-1.5"></i>TCH</span></button>
-                </div>
-                <div class="flex-1 p-2 md:p-3 overflow-y-auto space-y-1.5 md:space-y-2 pb-10 custom-scroll" id="tweaks-container"></div>
-                
-                <div class="absolute bottom-0 w-full bg-black/90 backdrop-blur-md py-1.5 text-center border-t border-purple-500/50 shadow-[0_-5px_15px_rgba(0,0,0,0.8)]">
-                    <span class="text-[8px] md:text-[10px] font-bold tracking-[0.4em] text-purple-400 footer-glow uppercase">CREATED BY AGUNG DEVELOPER</span>
-                </div>
-            </div>
-            
+    <main class="container mx-auto px-4 py-12">
+      <section class="flex justify-center mb-8" data-aos="zoom-in">
+        <div class="relative p-1 bg-gradient-to-br from-[#ff003c] to-[#330000]" style="clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);">
+          <img src="img/icon.webp" alt="Neon Core Icon" class="w-32 h-32 bg-[#050505] p-2" style="clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);" />
         </div>
-    </div>
+      </section>
 
-    <script src="tweaks.js"></script>
-    <script src="script.js"></script>
-</body>
+      <section class="mb-14 text-center" data-aos="fade-up" data-aos-delay="200">
+        <button id="download-btn" class="inline-flex items-center gap-2 text-base md:text-lg font-bold text-white rog-btn px-8 py-4">
+          <i class="fas fa-download"></i> DOWNLOAD MODULE
+        </button>
+      </section>
+
+      <section class="mb-16 max-w-3xl mx-auto" data-aos="fade-up">
+        <div class="flex items-center justify-center mb-6 gap-3">
+          <div class="h-[2px] w-12 bg-gradient-to-r from-transparent to-[#ff003c]"></div>
+          <h2 class="text-2xl font-bold rog-red uppercase tracking-widest font-rajdhani text-center">SYSTEM SPECS</h2>
+          <div class="h-[2px] w-12 bg-gradient-to-l from-transparent to-[#ff003c]"></div>
+        </div>
+        
+        <div class="rog-table-container p-1">
+          <table class="w-full text-left border-collapse bg-transparent">
+            <tbody>
+              <tr class="border-b border-[#ff003c]/20 hover:bg-[#ff003c]/5 transition-colors">
+                <td class="py-4 px-6 font-bold text-[#ff4d6d] uppercase tracking-wider text-xs md:text-sm w-1/3">Engine Name</td>
+                <td class="py-4 px-6 font-medium text-gray-200">Neon Core</td>
+              </tr>
+              <tr class="border-b border-[#ff003c]/20 hover:bg-[#ff003c]/5 transition-colors">
+                <td class="py-4 px-6 font-bold text-[#ff4d6d] uppercase tracking-wider text-xs md:text-sm">Payload Size</td>
+                <td class="py-4 px-6 font-medium text-gray-200">4.5 MB</td>
+              </tr>
+              <tr class="border-b border-[#ff003c]/20 hover:bg-[#ff003c]/5 transition-colors">
+                <td class="py-4 px-6 font-bold text-[#ff4d6d] uppercase tracking-wider text-xs md:text-sm">Developer</td>
+                <td class="py-4 px-6 font-medium text-gray-200">Agung Developer</td>
+              </tr>
+              <tr class="border-b border-[#ff003c]/20 hover:bg-[#ff003c]/5 transition-colors">
+                <td class="py-4 px-6 font-bold text-[#ff4d6d] uppercase tracking-wider text-xs md:text-sm">Requirements</td>
+                <td class="py-4 px-6 font-medium text-gray-200">Android 11+ <span class="font-bold text-[#ff003c] tracking-widest bg-[#ff003c]/10 px-2 py-1 ml-2 border border-[#ff003c]/30 rounded">NON-ROOT (SHIZUKU ONLY)</span></td>
+              </tr>
+              <tr class="hover:bg-[#ff003c]/5 transition-colors">
+                <td class="py-4 px-6 font-bold text-[#ff4d6d] uppercase tracking-wider text-xs md:text-sm">Build Version</td>
+                <td class="py-4 px-6 font-bold text-[#ff003c] rog-neon">1.6 (Ultimate Edition)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mb-16" data-aos="fade-up" data-aos-delay="200">
+        <div class="flex items-center justify-center mb-8 gap-3">
+          <div class="h-[2px] w-12 bg-gradient-to-r from-transparent to-[#ff003c]"></div>
+          <h2 class="text-2xl font-bold rog-red uppercase tracking-widest font-rajdhani text-center">INTERFACE PREVIEW</h2>
+          <div class="h-[2px] w-12 bg-gradient-to-l from-transparent to-[#ff003c]"></div>
+        </div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide flex justify-center">
+              <div class="phone-frame w-full max-w-[280px]">
+                <img src="img/ss1.webp" alt="Screenshot 1" class="object-cover" />
+              </div>
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <div class="phone-frame w-full max-w-[280px]">
+                <img src="img/ss2.webp" alt="Screenshot 2" class="object-cover" />
+              </div>
+            </div>
+            <div class="swiper-slide flex justify-center">
+              <div class="phone-frame w-full max-w-[280px]">
+                <img src="img/ss3.webp" alt="Screenshot 3" class="object-cover" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination mt-4"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </section>
+
+      <section class="mb-12 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex items-center justify-center mb-8 gap-3">
+          <div class="h-[2px] w-12 bg-gradient-to-r from-transparent to-[#ff003c]"></div>
+          <h2 class="text-2xl font-bold rog-red uppercase tracking-widest font-rajdhani text-center">SYSTEM OVERVIEW</h2>
+          <div class="h-[2px] w-12 bg-gradient-to-l from-transparent to-[#ff003c]"></div>
+        </div>
+        
+        <article class="text-gray-300">
+          <p class="text-base md:text-lg mb-6 leading-relaxed">
+            <strong class="text-white">Neon Core</strong> is an elite performance optimization suite engineered exclusively for <strong class="text-[#ff003c]">Non-Rooted</strong> Android 11+ devices. Powered by the Shizuku framework, it safely bypasses standard OEM restrictions, delivering raw hardware performance to the palm of your hands without voiding your warranty.
+          </p>
+          <p class="mb-10 leading-relaxed text-sm md:text-base">
+            By overriding thermal limits, manipulating CPU governors, and forcing 144Hz screen refresh rates on a system level, Neon Core guarantees zero input lag and maximum frame rendering for competitive gaming. It's not just a booster; it's a completely safe, root-free hardware overdrive matrix.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="rog-card p-5">
+              <h4 class="text-lg font-bold rog-red mb-2 font-rajdhani uppercase tracking-wide flex items-center gap-2">
+                <i class="fas fa-shield-alt"></i> 100% Non-Root Safe
+              </h4>
+              <p class="text-xs md:text-sm text-gray-400">
+                Utilizes the Shizuku API to inject powerful shell commands securely. Optimize your processor and GPU without risking bootloops or warranty voids.
+              </p>
+            </div>
+            
+            <div class="rog-card p-5">
+              <h4 class="text-lg font-bold rog-red mb-2 font-rajdhani uppercase tracking-wide flex items-center gap-2">
+                <i class="fas fa-tv"></i> 144Hz Display Unlock
+              </h4>
+              <p class="text-xs md:text-sm text-gray-400">
+                Directly manipulates SurfaceFlinger and HWUI to unlock native 120Hz/144Hz rendering. Bypasses Dynamic FPS (DFPS) to ensure the screen never downclocks during gameplay.
+              </p>
+            </div>
+
+            <div class="rog-card p-5">
+              <h4 class="text-lg font-bold rog-red mb-2 font-rajdhani uppercase tracking-wide flex items-center gap-2">
+                <i class="fas fa-fire"></i> Thermal Bypass
+              </h4>
+              <p class="text-xs md:text-sm text-gray-400">
+                Deactivates the system's thermal engine limits. Keeps your device running at peak processing power even when temperatures rise during intense gaming sessions.
+              </p>
+            </div>
+
+            <div class="rog-card p-5">
+              <h4 class="text-lg font-bold rog-red mb-2 font-rajdhani uppercase tracking-wide flex items-center gap-2">
+                <i class="fas fa-microchip"></i> CPU Overdrive
+              </h4>
+              <p class="text-xs md:text-sm text-gray-400">
+                Forces high-performance cores to stay active, completely disabling Deep Doze and EAS throttling. Experience instantaneous app launches and zero mid-game stuttering.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="mt-14 text-center pb-10" data-aos="fade-up">
+        <button id="get-link-btn" class="inline-flex items-center gap-2 text-base md:text-lg font-bold text-white rog-btn px-8 py-4">
+          <i class="fas fa-external-link-square-alt"></i> PROCEED TO DOWNLOAD
+        </button>
+      </section>
+    </main>
+
+    <footer class="bg-[#050000] py-6 text-center border-t border-[#ff003c]/20">
+      <p class="text-gray-500 font-bold text-xs tracking-[0.2em] font-rajdhani uppercase">
+        <span class="rog-red">&copy;</span> 2024 Agung Developer. All Rights Reserved.
+      </p>
+    </footer>
+
+    <script>
+      // Initialize AOS
+      AOS.init({ duration: 800, once: true });
+
+      // Initialize Particles.js (ROG Red Theme - Sharp Particles)
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 50, density: { enable: true, value_area: 1000 } },
+          color: { value: '#ff003c' },
+          shape: { type: 'polygon', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 6 } },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: '#ff003c', opacity: 0.2, width: 1 },
+          move: { enable: true, speed: 1.5, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false },
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+          modes: { grab: { distance: 140, line_linked: { opacity: 0.5 } }, push: { particles_nb: 3 } },
+        },
+        retina_detect: true,
+      });
+
+      // Initialize Swiper.js
+      const swiper = new Swiper('.swiper', {
+        loop: true,
+        pagination: { el: '.swiper-pagination', clickable: true },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        autoplay: { delay: 2500, disableOnInteraction: false },
+        slidesPerView: 1,
+        spaceBetween: 20,
+      });
+
+      // Download Button Logic
+      const downloadBtn = document.getElementById('download-btn');
+      const getLinkBtn = document.getElementById('get-link-btn');
+      const downloadLink = "https://otieu.com/4/10055984";
+
+      downloadBtn.addEventListener('click', () => {
+        downloadBtn.classList.add('disabled');
+        downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> INITIALIZING 10s';
+
+        // Open link immediately in new tab
+        window.open(downloadLink, '_blank');
+
+        let countdown = 10;
+        const interval = setInterval(() => {
+          countdown--;
+          downloadBtn.innerHTML = `<i class="fas fa-cog fa-spin"></i> PLEASE WAIT ${countdown}s`;
+          if (countdown <= 0) {
+            clearInterval(interval);
+            downloadBtn.innerHTML = '<i class="fas fa-check"></i> SCROLL DOWN';
+            downloadBtn.classList.remove('disabled');
+            getLinkBtn.style.display = 'inline-flex'; // show the link button
+            
+            // Auto scroll slightly
+            window.scrollBy({ top: 300, behavior: 'smooth' });
+          }
+        }, 1000);
+      });
+
+      getLinkBtn.addEventListener('click', () => {
+        window.open(downloadLink, '_blank');
+        sessionStorage.setItem('download', 'true');
+        setTimeout(() => {
+          window.location.href = 'download.html';
+        }, 2000);
+      });
+    </script>
+
+    <script>
+    (function () {
+        function detectAdBlockExtension() {
+            return new Promise((resolve) => {
+                const bait = document.createElement("div");
+                bait.className = "adsbox ad-banner ad-unit text-ad";
+                bait.style.width = "1px";
+                bait.style.height = "1px";
+                bait.style.position = "absolute";
+                bait.style.left = "-9999px";
+                bait.style.top = "-9999px";
+                bait.style.visibility = "hidden";
+                document.body.appendChild(bait);
+
+                setTimeout(() => {
+                    const isBlocked = !bait.parentElement || bait.offsetParent === null || window.getComputedStyle(bait).display === "none";
+                    if (bait.parentElement) {
+                        document.body.removeChild(bait);
+                    }
+                    resolve(isBlocked);
+                }, 100);
+            });
+        }
+
+        function detectDnsBlock() {
+            const adUrl = 'https://facultativethus.com/e57ns91yz8?key=06ab55d13d86b8641e906b3b87eb6915';
+            return fetch(adUrl, { method: 'HEAD', mode: 'no-cors', cache: 'no-store' })
+                .then(() => false)
+                .catch(() => true);
+        }
+
+        function showAdblockPopup(type) {
+            if (document.getElementById("adblock-overlay")) return;
+
+            const overlay = document.createElement("div");
+            overlay.id = "adblock-overlay";
+
+            const styles = `
+                #adblock-overlay {
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background-color: rgba(0, 0, 0, 0.95);
+                    display: flex; justify-content: center; align-items: center;
+                    z-index: 99999; opacity: 0; transition: opacity 0.4s ease;
+                    font-family: 'Chakra Petch', sans-serif;
+                }
+                .adblock-popup {
+                    background: linear-gradient(145deg, #110000, #000000);
+                    color: #e0e0e0; padding: 30px; text-align: center;
+                    max-width: 400px; width: 85%;
+                    box-shadow: 0 0 30px rgba(255, 0, 60, 0.4);
+                    transform: scale(0.95); transition: transform 0.4s ease;
+                    border: 1px solid #ff003c;
+                    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+                }
+                .adblock-popup h2 {
+                    margin: 0 0 10px; font-size: 22px; font-weight: 700;
+                    color: #ff003c; text-transform: uppercase; letter-spacing: 2px;
+                    text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+                }
+                .adblock-popup p {
+                    margin: 0 0 25px; font-size: 14px; color: #b3b3b3;
+                }
+                #refresh-page-btn {
+                    background: linear-gradient(45deg, #660000, #ff003c);
+                    color: white; border: none; padding: 12px 24px;
+                    font-size: 14px; font-weight: 700; cursor: pointer;
+                    text-transform: uppercase; letter-spacing: 1px;
+                    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+                    transition: all 0.3s;
+                }
+                #refresh-page-btn:hover {
+                    box-shadow: 0 0 15px rgba(255, 0, 60, 0.6);
+                    transform: scale(1.05);
+                }
+            `;
+
+            let title = 'SYSTEM INTERFERENCE DETECTED';
+            let message = 'Your DNS or AdBlocker is blocking the connection payload. Disable it to proceed with the download sequence.';
+
+            overlay.innerHTML = `
+                <style>${styles}</style>
+                <div class="adblock-popup">
+                    <h2><i class="fas fa-exclamation-triangle"></i> ${title}</h2>
+                    <p>${message}</p>
+                    <button id="refresh-page-btn">I'VE DISABLED IT</button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.style.opacity = "1";
+                overlay.querySelector(".adblock-popup").style.transform = "scale(1)";
+            }, 10);
+
+            document.getElementById("refresh-page-btn").addEventListener("click", () => {
+                location.reload();
+            });
+        }
+
+        window.addEventListener("load", async () => {
+            const isExtensionBlocked = await detectAdBlockExtension();
+            if (isExtensionBlocked) {
+                showAdblockPopup('extension');
+                return;
+            }
+            const isDnsBlocked = await detectDnsBlock();
+            if (isDnsBlocked) {
+                showAdblockPopup('dns');
+            }
+        });
+    })();
+    </script>                   
+  </body>
 </html>
