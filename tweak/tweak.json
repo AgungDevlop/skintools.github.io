@@ -9,5 +9,16 @@
     "icon": "fas fa-server",
     "description": "Ultimate Web Panel Engine untuk optimasi Android Non-Root via Shizuku. Berisi GUI lengkap untuk kontrol sistem, memori, dan grafis.",
     "downloadUrl": "AGUNG_CORE_V_1.0.zip"
+  },
+  {
+    "id": "regedit-gfx-ff-v1",
+    "title": "REGEDIT GFX FF V 1.0",
+    "developer": "Agung Developer",
+    "version": "1.0",
+    "size": "45KB",
+    "category": "GFX TOOL",
+    "icon": "fas fa-crosshairs",
+    "description": "Panel GFX & Regedit VIP khusus Free Fire. Mengunci frame rate layar, menghapus touch slop untuk Auto Headshot, dan memaksa HW Composition murni melalui eksekusi Shizuku/Root.",
+    "downloadUrl": "GFX_FF_V_1.0.zip"
   }
 ]
