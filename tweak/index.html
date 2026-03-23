@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neon Core - Web Panel Tools</title>
+    <link rel="icon" type="image/webp" href="../img/icon.webp" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Jura:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #030303;
+            background-image: radial-gradient(circle at 50% 0%, #1a0000 0%, #030303 70%),
+                              repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 0, 60, 0.02) 2px, rgba(255, 0, 60, 0.02) 4px);
+            color: #d1d5db;
+            font-family: 'Chakra Petch', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #particles-js {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+        }
+        .rog-red { color: #ff003c; }
+        .rog-neon { text-shadow: 0 0 10px rgba(255, 0, 60, 0.8), 0 0 20px rgba(255, 0, 60, 0.4); }
+        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+        .font-jura { font-family: 'Jura', sans-serif; }
+        
+        .header-panel {
+            background: rgba(10, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.15);
+        }
+
+        .tool-card {
+            background: linear-gradient(145deg, #0f0000, #000000);
+            border-left: 3px solid #ff003c;
+            border-right: 1px solid rgba(255, 0, 60, 0.15);
+            border-top: 1px solid rgba(255, 0, 60, 0.15);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.15);
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .tool-card:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.2), inset 0 0 15px rgba(255, 0, 60, 0.1);
+            border-color: #ff003c;
+            transform: translateY(-5px);
+        }
+
+        .dl-btn {
+            background: linear-gradient(45deg, #660000, #ff003c);
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.3s;
+            border: 1px solid #ff003c;
+        }
+        .dl-btn:hover {
+            background: linear-gradient(45deg, #880000, #ff1a4f);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
+            transform: scale(1.02);
+        }
+        .dl-btn:active {
+            transform: scale(0.95);
+        }
+
+        .badge-cyber {
+            background: rgba(255, 0, 60, 0.1);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+        }
+
+        ::-webkit-scrollbar { width: 3px; height: 3px; } 
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.4); } 
+        ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 3px; }
+        
+        .loader-spinner {
+            border: 3px solid rgba(255, 0, 60, 0.2);
+            border-top: 3px solid #ff003c;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header class="header-panel py-5 px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='../index.html'">
+                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#330000]" style="clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">
+                    <i class="fas fa-chevron-left text-white text-lg"></i>
+                </div>
+                <h1 class="text-xl md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.2em]">NEON CORE</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-server text-[#ff003c] animate-pulse"></i>
+                <span class="text-sm font-bold text-gray-300 uppercase tracking-widest font-jura">WEB PANEL TOOLS</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 container mx-auto px-4 py-10">
+        <div class="flex items-center justify-center mb-10 gap-3" data-aos="fade-down">
+            <div class="h-[2px] w-10 md:w-16 bg-gradient-to-r from-transparent to-[#ff003c]"></div>
+            <h2 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest font-rajdhani text-center">REPOSITORY TERMINAL</h2>
+            <div class="h-[2px] w-10 md:w-16 bg-gradient-to-l from-transparent to-[#ff003c]"></div>
+        </div>
+
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
+            <div class="loader-spinner mb-4"></div>
+            <p class="text-xs font-mono text-[#ff003c] tracking-widest uppercase">Fetching secure payload...</p>
+        </div>
+
+        <div id="tweak-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+        </div>
+    </main>
+
+    <footer class="bg-[#050000] py-6 text-center border-t border-[#ff003c]/20 mt-auto z-10">
+        <p class="text-gray-500 font-bold text-xs tracking-[0.2em] font-rajdhani uppercase">
+            <span class="rog-red">&copy;</span> 2025 Agung Developer. All Rights Reserved.
+        </p>
+    </footer>
+
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 40, density: { enable: true, value_area: 1000 } },
+                color: { value: '#ff003c' },
+                shape: { type: 'polygon', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 6 } },
+                opacity: { value: 0.3, random: true },
+                size: { value: 2, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ff003c', opacity: 0.15, width: 1 },
+                move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false },
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 0.4 } }, push: { particles_nb: 2 } },
+            },
+            retina_detect: true,
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("tweak-container");
+            const loading = document.getElementById("loading-state");
+
+            fetch("tweak.json")
+                .then(response => response.json())
+                .then(data => {
+                    loading.classList.add("hidden");
+                    container.classList.remove("hidden");
+
+                    data.forEach((item, index) => {
+                        const delay = (index % 3) * 100;
+                        const card = document.createElement("div");
+                        card.className = "tool-card p-6 flex flex-col justify-between";
+                        card.setAttribute("data-aos", "fade-up");
+                        card.setAttribute("data-aos-delay", delay.toString());
+
+                        card.innerHTML = `
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="w-14 h-14 bg-[#1a0000] border border-[#ff003c]/30 flex items-center justify-center text-2xl text-[#ff003c] shadow-[0_0_15px_rgba(255,0,60,0.2)]" style="clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">
+                                        <i class="${item.icon}"></i>
+                                    </div>
+                                    <span class="badge-cyber px-3 py-1 text-[10px] font-bold text-gray-300 font-mono uppercase tracking-widest">${item.category}</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-white uppercase tracking-wider font-rajdhani mb-2 rog-neon">${item.title}</h3>
+                                <p class="text-sm text-gray-400 mb-5 leading-relaxed">${item.description}</p>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <div class="bg-black border border-gray-800 px-2 py-1 rounded text-[10px] font-mono text-gray-500">
+                                        <i class="fas fa-code text-[#ff003c] mr-1"></i>${item.developer}
+                                    </div>
+                                    <div class="bg-black border border-gray-800 px-2 py-1 rounded text-[10px] font-mono text-gray-500">
+                                        <i class="fas fa-tag text-[#ff003c] mr-1"></i>v${item.version}
+                                    </div>
+                                    <div class="bg-black border border-gray-800 px-2 py-1 rounded text-[10px] font-mono text-gray-500">
+                                        <i class="fas fa-hdd text-[#ff003c] mr-1"></i>${item.size}
+                                    </div>
+                                </div>
+                                <a href="${item.downloadUrl}" class="dl-btn w-full block text-center py-3 text-white font-bold text-xs uppercase tracking-widest font-jura">
+                                    <i class="fas fa-download mr-2"></i> INITIATE DOWNLOAD
+                                </a>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    loading.innerHTML = `
+                        <i class="fas fa-exclamation-triangle text-4xl text-[#ff003c] mb-4"></i>
+                        <p class="text-xs font-mono text-gray-400 uppercase tracking-widest text-center">Connection Failed.<br>Unable to fetch payload repository.</p>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
