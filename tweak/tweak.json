@@ -7,7 +7,7 @@
     "size": "33KB",
     "category": "WEB PANEL",
     "icon": "fas fa-server",
-    "description": "Ultimate Web Panel Engine untuk optimasi Android Non-Root via Shizuku. Berisi GUI lengkap untuk kontrol sistem, memori, dan grafis.",
+    "description": "Web Panel Engine terpadu untuk optimasi perangkat Android Anda. Menyediakan antarmuka yang modern dan mudah digunakan untuk manajemen sistem, memori, dan performa secara aman.",
     "downloadUrl": "AGUNG_CORE_V_1.0.zip"
   },
   {
@@ -18,7 +18,7 @@
     "size": "45KB",
     "category": "GFX TOOL",
     "icon": "fas fa-crosshairs",
-    "description": "Panel GFX & Regedit VIP khusus Free Fire. Mengunci frame rate layar, menghapus touch slop untuk Auto Headshot, dan memaksa HW Composition murni melalui eksekusi Shizuku/Root.",
+    "description": "Panel optimasi grafis VIP yang dirancang khusus untuk meningkatkan performa game. Membantu menstabilkan frame rate dan mengoptimalkan responsivitas sentuhan layar untuk pengalaman bermain yang lebih kompetitif.",
     "downloadUrl": "GFX_FF_V_1.0.zip"
   },
   {
@@ -29,7 +29,7 @@
     "size": "29KB",
     "category": "SKIN TOOLS",
     "icon": "fas fa-shield-halved",
-    "description": "Engine injector kelas atas untuk Mobile Legends. Mengelola dan menyuntikkan aset UI, Skin, dan efek visual secara aman ke dalam sistem file lokal.",
+    "description": "Pusat kustomisasi visual kelas atas untuk pengalaman bermain yang lebih personal. Memudahkan Anda dalam mengelola tampilan antarmuka, kostum, dan efek visual secara praktis dan tertata.",
     "downloadUrl": "SKIN_TOOLS_ML.zip"
   },
   {
@@ -40,7 +40,7 @@
     "size": "58KB",
     "category": "REMOTE TOOLS",
     "icon": "fas fa-satellite-dish",
-    "description": "Sistem Remote Enterprise dengan Real-time Screen Mirroring Zero-Delay, Bypass File Manager OBB/Data, Live GitBash Terminal, dan 3-Way Serveo SSH Tunnel untuk kontrol jarak jauh via Shizuku.",
+    "description": "Sistem manajemen jarak jauh tingkat Enterprise. Dilengkapi dengan fitur Screen Mirroring nirkabel yang responsif, File Manager tingkat lanjut, serta Live Terminal interaktif untuk kontrol perangkat yang efisien.",
     "downloadUrl": "NEON_REMOTE_ENGINE_V_1.0.zip"
   }
 ]
