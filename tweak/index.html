@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neon Core - Web Panel Tools</title>
+    <title>Neon Core - Enterprise Repository</title>
     <link rel="icon" type="image/webp" href="../img/icon.webp" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
@@ -14,9 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Jura:wght@500;700&display=swap" rel="stylesheet" />
     <style>
         body {
-            background-color: #030303;
-            background-image: radial-gradient(circle at 50% 0%, #1a0000 0%, #030303 70%),
-                              repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 0, 60, 0.02) 2px, rgba(255, 0, 60, 0.02) 4px);
+            background-color: #050505;
+            background-image: radial-gradient(circle at 50% 0%, #150000 0%, #050505 80%),
+                              repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255, 0, 60, 0.015) 1px, rgba(255, 0, 60, 0.015) 3px);
             color: #d1d5db;
             font-family: 'Chakra Petch', sans-serif;
             overflow-x: hidden;
@@ -26,54 +26,50 @@
         }
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .rog-red { color: #ff003c; }
-        .rog-neon { text-shadow: 0 0 10px rgba(255, 0, 60, 0.8), 0 0 20px rgba(255, 0, 60, 0.4); }
+        .rog-neon { text-shadow: 0 0 8px rgba(255, 0, 60, 0.6); }
         .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
         .font-jura { font-family: 'Jura', sans-serif; }
         
         .header-panel {
-            background: rgba(10, 0, 0, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
-            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.15);
+            background: rgba(5, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 0, 60, 0.1);
         }
 
         .tool-card {
-            background: linear-gradient(145deg, #0f0000, #000000);
-            border-left: 3px solid #ff003c;
-            border-right: 1px solid rgba(255, 0, 60, 0.15);
-            border-top: 1px solid rgba(255, 0, 60, 0.15);
-            border-bottom: 1px solid rgba(255, 0, 60, 0.15);
-            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(20, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+            border: 1px solid rgba(255, 0, 60, 0.15);
+            border-left: 2px solid #ff003c;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.2s ease-out;
             position: relative;
             display: flex;
             flex-direction: column;
             height: 100%;
         }
         .tool-card:hover {
-            box-shadow: 0 0 25px rgba(255, 0, 60, 0.2), inset 0 0 15px rgba(255, 0, 60, 0.1);
-            border-color: #ff003c;
-            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 60, 0.15), inset 0 0 10px rgba(255, 0, 60, 0.05);
+            border-color: rgba(255, 0, 60, 0.4);
+            transform: translateY(-2px);
         }
 
         .dl-btn {
-            background: linear-gradient(45deg, #660000, #ff003c);
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.3s;
+            background: linear-gradient(90deg, #4d0000, #b3002a);
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            transition: all 0.2s;
             border: 1px solid #ff003c;
             cursor: pointer;
         }
         .dl-btn:hover {
-            background: linear-gradient(45deg, #880000, #ff1a4f);
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
-            transform: scale(1.02);
+            background: linear-gradient(90deg, #660000, #e60036);
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.4);
         }
-        .dl-btn:active { transform: scale(0.95); }
+        .dl-btn:active { transform: scale(0.98); }
 
         .badge-cyber {
-            background: rgba(255, 0, 60, 0.1);
-            border: 1px solid rgba(255, 0, 60, 0.3);
-            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
+            background: rgba(255, 0, 60, 0.05);
+            border: 1px solid rgba(255, 0, 60, 0.2);
         }
 
         ::-webkit-scrollbar { width: 3px; height: 3px; } 
@@ -81,72 +77,75 @@
         ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 3px; }
         
         .loader-spinner {
-            border: 3px solid rgba(255, 0, 60, 0.2);
-            border-top: 3px solid #ff003c;
+            border: 2px solid rgba(255, 0, 60, 0.1);
+            border-top: 2px solid #ff003c;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Clamp text to keep cards compact */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
 
-    <header class="header-panel py-5 px-6 sticky top-0 z-50">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <header class="header-panel py-3 px-4 md:py-4 md:px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='../index.html'">
-                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#330000]" style="clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">
-                    <i class="fas fa-chevron-left text-white text-lg"></i>
+                <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#330000]" style="clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);">
+                    <i class="fas fa-chevron-left text-white text-sm"></i>
                 </div>
-                <h1 class="text-xl md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.2em]">NEON CORE</h1>
+                <h1 class="text-lg md:text-xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.15em] leading-none">NEON CORE<br><span class="text-[9px] md:text-[10px] text-gray-500 tracking-widest font-mono">ENTERPRISE REPOSITORY</span></h1>
             </div>
-            <div class="flex items-center gap-2">
-                <i class="fas fa-server text-[#ff003c] animate-pulse"></i>
-                <span class="text-sm font-bold text-gray-300 uppercase tracking-widest font-jura">WEB PANEL TOOLS</span>
+            <div class="hidden md:flex items-center gap-2">
+                <i class="fas fa-server text-[#ff003c] text-xs animate-pulse"></i>
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest font-jura">SECURE CONNECTION</span>
             </div>
         </div>
     </header>
 
-    <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
-        <div class="flex items-center justify-center mb-10 gap-3" data-aos="fade-down">
-            <div class="h-[2px] w-10 md:w-16 bg-gradient-to-r from-transparent to-[#ff003c]"></div>
-            <h2 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest font-rajdhani text-center">REPOSITORY TERMINAL</h2>
-            <div class="h-[2px] w-10 md:w-16 bg-gradient-to-l from-transparent to-[#ff003c]"></div>
+    <main class="flex-1 w-full max-w-6xl mx-auto px-3 py-6 md:px-6 md:py-8">
+        
+        <div id="loading-state" class="flex flex-col items-center justify-center py-16">
+            <div class="loader-spinner mb-3"></div>
+            <p class="text-[10px] font-mono text-[#ff003c] tracking-widest uppercase">Fetching modules...</p>
         </div>
 
-        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
-            <div class="loader-spinner mb-4"></div>
-            <p class="text-xs font-mono text-[#ff003c] tracking-widest uppercase">Fetching secure payload...</p>
-        </div>
-
-        <div id="tweak-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden"></div>
+        <div id="tweak-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 hidden"></div>
+        
     </main>
 
-    <footer class="bg-[#050000] py-6 text-center border-t border-[#ff003c]/20 mt-auto z-10">
-        <p class="text-gray-500 font-bold text-xs tracking-[0.2em] font-rajdhani uppercase">
-            <span class="rog-red">&copy;</span> 2026 Agung Developer. All Rights Reserved.
+    <footer class="bg-[#050000] py-4 text-center border-t border-[#ff003c]/20 mt-auto z-10">
+        <p class="text-gray-600 font-bold text-[9px] tracking-[0.2em] font-rajdhani uppercase">
+            <span class="rog-red">&copy;</span> 2026 AGUNG DEVELOPER.
         </p>
     </footer>
 
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 600, once: true });
 
         particlesJS('particles-js', {
             particles: {
-                number: { value: 40, density: { enable: true, value_area: 1000 } },
+                number: { value: 30, density: { enable: true, value_area: 1000 } },
                 color: { value: '#ff003c' },
-                shape: { type: 'polygon', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 6 } },
-                opacity: { value: 0.3, random: true },
-                size: { value: 2, random: true },
-                line_linked: { enable: true, distance: 150, color: '#ff003c', opacity: 0.15, width: 1 },
-                move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false },
+                shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                opacity: { value: 0.2, random: true },
+                size: { value: 1.5, random: true },
+                line_linked: { enable: true, distance: 120, color: '#ff003c', opacity: 0.1, width: 1 },
+                move: { enable: true, speed: 0.5, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false },
             },
             interactivity: {
                 detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { grab: { distance: 140, line_linked: { opacity: 0.4 } }, push: { particles_nb: 2 } },
+                events: { onhover: { enable: false }, onclick: { enable: false }, resize: true }
             },
             retina_detect: true,
         });
@@ -167,11 +166,11 @@
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('error') === 'not_installed') {
                 Swal.fire({
-                    title: 'APP NOT DETECTED',
-                    text: 'Neon Core App is not installed. Please install it first to import Web Panels.',
+                    title: 'SYS ERROR',
+                    text: 'Neon Core Engine not detected on this device.',
                     icon: 'error',
                     background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
-                    customClass: { popup: 'border-2 border-[#ff003c] rounded-xl' }
+                    customClass: { popup: 'border border-[#ff003c] rounded-md' }
                 });
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
@@ -186,38 +185,37 @@
                     container.classList.remove("hidden");
 
                     data.forEach((item, index) => {
-                        const delay = (index % 3) * 100;
+                        const delay = (index % 4) * 50;
                         const card = document.createElement("div");
-                        card.className = "tool-card p-6 flex flex-col justify-between";
+                        card.className = "tool-card p-3 md:p-4 flex flex-col justify-between";
                         card.setAttribute("data-aos", "fade-up");
                         card.setAttribute("data-aos-delay", delay.toString());
 
                         card.innerHTML = `
-                            <div>
-                                <div class="flex justify-between items-start mb-4">
-                                    <div class="w-14 h-14 bg-[#1a0000] border border-[#ff003c]/30 flex items-center justify-center text-2xl text-[#ff003c] shadow-[0_0_15px_rgba(255,0,60,0.2)]" style="clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">
+                            <div class="mb-3">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-8 h-8 shrink-0 bg-[#1a0000] border border-[#ff003c]/20 flex items-center justify-center text-[10px] md:text-xs text-[#ff003c]" style="clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);">
                                         <i class="${item.icon}"></i>
                                     </div>
-                                    <span class="badge-cyber px-3 py-1 text-[10px] font-bold text-gray-300 font-mono uppercase tracking-widest">${item.category}</span>
+                                    <h3 class="text-[11px] md:text-[13px] font-bold text-white uppercase tracking-wide font-rajdhani rog-neon truncate leading-tight">${item.title}</h3>
                                 </div>
-                                <h3 class="text-xl font-bold text-white uppercase tracking-wider font-rajdhani mb-2 rog-neon">${item.title}</h3>
-                                <p class="text-sm text-gray-400 mb-5 leading-relaxed">${item.description}</p>
+                                
+                                <span class="badge-cyber px-1.5 py-0.5 text-[8px] font-bold text-gray-400 font-mono uppercase tracking-widest inline-block mb-1.5">${item.category}</span>
+                                
+                                <p class="text-[9px] md:text-[10px] text-gray-500 line-clamp-2 leading-relaxed font-mono">${item.description}</p>
                             </div>
                             
-                            <div class="mt-auto">
-                                <div class="flex flex-wrap gap-2 mb-5">
-                                    <div class="bg-black border border-gray-800 px-2 py-1 rounded text-[10px] font-mono text-gray-500">
-                                        <i class="fas fa-code text-[#ff003c] mr-1"></i>${item.developer}
+                            <div class="mt-auto border-t border-[#161626] pt-2 md:pt-3">
+                                <div class="flex flex-wrap gap-1 mb-2 md:mb-3">
+                                    <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500 truncate max-w-full">
+                                        <i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer}
                                     </div>
-                                    <div class="bg-black border border-gray-800 px-2 py-1 rounded text-[10px] font-mono text-gray-500">
-                                        <i class="fas fa-tag text-[#ff003c] mr-1"></i>v${item.version}
-                                    </div>
-                                    <div class="bg-black border border-gray-800 px-2 py-1 rounded text-[10px] font-mono text-gray-500">
-                                        <i class="fas fa-hdd text-[#ff003c] mr-1"></i>${item.size}
+                                    <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500">
+                                        <i class="fas fa-tag text-[#ff003c]/70 mr-1"></i>v${item.version}
                                     </div>
                                 </div>
-                                <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full block text-center py-3 text-white font-bold text-xs uppercase tracking-widest font-jura">
-                                    <i class="fas fa-download mr-2"></i> IMPORT TO NEON CORE
+                                <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-1.5 text-white font-bold text-[9px] md:text-[10px] uppercase tracking-widest font-jura flex items-center justify-center">
+                                    <i class="fas fa-bolt text-[8px] mr-1.5 opacity-70"></i> DEPLOY
                                 </button>
                             </div>
                         `;
@@ -226,12 +224,11 @@
                 })
                 .catch(error => {
                     loading.innerHTML = `
-                        <i class="fas fa-exclamation-triangle text-4xl text-[#ff003c] mb-4"></i>
-                        <p class="text-xs font-mono text-gray-400 uppercase tracking-widest text-center">Connection Failed.<br>Unable to fetch payload repository.</p>
+                        <i class="fas fa-triangle-exclamation text-2xl text-[#ff003c] mb-2"></i>
+                        <p class="text-[9px] font-mono text-gray-500 uppercase tracking-widest text-center">Repository Unreachable</p>
                     `;
                 });
         });
     </script>
 </body>
 </html>
-
