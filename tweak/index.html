@@ -72,6 +72,12 @@
             border: 1px solid rgba(255, 0, 60, 0.2);
         }
 
+        .search-box {
+            background: rgba(10, 0, 0, 0.6);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+        }
+
         ::-webkit-scrollbar { width: 3px; height: 3px; } 
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.4); } 
         ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 3px; }
@@ -99,16 +105,17 @@
     <div id="particles-js"></div>
 
     <header class="header-panel py-3 px-4 md:py-4 md:px-6 sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='../index.html'">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3 cursor-pointer w-full md:w-auto justify-center md:justify-start" onclick="window.location.href='../index.html'">
                 <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#330000]" style="clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);">
                     <i class="fas fa-chevron-left text-white text-sm"></i>
                 </div>
-                <h1 class="text-lg md:text-xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.15em] leading-none">NEON CORE<br><span class="text-[9px] md:text-[10px] text-gray-500 tracking-widest font-mono">ENTERPRISE REPOSITORY</span></h1>
+                <h1 class="text-lg md:text-xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.15em] leading-none text-center md:text-left">NEON CORE<br><span class="text-[9px] md:text-[10px] text-gray-500 tracking-widest font-mono">ENTERPRISE REPOSITORY</span></h1>
             </div>
-            <div class="hidden md:flex items-center gap-2">
-                <i class="fas fa-server text-[#ff003c] text-xs animate-pulse"></i>
-                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest font-jura">SECURE CONNECTION</span>
+            
+            <div class="relative w-full md:w-64 search-box transition focus-within:border-[#ff003c]">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ff003c]/60 text-xs"></i>
+                <input type="text" id="searchInput" placeholder="Search module..." class="w-full bg-transparent text-white text-[10px] md:text-xs font-mono py-2 pl-8 pr-3 focus:outline-none placeholder-gray-600">
             </div>
         </div>
     </header>
@@ -118,6 +125,11 @@
         <div id="loading-state" class="flex flex-col items-center justify-center py-16">
             <div class="loader-spinner mb-3"></div>
             <p class="text-[10px] font-mono text-[#ff003c] tracking-widest uppercase">Fetching modules...</p>
+        </div>
+
+        <div id="empty-state" class="hidden flex flex-col items-center justify-center py-16">
+            <i class="fas fa-database text-3xl text-gray-700 mb-3"></i>
+            <p class="text-[10px] font-mono text-gray-500 tracking-widest uppercase">No modules found matching query.</p>
         </div>
 
         <div id="tweak-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 hidden"></div>
@@ -131,6 +143,8 @@
     </footer>
 
     <script>
+        let repositoryData = []; // Menyimpan data murni untuk search
+        
         AOS.init({ duration: 600, once: true });
 
         particlesJS('particles-js', {
@@ -162,6 +176,94 @@
             }, 3000);
         }
 
+        function showDetail(id) {
+            const item = repositoryData.find(i => i.id === id);
+            if(item) {
+                Swal.fire({
+                    title: item.title,
+                    html: `
+                        <div class="text-left font-mono mt-3">
+                            <div class="flex items-center gap-2 mb-4 border-b border-[#ff003c]/20 pb-3">
+                                <span class="badge-cyber px-2 py-1 text-[9px] font-bold text-[#ff003c] uppercase tracking-widest"><i class="${item.icon} mr-1"></i> ${item.category}</span>
+                                <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[9px] text-gray-400">v${item.version}</span>
+                                <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[9px] text-gray-400">${item.size}</span>
+                            </div>
+                            <p class="text-xs text-gray-300 leading-relaxed">${item.description}</p>
+                            <div class="mt-5 pt-3 border-t border-[#ff003c]/20 text-[9px] text-gray-500 uppercase tracking-widest">
+                                <i class="fas fa-code text-[#ff003c]/70 mr-1"></i> Developer: ${item.developer}
+                            </div>
+                        </div>
+                    `,
+                    background: '#0a0a0f', 
+                    color: '#fff', 
+                    confirmButtonColor: '#ff003c',
+                    confirmButtonText: 'CLOSE',
+                    customClass: { 
+                        popup: 'border border-[#ff003c]/50 rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.15)]', 
+                        title: 'text-sm md:text-base font-rajdhani rog-neon tracking-widest uppercase' 
+                    }
+                });
+            }
+        }
+
+        function renderCards(data) {
+            const container = document.getElementById("tweak-container");
+            const emptyState = document.getElementById("empty-state");
+            
+            container.innerHTML = '';
+            
+            if (data.length === 0) {
+                container.classList.add("hidden");
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            container.classList.remove("hidden");
+
+            data.forEach((item, index) => {
+                const delay = (index % 4) * 50;
+                const card = document.createElement("div");
+                card.className = "tool-card p-3 md:p-4 flex flex-col justify-between group";
+                card.setAttribute("data-aos", "fade-up");
+                card.setAttribute("data-aos-delay", delay.toString());
+
+                card.innerHTML = `
+                    <div class="mb-3 relative">
+                        <button onclick="showDetail('${item.id}')" class="absolute top-0 right-0 text-gray-500 hover:text-[#ff003c] transition-colors z-10" title="Read Details">
+                            <i class="fas fa-circle-info text-xs md:text-sm"></i>
+                        </button>
+
+                        <div class="flex items-center gap-2 mb-2 pr-5">
+                            <div class="w-8 h-8 shrink-0 bg-[#1a0000] border border-[#ff003c]/20 flex items-center justify-center text-[10px] md:text-xs text-[#ff003c] transition-transform group-hover:scale-110" style="clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);">
+                                <i class="${item.icon}"></i>
+                            </div>
+                            <h3 class="text-[11px] md:text-[13px] font-bold text-white uppercase tracking-wide font-rajdhani rog-neon truncate leading-tight">${item.title}</h3>
+                        </div>
+                        
+                        <span class="badge-cyber px-1.5 py-0.5 text-[8px] font-bold text-gray-400 font-mono uppercase tracking-widest inline-block mb-1.5">${item.category}</span>
+                        
+                        <p class="text-[9px] md:text-[10px] text-gray-500 line-clamp-2 leading-relaxed font-mono cursor-pointer hover:text-gray-300 transition-colors" onclick="showDetail('${item.id}')" title="Click to read full description">${item.description}</p>
+                    </div>
+                    
+                    <div class="mt-auto border-t border-[#161626] pt-2 md:pt-3">
+                        <div class="flex flex-wrap gap-1 mb-2 md:mb-3">
+                            <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500 truncate max-w-[60%]">
+                                <i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer}
+                            </div>
+                            <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500">
+                                <i class="fas fa-hdd text-[#ff003c]/70 mr-1"></i>${item.size}
+                            </div>
+                        </div>
+                        <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-1.5 text-white font-bold text-[9px] md:text-[10px] uppercase tracking-widest font-jura flex items-center justify-center">
+                            <i class="fas fa-bolt text-[8px] mr-1.5 opacity-70"></i> DEPLOY
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('error') === 'not_installed') {
@@ -170,57 +272,21 @@
                     text: 'Neon Core Engine not detected on this device.',
                     icon: 'error',
                     background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
-                    customClass: { popup: 'border border-[#ff003c] rounded-md' }
+                    customClass: { popup: 'border border-[#ff003c] rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.2)]' }
                 });
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
 
-            const container = document.getElementById("tweak-container");
             const loading = document.getElementById("loading-state");
+            const searchInput = document.getElementById("searchInput");
 
+            // Fetch data
             fetch("tweak.json")
                 .then(response => response.json())
                 .then(data => {
                     loading.classList.add("hidden");
-                    container.classList.remove("hidden");
-
-                    data.forEach((item, index) => {
-                        const delay = (index % 4) * 50;
-                        const card = document.createElement("div");
-                        card.className = "tool-card p-3 md:p-4 flex flex-col justify-between";
-                        card.setAttribute("data-aos", "fade-up");
-                        card.setAttribute("data-aos-delay", delay.toString());
-
-                        card.innerHTML = `
-                            <div class="mb-3">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-8 h-8 shrink-0 bg-[#1a0000] border border-[#ff003c]/20 flex items-center justify-center text-[10px] md:text-xs text-[#ff003c]" style="clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);">
-                                        <i class="${item.icon}"></i>
-                                    </div>
-                                    <h3 class="text-[11px] md:text-[13px] font-bold text-white uppercase tracking-wide font-rajdhani rog-neon truncate leading-tight">${item.title}</h3>
-                                </div>
-                                
-                                <span class="badge-cyber px-1.5 py-0.5 text-[8px] font-bold text-gray-400 font-mono uppercase tracking-widest inline-block mb-1.5">${item.category}</span>
-                                
-                                <p class="text-[9px] md:text-[10px] text-gray-500 line-clamp-2 leading-relaxed font-mono">${item.description}</p>
-                            </div>
-                            
-                            <div class="mt-auto border-t border-[#161626] pt-2 md:pt-3">
-                                <div class="flex flex-wrap gap-1 mb-2 md:mb-3">
-                                    <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500 truncate max-w-full">
-                                        <i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer}
-                                    </div>
-                                    <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500">
-                                        <i class="fas fa-tag text-[#ff003c]/70 mr-1"></i>v${item.version}
-                                    </div>
-                                </div>
-                                <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-1.5 text-white font-bold text-[9px] md:text-[10px] uppercase tracking-widest font-jura flex items-center justify-center">
-                                    <i class="fas fa-bolt text-[8px] mr-1.5 opacity-70"></i> DEPLOY
-                                </button>
-                            </div>
-                        `;
-                        container.appendChild(card);
-                    });
+                    repositoryData = data; // Simpan data ke variabel global
+                    renderCards(repositoryData); // Render awal
                 })
                 .catch(error => {
                     loading.innerHTML = `
@@ -228,6 +294,17 @@
                         <p class="text-[9px] font-mono text-gray-500 uppercase tracking-widest text-center">Repository Unreachable</p>
                     `;
                 });
+
+            // Live Search Listener
+            searchInput.addEventListener("input", (e) => {
+                const query = e.target.value.toLowerCase();
+                const filteredData = repositoryData.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.category.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query)
+                );
+                renderCards(filteredData);
+            });
         });
     </script>
 </body>
