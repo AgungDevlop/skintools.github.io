@@ -42,5 +42,16 @@
     "icon": "fas fa-satellite-dish",
     "description": "Sistem manajemen jarak jauh tingkat Enterprise. Dilengkapi dengan fitur Screen Mirroring nirkabel yang responsif, File Manager tingkat lanjut, serta Live Terminal interaktif untuk kontrol perangkat yang efisien.",
     "downloadUrl": "NEON_REMOTE_ENGINE_V_1.0.zip"
+  },
+  {
+    "id": "xiaomi-game-turbo",
+    "title": "XIAOMI GAME TURBO V 1.0",
+    "developer": "Agung Dev Team",
+    "version": "1.0",
+    "size": "42KB",
+    "category": "GAME BOOSTER",
+    "icon": "fas fa-rocket",
+    "description": "Modul optimasi game khusus untuk perangkat Xiaomi. Meningkatkan performa GPU, menstabilkan FPS, dan memberikan pengalaman gaming skala Enterprise yang maksimal.",
+    "downloadUrl": "XIAOMI_GAME_TURBO_V_1.0.zip"
   }
 ]
