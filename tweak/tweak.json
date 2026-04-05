@@ -53,5 +53,16 @@
     "icon": "fas fa-rocket",
     "description": "Modul optimasi game khusus untuk perangkat Xiaomi. Meningkatkan performa GPU, menstabilkan FPS, dan memberikan pengalaman gaming skala Enterprise yang maksimal.",
     "downloadUrl": "XIAOMI_GAME_TURBO_V_1.0.zip"
+  },
+  {
+    "id": "realme-gt-engine",
+    "title": "REALME GT ENGINE V 1.0",
+    "developer": "Agung Dev Team",
+    "version": "1.0",
+    "size": "48KB",
+    "category": "GAME BOOSTER",
+    "icon": "fas fa-bolt",
+    "description": "Modul optimasi tingkat lanjut khusus untuk perangkat Realme dan Oplus. Membuka batasan performa hardware, menstabilkan FPS, dan memberikan pengalaman gaming ekstrim yang lancar.",
+    "downloadUrl": "REALME_GT_ENGINE_V_1.0.zip"
   }
 ]
