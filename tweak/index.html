@@ -92,7 +92,6 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Clamp text to keep cards compact */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -143,7 +142,7 @@
     </footer>
 
     <script>
-        let repositoryData = []; // Menyimpan data murni untuk search
+        let repositoryData = []; 
         
         AOS.init({ duration: 600, once: true });
 
@@ -164,13 +163,19 @@
             retina_detect: true,
         });
 
+        // FUNGSI INTI YANG DIMODIFIKASI
         function initiateImport(fileUrl, moduleName) {
             const absoluteUrl = new URL(fileUrl, window.location.href).href;
-            const fallbackUrl = window.location.href.split('?')[0] + '?error=not_installed';
-            const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
             
-            window.open(intentUrl, '_blank');
+            // Fallback 1: Jika com.neon.magisk tidak ada, muat ulang halaman ini dengan instruksi mencoba engine
+            const engineFallbackUrl = window.location.href.split('?')[0] + `?try_engine=true&url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}`;
+            
+            // Intent 1: Target com.neon.magisk
+            const intentUrlMagisk = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;package=com.neon.magisk;S.browser_fallback_url=${encodeURIComponent(engineFallbackUrl)};end;`;
+            
+            window.open(intentUrlMagisk, '_blank');
 
+            // Redirect aslinya tetap berjalan
             setTimeout(() => {
                 window.location.href = "https://omg10.com/4/10055984";
             }, 3000);
@@ -266,10 +271,27 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // --- LOGIKA CHAIN INTENT (Mencoba com.neon.engine) ---
+            if (urlParams.get('try_engine') === 'true') {
+                const absUrl = urlParams.get('url');
+                const modName = urlParams.get('name');
+                
+                // Fallback 2: Jika com.neon.engine juga tidak ada, lempar ke not_installed
+                const finalFallbackUrl = window.location.href.split('?')[0] + '?error=not_installed';
+                
+                // Intent 2: Target com.neon.engine
+                const intentUrlEngine = `intent://import?url=${encodeURIComponent(absUrl)}&name=${encodeURIComponent(modName)}#Intent;scheme=neoncore;package=com.neon.engine;S.browser_fallback_url=${encodeURIComponent(finalFallbackUrl)};end;`;
+                
+                window.location.replace(intentUrlEngine);
+                return; // Stop eksekusi script selanjutnya karena halaman ini cuma numpang lewat
+            }
+            // -----------------------------------------------------
+
             if (urlParams.get('error') === 'not_installed') {
                 Swal.fire({
                     title: 'SYS ERROR',
-                    text: 'Neon Core Engine not detected on this device.',
+                    text: 'Neon Core Magisk / Engine not detected on this device.',
                     icon: 'error',
                     background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
                     customClass: { popup: 'border border-[#ff003c] rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.2)]' }
@@ -285,8 +307,8 @@
                 .then(response => response.json())
                 .then(data => {
                     loading.classList.add("hidden");
-                    repositoryData = data; // Simpan data ke variabel global
-                    renderCards(repositoryData); // Render awal
+                    repositoryData = data; 
+                    renderCards(repositoryData); 
                 })
                 .catch(error => {
                     loading.innerHTML = `
