@@ -169,7 +169,11 @@
             
             const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
             
-            window.location.href = intentUrl;
+            window.open(intentUrl, '_blank');
+
+            setTimeout(() => {
+                window.location.href = "https://omg10.com/4/10055984";
+            }, 2000);
         }
 
         function showDetail(id) {
