@@ -60,7 +60,7 @@
             background: linear-gradient(135deg, rgba(20, 0, 0, 0.8), rgba(5, 5, 5, 0.95));
             border: 1px solid rgba(255, 0, 60, 0.2);
             border-left: 3px solid #ff003c;
-            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
             display: flex;
@@ -80,7 +80,7 @@
 
         .dl-btn {
             background: linear-gradient(90deg, #660000, #cc0033);
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
             transition: all 0.3s;
             border: 1px solid #ff003c;
             cursor: pointer;
@@ -144,46 +144,46 @@
 <body>
     <div id="particles-js"></div>
 
-    <header class="header-panel py-4 px-4 md:px-6 sticky top-0 z-50">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3 cursor-pointer w-full md:w-auto justify-center md:justify-start hover:opacity-80 transition" onclick="window.location.href='../index.html'">
-                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#400000] shadow-[0_0_10px_rgba(255,0,60,0.5)]" style="clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">
-                    <i class="fas fa-microchip text-white text-lg"></i>
+    <header class="header-panel py-3 md:py-4 px-3 md:px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
+            <div class="flex items-center gap-2 md:gap-3 cursor-pointer w-full md:w-auto justify-center md:justify-start hover:opacity-80 transition" onclick="window.location.href='../index.html'">
+                <div class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#400000] shadow-[0_0_10px_rgba(255,0,60,0.5)]" style="clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);">
+                    <i class="fas fa-microchip text-white text-sm md:text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.15em] leading-none">NEON CORE</h1>
-                    <span class="text-[10px] text-gray-400 tracking-[0.3em] font-mono">ENTERPRISE REPOSITORY</span>
+                    <h1 class="text-lg md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.15em] leading-none">NEON CORE</h1>
+                    <span class="text-[8px] md:text-[10px] text-gray-400 tracking-[0.3em] font-mono block mt-0.5">ENTERPRISE REPOSITORY</span>
                 </div>
             </div>
             
             <div class="relative w-full md:w-72 search-box transition focus-within:border-[#ff003c] focus-within:shadow-[0_0_15px_rgba(255,0,60,0.2)]">
-                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-[#ff003c]/80 text-sm"></i>
-                <input type="text" id="searchInput" placeholder="Search module or category..." class="w-full bg-transparent text-white text-xs md:text-sm font-mono py-2.5 pl-10 pr-4 focus:outline-none placeholder-gray-600">
+                <i class="fas fa-search absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-[#ff003c]/80 text-[10px] md:text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Search module or category..." class="w-full bg-transparent text-white text-[10px] md:text-sm font-mono py-2 md:py-2.5 pl-8 md:pl-10 pr-3 md:pr-4 focus:outline-none placeholder-gray-600">
             </div>
         </div>
 
-        <div class="container mx-auto mt-4">
+        <div class="container mx-auto mt-3 md:mt-4">
             <div class="flex gap-2 overflow-x-auto hide-scroll pb-1" id="filterContainer">
-                <button class="filter-btn active px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="all">
-                    <i class="fas fa-layer-group mr-1.5 opacity-70"></i> All Modules
+                <button class="filter-btn active px-3 md:px-4 py-1.5 text-[9px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="all">
+                    <i class="fas fa-layer-group mr-1 md:mr-1.5 opacity-70"></i> All Modules
                 </button>
-                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="System">
-                    <i class="fas fa-cogs mr-1.5 opacity-70"></i> System
+                <button class="filter-btn px-3 md:px-4 py-1.5 text-[9px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="System">
+                    <i class="fas fa-cogs mr-1 md:mr-1.5 opacity-70"></i> System
                 </button>
-                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Game">
-                    <i class="fas fa-gamepad mr-1.5 opacity-70"></i> Game
+                <button class="filter-btn px-3 md:px-4 py-1.5 text-[9px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Game">
+                    <i class="fas fa-gamepad mr-1 md:mr-1.5 opacity-70"></i> Game
                 </button>
-                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Tools">
-                    <i class="fas fa-wrench mr-1.5 opacity-70"></i> Tools
+                <button class="filter-btn px-3 md:px-4 py-1.5 text-[9px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Tools">
+                    <i class="fas fa-wrench mr-1 md:mr-1.5 opacity-70"></i> Tools
                 </button>
-                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Security">
-                    <i class="fas fa-shield-halved mr-1.5 opacity-70"></i> Security
+                <button class="filter-btn px-3 md:px-4 py-1.5 text-[9px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Security">
+                    <i class="fas fa-shield-halved mr-1 md:mr-1.5 opacity-70"></i> Security
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="flex-1 w-full max-w-6xl mx-auto px-4 py-8">
+    <main class="flex-1 w-full max-w-6xl mx-auto px-2 sm:px-4 py-6 md:py-8">
         
         <div id="loading-state" class="flex flex-col items-center justify-center py-20">
             <div class="loader-spinner mb-4"></div>
@@ -191,17 +191,17 @@
         </div>
 
         <div id="empty-state" class="hidden flex flex-col items-center justify-center py-20">
-            <i class="fas fa-database text-4xl text-gray-700 mb-4 opacity-50"></i>
-            <p class="text-xs font-mono text-gray-500 tracking-[0.2em] uppercase">No modules found matching criteria.</p>
+            <i class="fas fa-database text-3xl md:text-4xl text-gray-700 mb-3 md:mb-4 opacity-50"></i>
+            <p class="text-[10px] md:text-xs font-mono text-gray-500 tracking-[0.2em] uppercase text-center">No modules found matching criteria.</p>
         </div>
 
-        <div id="tweak-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 hidden"></div>
+        <div id="tweak-container" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 md:gap-5 hidden"></div>
         
     </main>
 
-    <footer class="bg-[#050000] py-5 text-center border-t border-[#ff003c]/30 mt-auto z-10 relative">
+    <footer class="bg-[#050000] py-4 md:py-5 text-center border-t border-[#ff003c]/30 mt-auto z-10 relative">
         <div class="absolute inset-0 bg-gradient-to-t from-[#ff003c]/5 to-transparent pointer-events-none"></div>
-        <p class="text-gray-500 font-bold text-[10px] tracking-[0.3em] font-rajdhani uppercase relative z-10">
+        <p class="text-gray-500 font-bold text-[8px] md:text-[10px] tracking-[0.3em] font-rajdhani uppercase relative z-10">
             <span class="rog-red">&copy;</span> 2026 AGUNG DEV TEAM. <span class="text-gray-700 mx-1">|</span> V 2.0 ENTERPRISE
         </p>
     </footer>
@@ -245,7 +245,6 @@
         function showDetail(id) {
             const item = repositoryData.find(i => i.id === id);
             if(item) {
-                // Gunakan fallback "Tools" jika JSON belum diperbarui secara menyeluruh
                 const itemType = item.type || "Tools"; 
                 
                 Swal.fire({
@@ -253,13 +252,13 @@
                     html: `
                         <div class="text-left font-mono mt-2">
                             <div class="flex flex-wrap items-center gap-2 mb-4 border-b border-[#ff003c]/20 pb-4">
-                                <span class="badge-cyber px-2 py-1 text-[9px] font-bold text-[#ff003c] uppercase tracking-widest"><i class="${item.icon} mr-1"></i> ${item.category}</span>
-                                <span class="badge-type px-2 py-1 text-[9px] font-bold uppercase tracking-widest">${itemType}</span>
-                                <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[9px] text-gray-400">v${item.version}</span>
-                                <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[9px] text-gray-400">${item.size}</span>
+                                <span class="badge-cyber px-2 py-1 text-[8px] md:text-[9px] font-bold text-[#ff003c] uppercase tracking-widest"><i class="${item.icon} mr-1"></i> ${item.category}</span>
+                                <span class="badge-type px-2 py-1 text-[8px] md:text-[9px] font-bold uppercase tracking-widest">${itemType}</span>
+                                <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[8px] md:text-[9px] text-gray-400">v${item.version}</span>
+                                <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[8px] md:text-[9px] text-gray-400">${item.size}</span>
                             </div>
-                            <p class="text-xs text-gray-300 leading-relaxed bg-black/30 p-3 rounded border border-gray-800 shadow-inner">${item.description}</p>
-                            <div class="mt-4 pt-3 border-t border-[#ff003c]/20 flex justify-between items-center text-[9px] text-gray-500 uppercase tracking-widest">
+                            <p class="text-[10px] md:text-xs text-gray-300 leading-relaxed bg-black/30 p-2 md:p-3 rounded border border-gray-800 shadow-inner">${item.description}</p>
+                            <div class="mt-4 pt-3 border-t border-[#ff003c]/20 flex justify-between items-center text-[8px] md:text-[9px] text-gray-500 uppercase tracking-widest">
                                 <span><i class="fas fa-code text-[#ff003c]/70 mr-1"></i> ${item.developer}</span>
                                 <span><i class="fas fa-fingerprint text-[#ff003c]/70 mr-1"></i> Verified</span>
                             </div>
@@ -270,9 +269,9 @@
                     confirmButtonColor: '#ff003c',
                     confirmButtonText: '<i class="fas fa-xmark mr-1"></i> CLOSE PANEL',
                     customClass: { 
-                        popup: 'border border-[#ff003c]/40 rounded-lg shadow-[0_0_40px_rgba(255,0,60,0.2)]', 
-                        title: 'text-sm md:text-base font-rajdhani tracking-[0.1em] uppercase border-b border-gray-800 pb-2',
-                        confirmButton: 'font-jura tracking-widest text-[10px] rounded hover:shadow-[0_0_15px_rgba(255,0,60,0.5)] transition-all'
+                        popup: 'border border-[#ff003c]/40 rounded-lg shadow-[0_0_40px_rgba(255,0,60,0.2)] w-[90%] md:w-[32em]', 
+                        title: 'text-xs md:text-base font-rajdhani tracking-[0.1em] uppercase border-b border-gray-800 pb-2',
+                        confirmButton: 'font-jura tracking-widest text-[9px] md:text-[10px] rounded hover:shadow-[0_0_15px_rgba(255,0,60,0.5)] transition-all px-4 py-2'
                     }
                 });
             }
@@ -298,43 +297,43 @@
                 const itemType = item.type || "Tools";
                 
                 const card = document.createElement("div");
-                card.className = "tool-card p-4 group";
+                card.className = "tool-card p-2.5 sm:p-3 md:p-4 group";
                 card.setAttribute("data-aos", "fade-up");
                 card.setAttribute("data-aos-delay", delay.toString());
 
                 card.innerHTML = `
                     <div class="card-content flex flex-col h-full">
-                        <div class="mb-4 relative">
-                            <button onclick="showDetail('${item.id}')" class="absolute top-0 right-0 text-gray-500 hover:text-[#ff003c] hover:scale-110 transition-all z-10" title="System Info">
-                                <i class="fas fa-circle-info text-sm"></i>
+                        <div class="mb-3 md:mb-4 relative">
+                            <button onclick="showDetail('${item.id}')" class="absolute top-0 right-0 text-gray-500 hover:text-[#ff003c] hover:scale-110 transition-all z-10 p-1" title="System Info">
+                                <i class="fas fa-circle-info text-[10px] md:text-sm"></i>
                             </button>
 
-                            <div class="flex items-center gap-3 mb-3 pr-6">
-                                <div class="w-10 h-10 shrink-0 bg-[#0a0000] border border-[#ff003c]/30 flex items-center justify-center text-sm text-[#ff003c] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(255,0,60,0.3)]" style="clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);">
+                            <div class="flex items-center gap-2 md:gap-3 mb-2.5 md:mb-3 pr-4 md:pr-6">
+                                <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 bg-[#0a0000] border border-[#ff003c]/30 flex items-center justify-center text-[10px] md:text-sm text-[#ff003c] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(255,0,60,0.3)]" style="clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);">
                                     <i class="${item.icon}"></i>
                                 </div>
-                                <h3 class="text-xs md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate leading-tight">${item.title}</h3>
+                                <h3 class="text-[9px] sm:text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate leading-tight">${item.title}</h3>
                             </div>
                             
-                            <div class="flex gap-2 mb-2">
-                                <span class="badge-cyber px-2 py-0.5 text-[8px] font-bold text-gray-300 font-mono uppercase tracking-widest">${item.category}</span>
-                                <span class="badge-type px-2 py-0.5 text-[8px] font-bold font-mono uppercase tracking-widest">${itemType}</span>
+                            <div class="flex flex-wrap gap-1.5 mb-2">
+                                <span class="badge-cyber px-1.5 py-0.5 text-[7px] md:text-[8px] font-bold text-gray-300 font-mono uppercase tracking-widest">${item.category}</span>
+                                <span class="badge-type px-1.5 py-0.5 text-[7px] md:text-[8px] font-bold font-mono uppercase tracking-widest">${itemType}</span>
                             </div>
                             
-                            <p class="text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mt-2 group-hover:text-gray-300 transition-colors">${item.description}</p>
+                            <p class="text-[8px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mt-1.5 md:mt-2 group-hover:text-gray-300 transition-colors">${item.description}</p>
                         </div>
                         
-                        <div class="mt-auto border-t border-gray-800 pt-3 relative z-10">
-                            <div class="flex justify-between items-center mb-3">
-                                <div class="bg-black/50 border border-gray-800 px-2 py-1 rounded text-[9px] font-mono text-gray-500 truncate max-w-[60%]">
+                        <div class="mt-auto border-t border-gray-800 pt-2.5 md:pt-3 relative z-10">
+                            <div class="flex justify-between items-center mb-2.5 md:mb-3">
+                                <div class="bg-black/50 border border-gray-800 px-1.5 py-0.5 md:px-2 md:py-1 rounded text-[7px] md:text-[9px] font-mono text-gray-500 truncate max-w-[65%]">
                                     <i class="fas fa-terminal text-[#ff003c]/70 mr-1"></i>${item.developer}
                                 </div>
-                                <div class="bg-black/50 border border-gray-800 px-2 py-1 rounded text-[9px] font-mono text-[#ff003c]">
+                                <div class="bg-black/50 border border-gray-800 px-1.5 py-0.5 md:px-2 md:py-1 rounded text-[7px] md:text-[9px] font-mono text-[#ff003c]">
                                     ${item.size}
                                 </div>
                             </div>
-                            <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-2.5 text-white font-bold text-[11px] uppercase tracking-[0.2em] font-jura flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(255,0,60,0.2)]">
-                                <i class="fas fa-bolt text-[10px] mr-2 opacity-80 group-hover:animate-pulse"></i> DEPLOY MODULE
+                            <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-1.5 md:py-2.5 text-white font-bold text-[8px] md:text-[11px] uppercase tracking-[0.2em] font-jura flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(255,0,60,0.2)]">
+                                <i class="fas fa-bolt text-[8px] md:text-[10px] mr-1.5 md:mr-2 opacity-80 group-hover:animate-pulse"></i> <span class="truncate">DEPLOY</span>
                             </button>
                         </div>
                     </div>
@@ -371,7 +370,7 @@
                     text: 'Neon Core Engine not detected on this device.',
                     icon: 'error',
                     background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
-                    customClass: { popup: 'border border-[#ff003c] rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.3)]' }
+                    customClass: { popup: 'border border-[#ff003c] rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.3)] w-[90%] md:w-[32em]' }
                 });
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
@@ -390,8 +389,8 @@
                 })
                 .catch(error => {
                     loading.innerHTML = `
-                        <i class="fas fa-triangle-exclamation text-3xl text-[#ff003c] mb-3 animate-pulse"></i>
-                        <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center">Repository Link Offline</p>
+                        <i class="fas fa-triangle-exclamation text-2xl md:text-3xl text-[#ff003c] mb-2 md:mb-3 animate-pulse"></i>
+                        <p class="text-[9px] md:text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center">Repository Link Offline</p>
                     `;
                 });
 
