@@ -6,6 +6,7 @@
     "version": "1.0",
     "size": "33KB",
     "category": "WEB PANEL",
+    "type": "System",
     "icon": "fas fa-server",
     "description": "Web Panel Engine terpadu untuk optimasi perangkat Android Anda. Menyediakan antarmuka yang modern dan mudah digunakan untuk manajemen sistem, memori, dan performa secara aman.",
     "downloadUrl": "AGUNG_CORE_V_1.0.zip"
@@ -17,6 +18,7 @@
     "version": "1.0",
     "size": "45KB",
     "category": "GFX TOOL",
+    "type": "Game",
     "icon": "fas fa-crosshairs",
     "description": "Panel optimasi grafis VIP yang dirancang khusus untuk meningkatkan performa game. Membantu menstabilkan frame rate dan mengoptimalkan responsivitas sentuhan layar untuk pengalaman bermain yang lebih kompetitif.",
     "downloadUrl": "GFX_FF_V_1.0.zip"
@@ -28,6 +30,7 @@
     "version": "1.0",
     "size": "29KB",
     "category": "SKIN TOOLS",
+    "type": "Game",
     "icon": "fas fa-shield-halved",
     "description": "Pusat kustomisasi visual kelas atas untuk pengalaman bermain yang lebih personal. Memudahkan Anda dalam mengelola tampilan antarmuka, kostum, dan efek visual secara praktis dan tertata.",
     "downloadUrl": "SKIN_TOOLS_ML.zip"
@@ -39,6 +42,7 @@
     "version": "1.0",
     "size": "58KB",
     "category": "REMOTE TOOLS",
+    "type": "Tools",
     "icon": "fas fa-satellite-dish",
     "description": "Sistem manajemen jarak jauh tingkat Enterprise. Dilengkapi dengan fitur Screen Mirroring nirkabel yang responsif, File Manager tingkat lanjut, serta Live Terminal interaktif untuk kontrol perangkat yang efisien.",
     "downloadUrl": "NEON_REMOTE_ENGINE_V_1.0.zip"
@@ -50,6 +54,7 @@
     "version": "1.0",
     "size": "42KB",
     "category": "GAME BOOSTER",
+    "type": "Game",
     "icon": "fas fa-rocket",
     "description": "Modul optimasi game khusus untuk perangkat Xiaomi. Meningkatkan performa GPU, menstabilkan FPS, dan memberikan pengalaman gaming skala Enterprise yang maksimal.",
     "downloadUrl": "XIAOMI_GAME_TURBO_V_1.0.zip"
@@ -61,8 +66,69 @@
     "version": "1.0",
     "size": "48KB",
     "category": "GAME BOOSTER",
+    "type": "Game",
     "icon": "fas fa-bolt",
     "description": "Modul optimasi tingkat lanjut khusus untuk perangkat Realme dan Oplus. Membuka batasan performa hardware, menstabilkan FPS, dan memberikan pengalaman gaming ekstrim yang lancar.",
     "downloadUrl": "REALME_GT_ENGINE_V_1.0.zip"
+  },
+  {
+    "id": "message-recovery-v1",
+    "title": "MESSAGE RECOVERY V 1.0",
+    "developer": "Agung Dev Team",
+    "version": "1.0",
+    "size": "24KB",
+    "category": "RECOVERY TOOLS",
+    "type": "Tools",
+    "icon": "fas fa-clock-rotate-left",
+    "description": "Alat praktis untuk memulihkan pesan obrolan yang terhapus. Berjalan di latar belakang untuk mencadangkan notifikasi dan riwayat pesan secara otomatis.",
+    "downloadUrl": "MESSAGE_RECOVERY_V_1.0.zip"
+  },
+  {
+    "id": "battery-spoofer-v1",
+    "title": "BATTERY SPOOFER V 1.0",
+    "developer": "Agung Dev Team",
+    "version": "1.0",
+    "size": "18KB",
+    "category": "SYSTEM TOOLS",
+    "type": "System",
+    "icon": "fas fa-battery-half",
+    "description": "Modul sistem untuk mengubah atau memanipulasi persentase dan status indikator baterai pada perangkat Anda.",
+    "downloadUrl": "BATTERY_SPOOFER_V_1.0.zip"
+  },
+  {
+    "id": "tethering-bypass-v1",
+    "title": "TETHERING BYPASS V 1.0",
+    "developer": "Agung Dev Team",
+    "version": "1.0",
+    "size": "31KB",
+    "category": "NETWORK TOOLS",
+    "type": "Tools",
+    "icon": "fas fa-wifi",
+    "description": "Tool jaringan sederhana untuk melewati (bypass) batasan tethering hotspot dari provider agar koneksi bisa dibagi dengan lancar.",
+    "downloadUrl": "TETHERING_BYPASS_V_1.0.zip"
+  },
+  {
+    "id": "app-protector-v1",
+    "title": "APP PROTECTOR V 1.0",
+    "developer": "Agung Dev Team",
+    "version": "1.0",
+    "size": "36KB",
+    "category": "SECURITY TOOLS",
+    "type": "Security",
+    "icon": "fas fa-lock",
+    "description": "Utilitas keamanan untuk mengunci aplikasi dan menjaga privasi data Anda agar aman dari akses yang tidak sah.",
+    "downloadUrl": "APP_PROTECTOR_V_1.0.zip"
+  },
+  {
+    "id": "status-saver-v1",
+    "title": "STATUS SAVER V 1.0",
+    "developer": "Agung Dev Team",
+    "version": "1.0",
+    "size": "27KB",
+    "category": "MEDIA TOOLS",
+    "type": "Tools",
+    "icon": "fas fa-download",
+    "description": "Alat ringan untuk mengunduh dan menyimpan status, story, atau media dari platform sosial media langsung ke galeri HP Anda.",
+    "downloadUrl": "STATUS_SAVER_V_1.0.zip"
   }
 ]
