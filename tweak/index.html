@@ -26,68 +26,107 @@
         }
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .rog-red { color: #ff003c; }
-        .rog-neon { text-shadow: 0 0 8px rgba(255, 0, 60, 0.6); }
+        .rog-neon { text-shadow: 0 0 10px rgba(255, 0, 60, 0.8), 0 0 20px rgba(255, 0, 60, 0.4); }
         .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
         .font-jura { font-family: 'Jura', sans-serif; }
         
         .header-panel {
             background: rgba(5, 0, 0, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 0, 60, 0.2);
-            box-shadow: 0 4px 20px rgba(255, 0, 60, 0.1);
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.15);
+        }
+
+        /* Styling Filter Tabs */
+        .filter-btn {
+            background: rgba(15, 0, 0, 0.6);
+            border: 1px solid rgba(255, 0, 60, 0.2);
+            color: #888;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            border-color: rgba(255, 0, 60, 0.6);
+            color: #fff;
+        }
+        .filter-btn.active {
+            background: rgba(255, 0, 60, 0.15);
+            border-color: #ff003c;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
 
         .tool-card {
-            background: linear-gradient(135deg, rgba(20, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
-            border: 1px solid rgba(255, 0, 60, 0.15);
-            border-left: 2px solid #ff003c;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.2s ease-out;
+            background: linear-gradient(135deg, rgba(20, 0, 0, 0.8), rgba(5, 5, 5, 0.95));
+            border: 1px solid rgba(255, 0, 60, 0.2);
+            border-left: 3px solid #ff003c;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
             display: flex;
             flex-direction: column;
             height: 100%;
         }
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 50%, rgba(255, 0, 60, 0.03) 100%);
+            z-index: 0; pointer-events: none;
+        }
         .tool-card:hover {
-            box-shadow: 0 5px 15px rgba(255, 0, 60, 0.15), inset 0 0 10px rgba(255, 0, 60, 0.05);
-            border-color: rgba(255, 0, 60, 0.4);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 0, 60, 0.2), inset 0 0 15px rgba(255, 0, 60, 0.1);
+            border-color: rgba(255, 0, 60, 0.6);
+            transform: translateY(-4px) scale(1.01);
         }
 
         .dl-btn {
-            background: linear-gradient(90deg, #4d0000, #b3002a);
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-            transition: all 0.2s;
+            background: linear-gradient(90deg, #660000, #cc0033);
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+            transition: all 0.3s;
             border: 1px solid #ff003c;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .dl-btn::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
         }
         .dl-btn:hover {
-            background: linear-gradient(90deg, #660000, #e60036);
-            box-shadow: 0 0 10px rgba(255, 0, 60, 0.4);
+            background: linear-gradient(90deg, #800000, #ff0040);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
         }
-        .dl-btn:active { transform: scale(0.98); }
+        .dl-btn:hover::after { left: 100%; }
+        .dl-btn:active { transform: scale(0.96); }
 
         .badge-cyber {
             background: rgba(255, 0, 60, 0.05);
-            border: 1px solid rgba(255, 0, 60, 0.2);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            border-left: 2px solid #ff003c;
+        }
+        .badge-type {
+            background: rgba(0, 150, 255, 0.05);
+            border: 1px solid rgba(0, 150, 255, 0.3);
+            color: #4da6ff;
         }
 
         .search-box {
-            background: rgba(10, 0, 0, 0.6);
-            border: 1px solid rgba(255, 0, 60, 0.3);
+            background: rgba(10, 0, 0, 0.8);
+            border: 1px solid rgba(255, 0, 60, 0.4);
             clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
 
-        ::-webkit-scrollbar { width: 3px; height: 3px; } 
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.4); } 
-        ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 3px; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; } 
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.6); } 
+        ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 2px; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
         
         .loader-spinner {
             border: 2px solid rgba(255, 0, 60, 0.1);
             border-top: 2px solid #ff003c;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -98,67 +137,97 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+        
+        .card-content { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
 
-    <header class="header-panel py-3 px-4 md:py-4 md:px-6 sticky top-0 z-50">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
-            <div class="flex items-center gap-3 cursor-pointer w-full md:w-auto justify-center md:justify-start" onclick="window.location.href='../index.html'">
-                <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#330000]" style="clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);">
-                    <i class="fas fa-chevron-left text-white text-sm"></i>
+    <header class="header-panel py-4 px-4 md:px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 cursor-pointer w-full md:w-auto justify-center md:justify-start hover:opacity-80 transition" onclick="window.location.href='../index.html'">
+                <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#400000] shadow-[0_0_10px_rgba(255,0,60,0.5)]" style="clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">
+                    <i class="fas fa-microchip text-white text-lg"></i>
                 </div>
-                <h1 class="text-lg md:text-xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.15em] leading-none text-center md:text-left">NEON CORE<br><span class="text-[9px] md:text-[10px] text-gray-500 tracking-widest font-mono">ENTERPRISE REPOSITORY</span></h1>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[0.15em] leading-none">NEON CORE</h1>
+                    <span class="text-[10px] text-gray-400 tracking-[0.3em] font-mono">ENTERPRISE REPOSITORY</span>
+                </div>
             </div>
             
-            <div class="relative w-full md:w-64 search-box transition focus-within:border-[#ff003c]">
-                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-[#ff003c]/60 text-xs"></i>
-                <input type="text" id="searchInput" placeholder="Search module..." class="w-full bg-transparent text-white text-[10px] md:text-xs font-mono py-2 pl-8 pr-3 focus:outline-none placeholder-gray-600">
+            <div class="relative w-full md:w-72 search-box transition focus-within:border-[#ff003c] focus-within:shadow-[0_0_15px_rgba(255,0,60,0.2)]">
+                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-[#ff003c]/80 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Search module or category..." class="w-full bg-transparent text-white text-xs md:text-sm font-mono py-2.5 pl-10 pr-4 focus:outline-none placeholder-gray-600">
+            </div>
+        </div>
+
+        <div class="container mx-auto mt-4">
+            <div class="flex gap-2 overflow-x-auto hide-scroll pb-1" id="filterContainer">
+                <button class="filter-btn active px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="all">
+                    <i class="fas fa-layer-group mr-1.5 opacity-70"></i> All Modules
+                </button>
+                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="System">
+                    <i class="fas fa-cogs mr-1.5 opacity-70"></i> System
+                </button>
+                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Game">
+                    <i class="fas fa-gamepad mr-1.5 opacity-70"></i> Game
+                </button>
+                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Tools">
+                    <i class="fas fa-wrench mr-1.5 opacity-70"></i> Tools
+                </button>
+                <button class="filter-btn px-4 py-1.5 text-[10px] md:text-xs font-jura font-bold tracking-widest uppercase whitespace-nowrap" data-type="Security">
+                    <i class="fas fa-shield-halved mr-1.5 opacity-70"></i> Security
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="flex-1 w-full max-w-6xl mx-auto px-3 py-6 md:px-6 md:py-8">
+    <main class="flex-1 w-full max-w-6xl mx-auto px-4 py-8">
         
-        <div id="loading-state" class="flex flex-col items-center justify-center py-16">
-            <div class="loader-spinner mb-3"></div>
-            <p class="text-[10px] font-mono text-[#ff003c] tracking-widest uppercase">Fetching modules...</p>
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
+            <div class="loader-spinner mb-4"></div>
+            <p class="text-xs font-mono text-[#ff003c] tracking-[0.2em] uppercase animate-pulse">Establishing Connection...</p>
         </div>
 
-        <div id="empty-state" class="hidden flex flex-col items-center justify-center py-16">
-            <i class="fas fa-database text-3xl text-gray-700 mb-3"></i>
-            <p class="text-[10px] font-mono text-gray-500 tracking-widest uppercase">No modules found matching query.</p>
+        <div id="empty-state" class="hidden flex flex-col items-center justify-center py-20">
+            <i class="fas fa-database text-4xl text-gray-700 mb-4 opacity-50"></i>
+            <p class="text-xs font-mono text-gray-500 tracking-[0.2em] uppercase">No modules found matching criteria.</p>
         </div>
 
-        <div id="tweak-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 hidden"></div>
+        <div id="tweak-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 hidden"></div>
         
     </main>
 
-    <footer class="bg-[#050000] py-4 text-center border-t border-[#ff003c]/20 mt-auto z-10">
-        <p class="text-gray-600 font-bold text-[9px] tracking-[0.2em] font-rajdhani uppercase">
-            <span class="rog-red">&copy;</span> 2026 AGUNG DEVELOPER.
+    <footer class="bg-[#050000] py-5 text-center border-t border-[#ff003c]/30 mt-auto z-10 relative">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#ff003c]/5 to-transparent pointer-events-none"></div>
+        <p class="text-gray-500 font-bold text-[10px] tracking-[0.3em] font-rajdhani uppercase relative z-10">
+            <span class="rog-red">&copy;</span> 2026 AGUNG DEV TEAM. <span class="text-gray-700 mx-1">|</span> V 2.0 ENTERPRISE
         </p>
     </footer>
 
     <script>
         let repositoryData = [];
+        let currentFilter = 'all';
+        let searchQuery = '';
         
         AOS.init({ duration: 600, once: true });
 
+        // Particles Background Config
         particlesJS('particles-js', {
             particles: {
-                number: { value: 30, density: { enable: true, value_area: 1000 } },
+                number: { value: 40, density: { enable: true, value_area: 1000 } },
                 color: { value: '#ff003c' },
-                shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
-                opacity: { value: 0.2, random: true },
-                size: { value: 1.5, random: true },
-                line_linked: { enable: true, distance: 120, color: '#ff003c', opacity: 0.1, width: 1 },
-                move: { enable: true, speed: 0.5, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false },
+                shape: { type: 'circle' },
+                opacity: { value: 0.3, random: true },
+                size: { value: 2, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ff003c', opacity: 0.15, width: 1 },
+                move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false },
             },
             interactivity: {
                 detect_on: 'canvas',
-                events: { onhover: { enable: false }, onclick: { enable: false }, resize: true }
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 140, line_linked: { opacity: 0.5 } }, push: { particles_nb: 3 } }
             },
             retina_detect: true,
         });
@@ -170,37 +239,40 @@
             const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
             
             window.open(intentUrl, '_blank');
-
-            setTimeout(() => {
-                window.location.href = "https://omg10.com/4/10055984";
-            }, 2000);
+            setTimeout(() => { window.location.href = fallbackUrl; }, 2000);
         }
 
         function showDetail(id) {
             const item = repositoryData.find(i => i.id === id);
             if(item) {
+                // Gunakan fallback "Tools" jika JSON belum diperbarui secara menyeluruh
+                const itemType = item.type || "Tools"; 
+                
                 Swal.fire({
-                    title: item.title,
+                    title: `<span class="rog-neon">${item.title}</span>`,
                     html: `
-                        <div class="text-left font-mono mt-3">
-                            <div class="flex items-center gap-2 mb-4 border-b border-[#ff003c]/20 pb-3">
+                        <div class="text-left font-mono mt-2">
+                            <div class="flex flex-wrap items-center gap-2 mb-4 border-b border-[#ff003c]/20 pb-4">
                                 <span class="badge-cyber px-2 py-1 text-[9px] font-bold text-[#ff003c] uppercase tracking-widest"><i class="${item.icon} mr-1"></i> ${item.category}</span>
+                                <span class="badge-type px-2 py-1 text-[9px] font-bold uppercase tracking-widest">${itemType}</span>
                                 <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[9px] text-gray-400">v${item.version}</span>
                                 <span class="bg-black border border-gray-800 px-2 py-1 rounded text-[9px] text-gray-400">${item.size}</span>
                             </div>
-                            <p class="text-xs text-gray-300 leading-relaxed">${item.description}</p>
-                            <div class="mt-5 pt-3 border-t border-[#ff003c]/20 text-[9px] text-gray-500 uppercase tracking-widest">
-                                <i class="fas fa-code text-[#ff003c]/70 mr-1"></i> Developer: ${item.developer}
+                            <p class="text-xs text-gray-300 leading-relaxed bg-black/30 p-3 rounded border border-gray-800 shadow-inner">${item.description}</p>
+                            <div class="mt-4 pt-3 border-t border-[#ff003c]/20 flex justify-between items-center text-[9px] text-gray-500 uppercase tracking-widest">
+                                <span><i class="fas fa-code text-[#ff003c]/70 mr-1"></i> ${item.developer}</span>
+                                <span><i class="fas fa-fingerprint text-[#ff003c]/70 mr-1"></i> Verified</span>
                             </div>
                         </div>
                     `,
                     background: '#0a0a0f', 
                     color: '#fff', 
                     confirmButtonColor: '#ff003c',
-                    confirmButtonText: 'CLOSE',
+                    confirmButtonText: '<i class="fas fa-xmark mr-1"></i> CLOSE PANEL',
                     customClass: { 
-                        popup: 'border border-[#ff003c]/50 rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.15)]', 
-                        title: 'text-sm md:text-base font-rajdhani rog-neon tracking-widest uppercase' 
+                        popup: 'border border-[#ff003c]/40 rounded-lg shadow-[0_0_40px_rgba(255,0,60,0.2)]', 
+                        title: 'text-sm md:text-base font-rajdhani tracking-[0.1em] uppercase border-b border-gray-800 pb-2',
+                        confirmButton: 'font-jura tracking-widest text-[10px] rounded hover:shadow-[0_0_15px_rgba(255,0,60,0.5)] transition-all'
                     }
                 });
             }
@@ -223,63 +295,92 @@
 
             data.forEach((item, index) => {
                 const delay = (index % 4) * 50;
+                const itemType = item.type || "Tools";
+                
                 const card = document.createElement("div");
-                card.className = "tool-card p-3 md:p-4 flex flex-col justify-between group";
+                card.className = "tool-card p-4 group";
                 card.setAttribute("data-aos", "fade-up");
                 card.setAttribute("data-aos-delay", delay.toString());
 
                 card.innerHTML = `
-                    <div class="mb-3 relative">
-                        <button onclick="showDetail('${item.id}')" class="absolute top-0 right-0 text-gray-500 hover:text-[#ff003c] transition-colors z-10" title="Read Details">
-                            <i class="fas fa-circle-info text-xs md:text-sm"></i>
-                        </button>
+                    <div class="card-content flex flex-col h-full">
+                        <div class="mb-4 relative">
+                            <button onclick="showDetail('${item.id}')" class="absolute top-0 right-0 text-gray-500 hover:text-[#ff003c] hover:scale-110 transition-all z-10" title="System Info">
+                                <i class="fas fa-circle-info text-sm"></i>
+                            </button>
 
-                        <div class="flex items-center gap-2 mb-2 pr-5">
-                            <div class="w-8 h-8 shrink-0 bg-[#1a0000] border border-[#ff003c]/20 flex items-center justify-center text-[10px] md:text-xs text-[#ff003c] transition-transform group-hover:scale-110" style="clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px);">
-                                <i class="${item.icon}"></i>
+                            <div class="flex items-center gap-3 mb-3 pr-6">
+                                <div class="w-10 h-10 shrink-0 bg-[#0a0000] border border-[#ff003c]/30 flex items-center justify-center text-sm text-[#ff003c] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(255,0,60,0.3)]" style="clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);">
+                                    <i class="${item.icon}"></i>
+                                </div>
+                                <h3 class="text-xs md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate leading-tight">${item.title}</h3>
                             </div>
-                            <h3 class="text-[11px] md:text-[13px] font-bold text-white uppercase tracking-wide font-rajdhani rog-neon truncate leading-tight">${item.title}</h3>
+                            
+                            <div class="flex gap-2 mb-2">
+                                <span class="badge-cyber px-2 py-0.5 text-[8px] font-bold text-gray-300 font-mono uppercase tracking-widest">${item.category}</span>
+                                <span class="badge-type px-2 py-0.5 text-[8px] font-bold font-mono uppercase tracking-widest">${itemType}</span>
+                            </div>
+                            
+                            <p class="text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mt-2 group-hover:text-gray-300 transition-colors">${item.description}</p>
                         </div>
                         
-                        <span class="badge-cyber px-1.5 py-0.5 text-[8px] font-bold text-gray-400 font-mono uppercase tracking-widest inline-block mb-1.5">${item.category}</span>
-                        
-                        <p class="text-[9px] md:text-[10px] text-gray-500 line-clamp-2 leading-relaxed font-mono cursor-pointer hover:text-gray-300 transition-colors" onclick="showDetail('${item.id}')" title="Click to read full description">${item.description}</p>
-                    </div>
-                    
-                    <div class="mt-auto border-t border-[#161626] pt-2 md:pt-3">
-                        <div class="flex flex-wrap gap-1 mb-2 md:mb-3">
-                            <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500 truncate max-w-[60%]">
-                                <i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer}
+                        <div class="mt-auto border-t border-gray-800 pt-3 relative z-10">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="bg-black/50 border border-gray-800 px-2 py-1 rounded text-[9px] font-mono text-gray-500 truncate max-w-[60%]">
+                                    <i class="fas fa-terminal text-[#ff003c]/70 mr-1"></i>${item.developer}
+                                </div>
+                                <div class="bg-black/50 border border-gray-800 px-2 py-1 rounded text-[9px] font-mono text-[#ff003c]">
+                                    ${item.size}
+                                </div>
                             </div>
-                            <div class="bg-black px-1.5 py-0.5 rounded text-[8px] font-mono text-gray-500">
-                                <i class="fas fa-hdd text-[#ff003c]/70 mr-1"></i>${item.size}
-                            </div>
+                            <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-2.5 text-white font-bold text-[11px] uppercase tracking-[0.2em] font-jura flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(255,0,60,0.2)]">
+                                <i class="fas fa-bolt text-[10px] mr-2 opacity-80 group-hover:animate-pulse"></i> DEPLOY MODULE
+                            </button>
                         </div>
-                        <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-1.5 text-white font-bold text-[9px] md:text-[10px] uppercase tracking-widest font-jura flex items-center justify-center">
-                            <i class="fas fa-bolt text-[8px] mr-1.5 opacity-70"></i> DEPLOY
-                        </button>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
+        function filterData() {
+            let filtered = repositoryData;
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(item => (item.type || "Tools") === currentFilter);
+            }
+            
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.category.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query) ||
+                    (item.type && item.type.toLowerCase().includes(query))
+                );
+            }
+            
+            renderCards(filtered);
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('error') === 'not_installed') {
                 Swal.fire({
-                    title: 'SYS ERROR',
+                    title: '<span class="text-red-500 font-bold tracking-widest uppercase">SYS ERROR</span>',
                     text: 'Neon Core Engine not detected on this device.',
                     icon: 'error',
                     background: '#09050e', color: '#e4e4e7', confirmButtonColor: '#ff003c',
-                    customClass: { popup: 'border border-[#ff003c] rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.2)]' }
+                    customClass: { popup: 'border border-[#ff003c] rounded-xl shadow-[0_0_30px_rgba(255,0,60,0.3)]' }
                 });
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
 
             const loading = document.getElementById("loading-state");
             const searchInput = document.getElementById("searchInput");
+            const filterBtns = document.querySelectorAll(".filter-btn");
 
+            // Fetch Data
             fetch("tweak.json")
                 .then(response => response.json())
                 .then(data => {
@@ -289,19 +390,25 @@
                 })
                 .catch(error => {
                     loading.innerHTML = `
-                        <i class="fas fa-triangle-exclamation text-2xl text-[#ff003c] mb-2"></i>
-                        <p class="text-[9px] font-mono text-gray-500 uppercase tracking-widest text-center">Repository Unreachable</p>
+                        <i class="fas fa-triangle-exclamation text-3xl text-[#ff003c] mb-3 animate-pulse"></i>
+                        <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-center">Repository Link Offline</p>
                     `;
                 });
 
+            // Search Event
             searchInput.addEventListener("input", (e) => {
-                const query = e.target.value.toLowerCase();
-                const filteredData = repositoryData.filter(item => 
-                    item.title.toLowerCase().includes(query) || 
-                    item.category.toLowerCase().includes(query) ||
-                    item.description.toLowerCase().includes(query)
-                );
-                renderCards(filteredData);
+                searchQuery = e.target.value;
+                filterData();
+            });
+
+            // Filter Buttons Event
+            filterBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    filterBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentFilter = btn.getAttribute("data-type");
+                    filterData();
+                });
             });
         });
     </script>
