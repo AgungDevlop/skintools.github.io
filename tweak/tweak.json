@@ -36,16 +36,16 @@
     "downloadUrl": "SKIN_TOOLS_ML.zip"
   },
   {
-    "id": "neon-remote-engine-v1",
-    "title": "NEON REMOTE ENGINE V 1.0",
-    "developer": "Agung Developer",
+    "id": "samsung-game-turbo",
+    "title": "SAMSUNG GAME TURBO V 1.0",
+    "developer": "Agung Dev Team",
     "version": "1.0",
-    "size": "58KB",
-    "category": "REMOTE TOOLS",
-    "type": "Tools",
-    "icon": "fas fa-satellite-dish",
-    "description": "Sistem manajemen jarak jauh tingkat Enterprise. Dilengkapi dengan fitur Screen Mirroring nirkabel yang responsif, File Manager tingkat lanjut, serta Live Terminal interaktif untuk kontrol perangkat yang efisien.",
-    "downloadUrl": "NEON_REMOTE_ENGINE_V_1.0.zip"
+    "size": "52KB",
+    "category": "GAME BOOSTER",
+    "type": "Game",
+    "icon": "fas fa-meteor",
+    "description": "Modul optimasi tingkat enterprise (The Omni God) khusus untuk perangkat Samsung. Menghapus batasan GOS, Joyose, SmartFPS, mengunci layar di 120Hz, dan menstabilkan performa secara ekstrem.",
+    "downloadUrl": "SAMSUNG_GAME_TURBO_V_1.0.zip"
   },
   {
     "id": "xiaomi-game-turbo",
