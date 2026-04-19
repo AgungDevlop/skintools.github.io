@@ -37,7 +37,6 @@
             box-shadow: 0 4px 30px rgba(255, 0, 60, 0.15);
         }
 
-        /* Styling Filter Tabs */
         .filter-btn {
             background: rgba(15, 0, 0, 0.6);
             border: 1px solid rgba(255, 0, 60, 0.2);
@@ -45,27 +44,19 @@
             clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
             transition: all 0.3s ease;
         }
-        .filter-btn:hover {
-            border-color: rgba(255, 0, 60, 0.6);
-            color: #fff;
-        }
+        .filter-btn:hover { border-color: rgba(255, 0, 60, 0.6); color: #fff; }
         .filter-btn.active {
             background: rgba(255, 0, 60, 0.15);
-            border-color: #ff003c;
-            color: #fff;
+            border-color: #ff003c; color: #fff;
             box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
 
         .tool-card {
             background: linear-gradient(135deg, rgba(20, 0, 0, 0.8), rgba(5, 5, 5, 0.95));
-            border: 1px solid rgba(255, 0, 60, 0.2);
-            border-left: 3px solid #ff003c;
+            border: 1px solid rgba(255, 0, 60, 0.2); border-left: 3px solid #ff003c;
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative;
+            display: flex; flex-direction: column; height: 100%;
         }
         .tool-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -74,71 +65,45 @@
         }
         .tool-card:hover {
             box-shadow: 0 8px 25px rgba(255, 0, 60, 0.2), inset 0 0 15px rgba(255, 0, 60, 0.1);
-            border-color: rgba(255, 0, 60, 0.6);
-            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(255, 0, 60, 0.6); transform: translateY(-4px) scale(1.01);
         }
 
         .dl-btn {
             background: linear-gradient(90deg, #660000, #cc0033);
             clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-            transition: all 0.3s;
-            border: 1px solid #ff003c;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s; border: 1px solid #ff003c; cursor: pointer; position: relative; overflow: hidden;
         }
         .dl-btn::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s;
         }
-        .dl-btn:hover {
-            background: linear-gradient(90deg, #800000, #ff0040);
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
-        }
+        .dl-btn:hover { background: linear-gradient(90deg, #800000, #ff0040); box-shadow: 0 0 15px rgba(255, 0, 60, 0.5); }
         .dl-btn:hover::after { left: 100%; }
         .dl-btn:active { transform: scale(0.96); }
 
-        .badge-cyber {
-            background: rgba(255, 0, 60, 0.05);
-            border: 1px solid rgba(255, 0, 60, 0.3);
-            border-left: 2px solid #ff003c;
-        }
-        .badge-type {
-            background: rgba(0, 150, 255, 0.05);
-            border: 1px solid rgba(0, 150, 255, 0.3);
-            color: #4da6ff;
-        }
-
-        .search-box {
-            background: rgba(10, 0, 0, 0.8);
-            border: 1px solid rgba(255, 0, 60, 0.4);
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-        }
+        .badge-cyber { background: rgba(255, 0, 60, 0.05); border: 1px solid rgba(255, 0, 60, 0.3); border-left: 2px solid #ff003c; }
+        .badge-type { background: rgba(0, 150, 255, 0.05); border: 1px solid rgba(0, 150, 255, 0.3); color: #4da6ff; }
+        .search-box { background: rgba(10, 0, 0, 0.8); border: 1px solid rgba(255, 0, 60, 0.4); clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
 
         ::-webkit-scrollbar { width: 4px; height: 4px; } 
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.6); } 
         ::-webkit-scrollbar-thumb { background: #ff003c; border-radius: 2px; }
         .hide-scroll::-webkit-scrollbar { display: none; }
         
-        .loader-spinner {
-            border: 2px solid rgba(255, 0, 60, 0.1);
-            border-top: 2px solid #ff003c;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
+        .loader-spinner { border: 2px solid rgba(255, 0, 60, 0.1); border-top: 2px solid #ff003c; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-content { position: relative; z-index: 1; }
+
+        /* Terminal Overlay CSS */
+        #term-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.92); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+        .term-box { width: 90%; max-width: 400px; background: #000; border: 1px solid #ff003c; border-radius: 12px; padding: 20px; font-family: 'Courier New', monospace; font-size: 12px; height: 250px; overflow-y: auto; box-shadow: inset 0 0 20px rgba(255,0,60,0.15); text-align: left; }
+        .term-line { margin-bottom: 5px; opacity: 0; animation: fadeIn 0.2s forwards; }
+        .term-info { color: #00e5ff; }
+        .term-warn { color: #ffb300; }
+        .term-success { color: #00ff88; }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -206,6 +171,11 @@
         </p>
     </footer>
 
+    <div id="term-overlay">
+        <div class="loader-spinner mb-4" id="term-spinner"></div>
+        <div class="term-box" id="terminal"></div>
+    </div>
+
     <script>
         let repositoryData = [];
         let currentFilter = 'all';
@@ -213,7 +183,6 @@
         
         AOS.init({ duration: 600, once: true });
 
-        // Particles Background Config
         particlesJS('particles-js', {
             particles: {
                 number: { value: 40, density: { enable: true, value_area: 1000 } },
@@ -232,14 +201,58 @@
             retina_detect: true,
         });
 
+        const adLinks = [
+            "https://omg10.com/4/10055984",
+            "https://sorrowfulpsychology.com/HE9TFh",
+            "https://dulyhagglermounting.com/2082665",
+            "https://di.ruggersnevome.com/iiy4KbogsR7EW/94691"
+        ];
+
+        function printLog(msg, type = "term-info") {
+            const term = document.getElementById('terminal');
+            const line = document.createElement('div');
+            line.className = `term-line ${type}`;
+            line.innerText = `> ${msg}`;
+            term.appendChild(line);
+            term.scrollTop = term.scrollHeight;
+        }
+
+        async function startTerminalSequence(downloadUrl, moduleId) {
+            document.getElementById('term-overlay').style.display = 'flex';
+            document.getElementById('terminal').innerHTML = '';
+            document.getElementById('term-spinner').style.display = 'block';
+
+            const logs = [
+                { text: `[SYS] Target module locked: ${moduleId}`, type: "term-info", delay: 400 },
+                { text: `[AUTH] Verifying secure signature...`, type: "term-warn", delay: 600 },
+                { text: `[AUTH] Signature verified. Access GRANTED.`, type: "term-success", delay: 300 },
+                { text: `[NET] Establishing bridge to Neon Engine...`, type: "term-info", delay: 500 },
+                { text: `[NET] Connection established.`, type: "term-success", delay: 300 },
+                { text: `[INJECT] Sending payload sequence to Daemon...`, type: "term-warn", delay: 700 },
+                { text: `[SUCCESS] Injection Ready. Forwarding Intent...`, type: "term-success", delay: 500 }
+            ];
+
+            for (let i = 0; i < logs.length; i++) {
+                await new Promise(r => setTimeout(r, logs[i].delay));
+                printLog(logs[i].text, logs[i].type);
+            }
+
+            document.getElementById('term-spinner').style.display = 'none';
+            
+            setTimeout(() => {
+                initiateImport(downloadUrl, moduleId);
+                document.getElementById('term-overlay').style.display = 'none';
+            }, 800);
+        }
+
         function initiateImport(fileUrl, moduleName) {
             const absoluteUrl = new URL(fileUrl, window.location.href).href;
-            const fallbackUrl = "https://omg10.com/4/10055984";
+            const selectedAd = adLinks[Math.floor(Math.random() * adLinks.length)];
             
-            const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
+            const intentUrl = `intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(selectedAd)};end;`;
             
             window.open(intentUrl, '_blank');
-            setTimeout(() => { window.location.href = fallbackUrl; }, 2000);
+            setTimeout(() => { window.location.href = selectedAd; }, 2000);
         }
 
         function showDetail(id) {
@@ -332,7 +345,7 @@
                                     ${item.size}
                                 </div>
                             </div>
-                            <button onclick="initiateImport('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-1.5 md:py-2.5 text-white font-bold text-[8px] md:text-[11px] uppercase tracking-[0.2em] font-jura flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(255,0,60,0.2)]">
+                            <button onclick="startTerminalSequence('${item.downloadUrl}', '${item.id}')" class="dl-btn w-full py-1.5 md:py-2.5 text-white font-bold text-[8px] md:text-[11px] uppercase tracking-[0.2em] font-jura flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(255,0,60,0.2)]">
                                 <i class="fas fa-bolt text-[8px] md:text-[10px] mr-1.5 md:mr-2 opacity-80 group-hover:animate-pulse"></i> <span class="truncate">DEPLOY</span>
                             </button>
                         </div>
@@ -379,7 +392,6 @@
             const searchInput = document.getElementById("searchInput");
             const filterBtns = document.querySelectorAll(".filter-btn");
 
-            // Fetch Data
             fetch("tweak.json")
                 .then(response => response.json())
                 .then(data => {
@@ -394,13 +406,11 @@
                     `;
                 });
 
-            // Search Event
             searchInput.addEventListener("input", (e) => {
                 searchQuery = e.target.value;
                 filterData();
             });
 
-            // Filter Buttons Event
             filterBtns.forEach(btn => {
                 btn.addEventListener("click", () => {
                     filterBtns.forEach(b => b.classList.remove("active"));
