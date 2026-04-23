@@ -130,5 +130,17 @@
     "icon": "fas fa-download",
     "description": "Alat ringan untuk mengunduh dan menyimpan status, story, atau media dari platform sosial media langsung ke galeri HP Anda.",
     "downloadUrl": "STATUS_SAVER_V_1.0.zip"
+  },
+  {
+  "id": "infinix-game-booster",
+  "title": "INFINIX GAME BOOSTER V 1.0",
+  "developer": "Agung Dev Team",
+  "version": "1.0",
+  "size": "48KB",
+  "category": "GAME BOOSTER",
+  "type": "Game",
+  "icon": "fas fa-crosshairs",
+  "description": "Modul optimasi tingkat lanjut khusus untuk perangkat Infinix dan MediaTek. Melumpuhkan limitasi XOS, menonaktifkan intervensi Dar-Link secara paksa, dan mengunci performa gaming ke tingkat maksimal.",
+  "downloadUrl": "INFINIX_GAME_BOOSTER_V_1.0.zip"
   }
 ]
