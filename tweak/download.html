@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Download Shell Module</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 0%,#150000 0%,#050505 80%);font-family:Arial,Helvetica,sans-serif;color:#fff;padding:18px}
+.box{width:min(520px,100%);background:rgba(5,0,0,.9);border:1px solid rgba(255,0,60,.4);border-radius:18px;padding:26px;text-align:center;box-shadow:0 0 35px rgba(255,0,60,.22)}
+.icon{width:64px;height:64px;margin:0 auto 16px;display:grid;place-items:center;background:linear-gradient(135deg,#660000,#ff003c);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);font-size:30px}
+h1{margin:0;color:#ff003c;text-shadow:0 0 10px rgba(255,0,60,.8);font-size:24px}
+p{color:#9ca3af;line-height:1.6;font-size:13px}
+.file{word-break:break-word;background:rgba(0,0,0,.45);border:1px solid rgba(255,0,60,.25);padding:13px;border-radius:12px;margin:18px 0;color:#fff;font-weight:700}
+.btn{display:inline-flex;width:100%;justify-content:center;align-items:center;text-decoration:none;border:1px solid #ff003c;background:linear-gradient(90deg,#660000,#cc0033);color:white;border-radius:12px;padding:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.err{display:none;color:#fecaca;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);padding:13px;border-radius:12px}
+</style>
+</head>
+<body>
+<main class="box">
+<div class="icon">↓</div>
+<h1>Shell Download</h1>
+<p>Download akan dimulai otomatis. Jika tidak berjalan, tekan tombol download ulang.</p>
+<div id="fileName" class="file"></div>
+<div id="err" class="err"></div>
+<a id="btn" class="btn" href="#">Download Ulang</a>
+</main>
+<script>
+const params=new URLSearchParams(location.search);
+const raw=params.get("file")||"";
+const fileName=document.getElementById("fileName");
+const err=document.getElementById("err");
+const btn=document.getElementById("btn");
+function valid(f){return f&&!f.includes("..")&&!f.includes("/")&&!f.includes("\\")&&/\.zip$/i.test(f)}
+if(!valid(raw)){
+err.style.display="block";
+err.textContent="File tidak valid.";
+fileName.style.display="none";
+btn.style.display="none";
+}else{
+const f=raw.trim();
+const u="shell/"+encodeURIComponent(f).replace(/%20/g," ");
+fileName.textContent=f;
+btn.href=u;
+btn.download=f;
+setTimeout(()=>{const a=document.createElement("a");a.href=u;a.download=f;document.body.appendChild(a);a.click();a.remove()},650);
+}
+</script>
+</body>
+</html>
