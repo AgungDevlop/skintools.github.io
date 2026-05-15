@@ -18,15 +18,15 @@ SETUP_FILE="/sdcard/Download/neon-core-setup.sh"
 RUN_CMD="sh /sdcard/Download/neon-core-setup.sh"
 
 line() {
-  printf "%s\n" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  printf "%b\n" "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N"
 }
 
 printf "%b" "$M"
 printf "%s\n" " _   _                  ____"
-printf "%s\n" "| \\ | | ___  ___  _ __ / ___|___  _ __ ___"
-printf "%s\n" "|  \\| |/ _ \\/ _ \\| '_ \\ |   / _ \\| '__/ _ \\"
-printf "%s\n" "| |\\  |  __/ (_) | | | | |__| (_) | | |  __/"
-printf "%s\n" "|_| \\_|\\___|\\___/|_| |_|\\____\\___/|_|  \\___|"
+printf "%s\n" "| \ | | ___  ___  _ __ / ___|___  _ __ ___"
+printf "%s\n" "|  \| |/ _ \/ _ \| '_ \ |   / _ \| '__/ _ \\"
+printf "%s\n" "| |\  |  __/ (_) | | | | |__| (_) | | |  __/"
+printf "%s\n" "|_| \_|\___|\___/|_| |_|\____\___/|_|  \___|"
 printf "%s\n" "        N E O N   C O R E   E N G I N E"
 printf "%b\n" "$N"
 
@@ -250,13 +250,6 @@ fi
 
 printf "%b\n\n" "$G[✓] Setup file ready$N"
 
-if command -v termux-clipboard-set >/dev/null 2>&1; then
-  printf "%s" "$RUN_CMD" | termux-clipboard-set
-  CLIP_STATUS="copied"
-else
-  CLIP_STATUS="manual"
-fi
-
 line
 
 printf "%b\n" "$G[✓] TERMUX SETUP SUCCESS$N"
@@ -274,10 +267,7 @@ printf "%b\n\n" "$W└───────────────────�
 
 printf "%b\n\n" "$C$RUN_CMD$N"
 
-if [ "$CLIP_STATUS" = "copied" ]; then
-  printf "%b\n" "$G[✓] Command sudah dicopy ke clipboard.$N"
-else
-  printf "%b\n" "$Y[!] Copy satu baris command di atas.$N"
-fi
-
+printf "%b\n" "$Y[!] Copy satu baris command di atas.$N"
 printf "%b\n" "$G[✓] Done.$N"
+
+exit 0
