@@ -15,7 +15,8 @@ BASE_URL="https://raw.githubusercontent.com/Magisk-Modules-Repo/busybox-ndk/mast
 LOCAL_ENGINE="$HOME/neon-core-engine.bin"
 PUBLIC_ENGINE="/sdcard/Download/neon-core-engine.bin"
 SETUP_FILE="/sdcard/Download/neon-core-setup.sh"
-RUN_CMD="sh /sdcard/Download/neon-core-setup.sh"
+RUN_SETUP="sh /sdcard/Download/neon-core-setup.sh"
+RUN_NEXT=". /data/local/tmp/neon-core/env.sh; neon shell"
 
 line() {
   printf "%b\n" "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N"
@@ -103,8 +104,8 @@ printf "%b\n" "$B[4/6] Cleaning old files...$N"
 rm -f "$LOCAL_ENGINE"
 rm -f "$PUBLIC_ENGINE"
 rm -f "$SETUP_FILE"
-rm -f /sdcard/Download/.neon-core-engine
 rm -f /sdcard/Download/neon-core-start.sh
+rm -f /sdcard/Download/neon.sh
 
 printf "%b\n\n" "$G[✓] Clean install ready$N"
 
@@ -185,7 +186,6 @@ chmod 755 "$CORE"
 
 if ! "$CORE" --help >/dev/null 2>&1; then
   printf '\033[1;31m[!] Engine core gagal dijalankan.\033[0m\n'
-  printf '\033[1;33m[!] Diagnostic:\033[0m\n'
   ls -l "$CORE" 2>/dev/null
   uname -m 2>/dev/null
   getprop ro.product.cpu.abi 2>/dev/null
@@ -200,7 +200,7 @@ printf '\033[1;34m[3/5] Creating Neon shortcuts...\033[0m\n'
 cd "$BIN_DIR" || exit 1
 "$CORE" --install -s "$BIN_DIR"
 
-cat > "$BIN_DIR/neon" <<'NEON_EOF'
+cat > "$BIN_DIR/neon" <<'NEON_BIN_EOF'
 #!/system/bin/sh
 
 CORE="/data/local/tmp/neon-core/bin/busybox"
@@ -221,15 +221,10 @@ if [ "$1" = "shell" ]; then
 fi
 
 exec "$CORE" "$@"
-NEON_EOF
+NEON_BIN_EOF
 
 chmod 755 "$BIN_DIR/neon"
 ln -sf "$BIN_DIR/neon" "$NEON_LINK"
-
-printf '\033[1;32m[✓] Shortcut created: neon\033[0m\n\n'
-
-printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
-printf '\033[1;34m[4/5] Activating Neon environment...\033[0m\n'
 
 cat > "$ENV_FILE" <<'ENV_EOF'
 export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"
@@ -238,21 +233,23 @@ ENV_EOF
 chmod 755 "$ENV_FILE"
 export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"
 
-printf '\033[1;32m[✓] Environment activated\033[0m\n\n'
+printf '\033[1;32m[✓] Shortcut created: neon\033[0m\n'
+printf '\033[1;32m[✓] Env created: /data/local/tmp/neon-core/env.sh\033[0m\n\n'
+
+printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+printf '\033[1;34m[4/5] Activating Neon environment...\033[0m\n'
+printf '\033[1;32m[✓] Environment activated for this session\033[0m\n\n'
 
 printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
 printf '\033[1;34m[5/5] Finalizing setup...\033[0m\n'
 
 printf '\033[1;32m[✓] Neon Core Engine is ready\033[0m\n\n'
 
-printf '\033[1;37mAvailable commands:\033[0m\n'
-printf '\033[1;36m  neon\n  neon shell\n  neon find\n  neon wget\n  neon df\n  neon ps\n  find\n  grep\n  awk\n  sed\n  wget\n  tar\n  unzip\033[0m\n\n'
-
-printf '\033[1;33mUntuk sesi berikutnya jalankan:\033[0m\n'
-printf '\033[1;37m. /data/local/tmp/neon-core/env.sh\033[0m\n\n'
+printf '\033[1;37mGunakan untuk sesi berikutnya:\033[0m\n'
+printf '\033[1;36m. /data/local/tmp/neon-core/env.sh; neon shell\033[0m\n\n'
 
 printf '\033[1;32mOpening Neon shell...\033[0m\n'
-neon shell
+exec "$CORE" sh
 NEON_SETUP_EOF
 
 chmod 755 "$SETUP_FILE"
@@ -271,17 +268,15 @@ printf "%b\n" "$C[•] Neon Core Engine setup file:$N"
 printf "%b\n\n" "$W    $SETUP_FILE$N"
 
 printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
-printf "%b\n" "$Y║       COPY COMMAND BELOW                   ║$N"
-printf "%b\n" "$Y║       RUN IN NEON CORE ENGINE              ║$N"
+printf "%b\n" "$Y║       STEP 1: RUN IN NEON CORE ENGINE      ║$N"
 printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
+printf "\n%b\n\n" "$C$RUN_SETUP$N"
 
-printf "\n%b\n" "$W┌────────────────────────────────────────────┐$N"
-printf "%b\n" "$W│ sh /sdcard/Download/neon-core-setup.sh     │$N"
-printf "%b\n\n" "$W└────────────────────────────────────────────┘$N"
+printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
+printf "%b\n" "$Y║       STEP 2: NEXT SESSION COMMAND         ║$N"
+printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
+printf "\n%b\n\n" "$C$RUN_NEXT$N"
 
-printf "%b\n\n" "$C$RUN_CMD$N"
-
-printf "%b\n" "$Y[!] Copy satu baris command di atas.$N"
 printf "%b\n" "$G[✓] Done.$N"
 
 exit 0
