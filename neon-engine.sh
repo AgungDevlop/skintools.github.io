@@ -18,39 +18,30 @@ SETUP_FILE="/sdcard/Download/neon-core-setup.sh"
 RUN_CMD="sh /sdcard/Download/neon-core-setup.sh"
 
 line() {
-  printf "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N\n"
+  printf "%s\n" "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
-banner() {
-  printf "$M"
-  printf " _   _                  ____               \n"
-  printf "| \\ | | ___  ___  _ __ / ___|___  _ __ ___ \n"
-  printf "|  \\| |/ _ \\/ _ \\| '_ \\ |   / _ \\| '__/ _ \\\n"
-  printf "| |\\  |  __/ (_) | | | | |__| (_) | | |  __/\n"
-  printf "|_| \\_|\\___|\\___/|_| |_|\\____\\___/|_|  \\___|\n"
-  printf "                                            \n"
-  printf "        N E O N   C O R E   E N G I N E\n"
-  printf "$N\n"
-}
+printf "%b" "$M"
+printf "%s\n" " _   _                  ____"
+printf "%s\n" "| \\ | | ___  ___  _ __ / ___|___  _ __ ___"
+printf "%s\n" "|  \\| |/ _ \\/ _ \\| '_ \\ |   / _ \\| '__/ _ \\"
+printf "%s\n" "| |\\  |  __/ (_) | | | | |__| (_) | | |  __/"
+printf "%s\n" "|_| \\_|\\___|\\___/|_| |_|\\____\\___/|_|  \\___|"
+printf "%s\n" "        N E O N   C O R E   E N G I N E"
+printf "%b\n" "$N"
 
-banner
+printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
+printf "%b\n" "$Y║          NEON ENGINE INSTALLER            ║$N"
+printf "%b\n" "$Y║        TERMUX TO ANDROID SHELL KIT         ║$N"
+printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
 
-printf "$Y"
-printf "╔════════════════════════════════════════════╗\n"
-printf "║          NEON ENGINE INSTALLER            ║\n"
-printf "║        TERMUX TO ANDROID SHELL KIT         ║\n"
-printf "╚════════════════════════════════════════════╝\n"
-printf "$N\n"
+printf "\n%b\n" "$W[•] Developer  : Agung Dev$N"
+printf "%b\n" "$W[•] Domain     : neonmagisk.my.id$N"
+printf "%b\n" "$W[•] Engine     : Neon Core Engine$N"
+printf "%b\n\n" "$W[•] Output     : $SETUP_FILE$N"
 
-printf "$W[•] Developer  : Agung Dev$N\n"
-printf "$W[•] Domain     : neonmagisk.my.id$N\n"
-printf "$W[•] Engine     : Neon Core Engine$N\n"
-printf "$W[•] Output     : $SETUP_FILE$N\n\n"
-
-sleep 1
 line
-
-printf "$B[1/6] Detecting device platform...$N\n"
+printf "%b\n" "$B[1/6] Detecting device platform...$N"
 
 ABI="$(getprop ro.product.cpu.abi 2>/dev/null)"
 
@@ -72,13 +63,11 @@ case "$ABI" in
     ;;
 esac
 
-printf "$G[✓] Platform detected : ${ABI:-unknown}$N\n"
-printf "$G[✓] Engine package    : ready$N\n\n"
+printf "%b\n" "$G[✓] Platform detected : ${ABI:-unknown}$N"
+printf "%b\n\n" "$G[✓] Engine package    : ready$N"
 
-sleep 1
 line
-
-printf "$B[2/6] Checking storage access...$N\n"
+printf "%b\n" "$B[2/6] Checking storage access...$N"
 
 if [ ! -d "/sdcard/Download" ]; then
   termux-setup-storage
@@ -86,49 +75,40 @@ if [ ! -d "/sdcard/Download" ]; then
 fi
 
 if [ ! -d "/sdcard/Download" ]; then
-  printf "$R[!] Storage belum aktif.$N\n"
-  printf "$Y[!] Izinkan akses storage Termux lalu jalankan ulang.$N\n"
+  printf "%b\n" "$R[!] Storage belum aktif.$N"
+  printf "%b\n" "$Y[!] Izinkan akses storage Termux lalu jalankan ulang.$N"
   exit 1
 fi
 
-printf "$G[✓] Storage ready$N\n\n"
+printf "%b\n\n" "$G[✓] Storage ready$N"
 
-sleep 1
 line
-
-printf "$B[3/6] Checking downloader...$N\n"
+printf "%b\n" "$B[3/6] Checking downloader...$N"
 
 if command -v curl >/dev/null 2>&1; then
   DOWNLOADER="curl"
 elif command -v wget >/dev/null 2>&1; then
   DOWNLOADER="wget"
 else
-  printf "$R[!] Downloader tidak ditemukan.$N\n"
-  printf "$Y[!] Jalankan dulu:$N\n"
-  printf "$W    pkg install curl -y$N\n"
+  printf "%b\n" "$R[!] Downloader tidak ditemukan.$N"
+  printf "%b\n" "$Y[!] Jalankan dulu: pkg install curl -y$N"
   exit 1
 fi
 
-printf "$G[✓] Downloader ready : $DOWNLOADER$N\n\n"
+printf "%b\n\n" "$G[✓] Downloader ready : $DOWNLOADER$N"
 
-sleep 1
 line
-
-printf "$B[4/6] Cleaning old files...$N\n"
-
-cd "$HOME" || exit 1
+printf "%b\n" "$B[4/6] Cleaning old files...$N"
 
 rm -f "$LOCAL_ENGINE"
 rm -f "$PUBLIC_ENGINE"
 rm -f "$SETUP_FILE"
 rm -f /sdcard/Download/neon-core-start.sh
 
-printf "$G[✓] Clean install ready$N\n\n"
+printf "%b\n\n" "$G[✓] Clean install ready$N"
 
-sleep 1
 line
-
-printf "$B[5/6] Downloading Neon Core Engine package...$N\n"
+printf "%b\n" "$B[5/6] Downloading Neon Core Engine package...$N"
 
 DOWNLOAD_URL="$BASE_URL/$ENGINE_FILE"
 
@@ -139,15 +119,14 @@ else
 fi
 
 if [ ! -f "$LOCAL_ENGINE" ]; then
-  printf "$R[!] Download package gagal.$N\n"
-  printf "$Y[!] Cek koneksi internet lalu jalankan ulang.$N\n"
+  printf "%b\n" "$R[!] Download package gagal.$N"
   exit 1
 fi
 
 SIZE="$(wc -c < "$LOCAL_ENGINE" 2>/dev/null)"
 
 if [ -z "$SIZE" ] || [ "$SIZE" -lt 100000 ]; then
-  printf "$R[!] File package tidak valid.$N\n"
+  printf "%b\n" "$R[!] File package tidak valid.$N"
   rm -f "$LOCAL_ENGINE"
   exit 1
 fi
@@ -156,144 +135,120 @@ chmod 755 "$LOCAL_ENGINE"
 cp "$LOCAL_ENGINE" "$PUBLIC_ENGINE"
 chmod 755 "$PUBLIC_ENGINE"
 
-printf "$G[✓] Neon Core Engine package ready$N\n\n"
+printf "%b\n\n" "$G[✓] Neon Core Engine package ready$N"
 
-sleep 1
 line
+printf "%b\n" "$B[6/6] Creating Neon Core setup file...$N"
 
-printf "$B[6/6] Creating Neon Core setup file...$N\n"
+cat > "$SETUP_FILE" <<'NEON_SETUP_EOF'
+#!/system/bin/sh
+
+clear
+
+SRC="/sdcard/Download/.neon-core-engine"
+CORE="/data/local/tmp/.neon-core-engine"
+HOME_DIR="/data/local/tmp/neon-core"
+BIN_DIR="/data/local/tmp/neon-core/bin"
+ENV_FILE="/data/local/tmp/neon-core/env.sh"
+
+printf '\033[1;35m'
+printf '%s\n' ' _   _                  ____'
+printf '%s\n' '| \ | | ___  ___  _ __ / ___|___  _ __ ___'
+printf '%s\n' '|  \| |/ _ \/ _ \| '"'"'_ \ |   / _ \| '"'"'__/ _ \'
+printf '%s\n' '| |\  |  __/ (_) | | | | |__| (_) | | |  __/'
+printf '%s\n' '|_| \_|\___|\___/|_| |_|\____\___/|_|  \___|'
+printf '%s\n' '        N E O N   C O R E   E N G I N E'
+printf '\033[0m\n'
+
+printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+printf '\033[1;34m[1/5] Resetting old engine files...\033[0m\n'
+
+rm -rf "$HOME_DIR"
+rm -f "$CORE"
+rm -f /data/local/tmp/neon
+
+printf '\033[1;32m[✓] Reset complete\033[0m\n\n'
+
+printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+printf '\033[1;34m[2/5] Installing engine core...\033[0m\n'
+
+if [ ! -f "$SRC" ]; then
+  printf '\033[1;31m[!] Engine package tidak ditemukan.\033[0m\n'
+  printf '\033[1;33m[!] Jalankan installer dari Termux terlebih dahulu.\033[0m\n'
+  exit 1
+fi
+
+cp "$SRC" "$CORE" 2>/dev/null || cat "$SRC" > "$CORE"
+chmod 755 "$CORE"
+
+if ! "$CORE" --help >/dev/null 2>&1; then
+  printf '\033[1;31m[!] Engine core gagal dijalankan.\033[0m\n'
+  exit 1
+fi
+
+printf '\033[1;32m[✓] Engine core installed\033[0m\n\n'
+
+printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+printf '\033[1;34m[3/5] Creating Neon shortcuts...\033[0m\n'
+
+mkdir -p "$BIN_DIR"
+
+cp "$CORE" "$BIN_DIR/.core"
+chmod 755 "$BIN_DIR/.core"
+
+cd "$BIN_DIR" || exit 1
+./.core --install -s .
 
 {
-printf '%s\n' '#!/system/bin/sh'
-printf '%s\n' ''
-printf '%s\n' 'clear'
-printf '%s\n' ''
-printf '%s\n' 'R="\033[1;31m"'
-printf '%s\n' 'G="\033[1;32m"'
-printf '%s\n' 'Y="\033[1;33m"'
-printf '%s\n' 'B="\033[1;34m"'
-printf '%s\n' 'C="\033[1;36m"'
-printf '%s\n' 'M="\033[1;35m"'
-printf '%s\n' 'W="\033[1;37m"'
-printf '%s\n' 'N="\033[0m"'
-printf '%s\n' ''
-printf '%s\n' 'SRC="/sdcard/Download/.neon-core-engine"'
-printf '%s\n' 'CORE="/data/local/tmp/.neon-core-engine"'
-printf '%s\n' 'HOME_DIR="/data/local/tmp/neon-core"'
-printf '%s\n' 'BIN_DIR="/data/local/tmp/neon-core/bin"'
-printf '%s\n' 'ENV_FILE="/data/local/tmp/neon-core/env.sh"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$M"'
-printf '%s\n' 'printf " _   _                  ____               \n"'
-printf '%s\n' 'printf "| \\ | | ___  ___  _ __ / ___|___  _ __ ___ \n"'
-printf '%s\n' 'printf "|  \\| |/ _ \\/ _ \\| '"'"'_ \\ |   / _ \\| '"'"'__/ _ \\\n"'
-printf '%s\n' 'printf "| |\\  |  __/ (_) | | | | |__| (_) | | |  __/\n"'
-printf '%s\n' 'printf "|_| \\_|\\___|\\___/|_| |_|\\____\\___/|_|  \\___|\n"'
-printf '%s\n' 'printf "                                            \n"'
-printf '%s\n' 'printf "        N E O N   C O R E   E N G I N E\n"'
-printf '%s\n' 'printf "$N\n"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N\n"'
-printf '%s\n' 'printf "$B[1/5] Resetting old engine files...$N\n"'
-printf '%s\n' ''
-printf '%s\n' 'rm -rf "$HOME_DIR"'
-printf '%s\n' 'rm -f "$CORE"'
-printf '%s\n' 'rm -f /data/local/tmp/neon'
-printf '%s\n' ''
-printf '%s\n' 'printf "$G[✓] Reset complete$N\n\n"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N\n"'
-printf '%s\n' 'printf "$B[2/5] Installing engine core...$N\n"'
-printf '%s\n' ''
-printf '%s\n' 'if [ ! -f "$SRC" ]; then'
-printf '%s\n' '  printf "$R[!] Engine package tidak ditemukan.$N\n"'
-printf '%s\n' '  printf "$Y[!] Jalankan installer dari Termux terlebih dahulu.$N\n"'
-printf '%s\n' '  exit 1'
-printf '%s\n' 'fi'
-printf '%s\n' ''
-printf '%s\n' 'cp "$SRC" "$CORE" 2>/dev/null || cat "$SRC" > "$CORE"'
-printf '%s\n' 'chmod 755 "$CORE"'
-printf '%s\n' ''
-printf '%s\n' 'if ! "$CORE" --help >/dev/null 2>&1; then'
-printf '%s\n' '  printf "$R[!] Engine core gagal dijalankan di Android shell.$N\n"'
-printf '%s\n' '  printf "$Y[!] File ada, tapi tidak bisa dieksekusi di sesi ini.$N\n"'
-printf '%s\n' '  exit 1'
-printf '%s\n' 'fi'
-printf '%s\n' ''
-printf '%s\n' 'printf "$G[✓] Engine core installed$N\n\n"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N\n"'
-printf '%s\n' 'printf "$B[3/5] Creating Neon shortcuts...$N\n"'
-printf '%s\n' ''
-printf '%s\n' 'mkdir -p "$BIN_DIR"'
-printf '%s\n' 'cp "$CORE" "$BIN_DIR/.core"'
-printf '%s\n' 'chmod 755 "$BIN_DIR/.core"'
-printf '%s\n' ''
-printf '%s\n' 'cd "$BIN_DIR" || exit 1'
-printf '%s\n' './.core --install -s .'
-printf '%s\n' ''
-printf '%s\n' 'printf "%s\n" "#!/system/bin/sh" > "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "CORE=\"/data/local/tmp/neon-core/bin/.core\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "if [ \"\$1\" = \"\" ]; then" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"Neon Core Engine\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"Usage:\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"  neon shell\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"  neon find /sdcard -type f -size +100M\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"  neon wget --help\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"  neon df -h\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  echo \"  neon ps\"" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  exit 0" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "fi" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "if [ \"\$1\" = \"shell\" ]; then" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "  exec \"\$CORE\" sh" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "fi" >> "$BIN_DIR/neon"'
-printf '%s\n' 'printf "%s\n" "exec \"\$CORE\" \"\$@\"" >> "$BIN_DIR/neon"'
-printf '%s\n' ''
-printf '%s\n' 'chmod 755 "$BIN_DIR/neon"'
-printf '%s\n' 'ln -sf "$BIN_DIR/neon" /data/local/tmp/neon'
-printf '%s\n' ''
-printf '%s\n' 'printf "$G[✓] Shortcut created: neon$N\n\n"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N\n"'
-printf '%s\n' 'printf "$B[4/5] Activating Neon environment...$N\n"'
-printf '%s\n' ''
-printf '%s\n' 'printf "%s\n" "export PATH=\"/data/local/tmp/neon-core/bin:/data/local/tmp:\$PATH\"" > "$ENV_FILE"'
-printf '%s\n' 'chmod 755 "$ENV_FILE"'
-printf '%s\n' 'export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$G[✓] Environment activated$N\n\n"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N\n"'
-printf '%s\n' 'printf "$B[5/5] Finalizing setup...$N\n"'
-printf '%s\n' ''
-printf '%s\n' 'printf "$G[✓] Neon Core Engine is ready$N\n\n"'
-printf '%s\n' 'printf "$WAvailable commands:$N\n"'
-printf '%s\n' 'printf "$C  neon$N\n"'
-printf '%s\n' 'printf "$C  neon shell$N\n"'
-printf '%s\n' 'printf "$C  neon find$N\n"'
-printf '%s\n' 'printf "$C  neon wget$N\n"'
-printf '%s\n' 'printf "$C  neon df$N\n"'
-printf '%s\n' 'printf "$C  neon ps$N\n"'
-printf '%s\n' 'printf "$C  find$N\n"'
-printf '%s\n' 'printf "$C  grep$N\n"'
-printf '%s\n' 'printf "$C  awk$N\n"'
-printf '%s\n' 'printf "$C  sed$N\n"'
-printf '%s\n' 'printf "$C  wget$N\n"'
-printf '%s\n' 'printf "$C  tar$N\n"'
-printf '%s\n' 'printf "$C  unzip$N\n\n"'
-printf '%s\n' 'printf "$YUntuk sesi berikutnya, jalankan:$N\n"'
-printf '%s\n' 'printf "$W. /data/local/tmp/neon-core/env.sh$N\n\n"'
-printf '%s\n' 'printf "$GOpening Neon shell...$N\n"'
-printf '%s\n' 'neon shell'
-} > "$SETUP_FILE"
+  printf '%s\n' '#!/system/bin/sh'
+  printf '%s\n' 'CORE="/data/local/tmp/neon-core/bin/.core"'
+  printf '%s\n' 'if [ "$1" = "" ]; then'
+  printf '%s\n' '  echo "Neon Core Engine"'
+  printf '%s\n' '  echo "Usage: neon shell | neon find | neon wget | neon df | neon ps"'
+  printf '%s\n' '  exit 0'
+  printf '%s\n' 'fi'
+  printf '%s\n' 'if [ "$1" = "shell" ]; then exec "$CORE" sh; fi'
+  printf '%s\n' 'exec "$CORE" "$@"'
+} > "$BIN_DIR/neon"
+
+chmod 755 "$BIN_DIR/neon"
+ln -sf "$BIN_DIR/neon" /data/local/tmp/neon
+
+printf '\033[1;32m[✓] Shortcut created: neon\033[0m\n\n'
+
+printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+printf '\033[1;34m[4/5] Activating Neon environment...\033[0m\n'
+
+printf '%s\n' 'export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"' > "$ENV_FILE"
+chmod 755 "$ENV_FILE"
+
+export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"
+
+printf '\033[1;32m[✓] Environment activated\033[0m\n\n'
+
+printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+printf '\033[1;34m[5/5] Finalizing setup...\033[0m\n'
+
+printf '\033[1;32m[✓] Neon Core Engine is ready\033[0m\n\n'
+
+printf '\033[1;37mAvailable commands:\033[0m\n'
+printf '\033[1;36m  neon\n  neon shell\n  neon find\n  neon wget\n  neon df\n  neon ps\n  find\n  grep\n  awk\n  sed\n  wget\n  tar\n  unzip\033[0m\n\n'
+
+printf '\033[1;33mUntuk sesi berikutnya jalankan:\033[0m\n'
+printf '\033[1;37m. /data/local/tmp/neon-core/env.sh\033[0m\n\n'
+
+printf '\033[1;32mOpening Neon shell...\033[0m\n'
+neon shell
+NEON_SETUP_EOF
 
 chmod 755 "$SETUP_FILE"
 
 if [ ! -s "$SETUP_FILE" ]; then
-  printf "$R[!] Gagal membuat setup file.$N\n"
+  printf "%b\n" "$R[!] Gagal membuat setup file.$N"
   exit 1
 fi
+
+printf "%b\n\n" "$G[✓] Setup file ready$N"
 
 if command -v termux-clipboard-set >/dev/null 2>&1; then
   printf "%s" "$RUN_CMD" | termux-clipboard-set
@@ -302,44 +257,27 @@ else
   CLIP_STATUS="manual"
 fi
 
-printf "$G[✓] Setup file ready$N\n\n"
-
-sleep 1
 line
 
-printf "$G"
-printf " ____                 _       \n"
-printf "|  _ \\ ___  __ _  __| |_   _ \n"
-printf "| |_) / _ \\/ _\` |/ _\` | | | |\n"
-printf "|  _ <  __/ (_| | (_| | |_| |\n"
-printf "|_| \\_\\___|\\__,_|\\__,_|\\__, |\n"
-printf "                        |___/ \n"
-printf "$N"
+printf "%b\n" "$G[✓] TERMUX SETUP SUCCESS$N"
+printf "%b\n" "$C[•] Neon Core Engine setup file:$N"
+printf "%b\n\n" "$W    $SETUP_FILE$N"
 
-printf "\n$G[✓] TERMUX SETUP SUCCESS$N\n\n"
+printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
+printf "%b\n" "$Y║       COPY COMMAND BELOW                   ║$N"
+printf "%b\n" "$Y║       RUN IN NEON CORE ENGINE              ║$N"
+printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
 
-printf "$C[•] Neon Core Engine setup file:$N\n"
-printf "$W    $SETUP_FILE$N\n\n"
+printf "\n%b\n" "$W┌────────────────────────────────────────────┐$N"
+printf "%b\n" "$W│ sh /sdcard/Download/neon-core-setup.sh     │$N"
+printf "%b\n\n" "$W└────────────────────────────────────────────┘$N"
 
-printf "$Y"
-printf "╔════════════════════════════════════════════╗\n"
-printf "║       COPY COMMAND BELOW                   ║\n"
-printf "║       RUN IN NEON CORE ENGINE              ║\n"
-printf "╚════════════════════════════════════════════╝\n"
-printf "$N\n"
-
-printf "$W"
-printf "┌────────────────────────────────────────────┐\n"
-printf "│ sh /sdcard/Download/neon-core-setup.sh     │\n"
-printf "└────────────────────────────────────────────┘\n"
-printf "$N\n"
-
-printf "$C%s$N\n\n" "$RUN_CMD"
+printf "%b\n\n" "$C$RUN_CMD$N"
 
 if [ "$CLIP_STATUS" = "copied" ]; then
-  printf "$G[✓] Command sudah dicopy ke clipboard.$N\n"
+  printf "%b\n" "$G[✓] Command sudah dicopy ke clipboard.$N"
 else
-  printf "$Y[!] Copy satu baris command di atas.$N\n"
+  printf "%b\n" "$Y[!] Copy satu baris command di atas.$N"
 fi
 
-printf "$G[✓] Done.$N\n"
+printf "%b\n" "$G[✓] Done.$N"
