@@ -15,8 +15,6 @@ BASE_URL="https://raw.githubusercontent.com/Magisk-Modules-Repo/busybox-ndk/mast
 LOCAL_ENGINE="$HOME/busybox"
 PUBLIC_ENGINE="/sdcard/Download/busybox"
 SETUP_FILE="/sdcard/Download/neon-core-setup.sh"
-RUN_SETUP="sh /sdcard/Download/neon-core-setup.sh"
-RUN_NEXT=". /data/local/tmp/bb/env.sh; busybox sh"
 
 line() {
   printf "%b\n" "$C━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$N"
@@ -25,7 +23,7 @@ line() {
 printf "%b" "$M"
 printf "%s\n" " _   _                  ____"
 printf "%s\n" "| \ | | ___  ___  _ __ / ___|___  _ __ ___"
-printf "%s\n" "|  \| |/ _ \/ _ \| '_ \ |   / _ \| '__/ _ \\"
+printf "%s\n" "|  \| |/ _ \/ _ \| _  \ |   / _ \| __/ _ \\"
 printf "%s\n" "| |\  |  __/ (_) | | | | |__| (_) | | |  __/"
 printf "%s\n" "|_| \_|\___|\___/|_| |_|\____\___/|_|  \___|"
 printf "%s\n" "        N E O N   C O R E   E N G I N E"
@@ -173,7 +171,6 @@ printf '\033[1;34m[2/4] Installing BusyBox...\033[0m\n'
 
 if [ ! -f "$SRC" ]; then
   printf '\033[1;31m[!] File /sdcard/Download/busybox tidak ditemukan.\033[0m\n'
-  printf '\033[1;33m[!] Jalankan installer dari Termux terlebih dahulu.\033[0m\n'
   exit 1
 fi
 
@@ -201,21 +198,23 @@ export PATH="/data/local/tmp/bb/bin:$PATH"
 ENV_EOF
 
 chmod 755 "$ENV"
-export PATH="/data/local/tmp/bb/bin:$PATH"
+. "$ENV"
 
-printf '\033[1;32m[✓] Shortcut active: busybox\033[0m\n'
-printf '\033[1;32m[✓] Shortcut active: find, grep, awk, sed, wget, tar, unzip\033[0m\n'
-printf '\033[1;32m[✓] Env file: /data/local/tmp/bb/env.sh\033[0m\n\n'
+printf '\033[1;32m[✓] Command active: busybox\033[0m\n'
+printf '\033[1;32m[✓] Command active: find, wget, du, df, grep, awk, sed, tar, unzip\033[0m\n\n'
 
 printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
 printf '\033[1;34m[4/4] Finalizing setup...\033[0m\n'
 
 printf '\033[1;32m[✓] Neon Core Engine is ready\033[0m\n\n'
 
-printf '\033[1;37mShell akan otomatis dibuka sekarang.\033[0m\n'
-printf '\033[1;37mUntuk sesi berikutnya gunakan:\033[0m\n'
-printf '\033[1;36m. /data/local/tmp/bb/env.sh; busybox sh\033[0m\n\n'
+printf '\033[1;37mSekarang kamu bisa langsung pakai:\033[0m\n'
+printf '\033[1;36mfind, wget, du, df, grep, awk, sed, tar, unzip, busybox\033[0m\n\n'
 
+printf '\033[1;33mCatatan sesi baru:\033[0m\n'
+printf '\033[1;37mKalau shell ditutup, jalankan setup ini lagi atau aktifkan env manual.\033[0m\n\n'
+
+printf '\033[1;32mOpening BusyBox shell...\033[0m\n'
 exec "$BB" sh
 SETUP_EOF
 
@@ -235,14 +234,9 @@ printf "%b\n" "$C[•] Setup file:$N"
 printf "%b\n\n" "$W    $SETUP_FILE$N"
 
 printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
-printf "%b\n" "$Y║       STEP 1: RUN IN NEON CORE / SHELL     ║$N"
+printf "%b\n" "$Y║       RUN IN NEON CORE / SHELL             ║$N"
 printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
-printf "\n%b\n\n" "$C$RUN_SETUP$N"
-
-printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
-printf "%b\n" "$Y║       STEP 2: NEXT SESSION COMMAND         ║$N"
-printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
-printf "\n%b\n\n" "$C$RUN_NEXT$N"
+printf "\n%b\n\n" "$Csh /sdcard/Download/neon-core-setup.sh$N"
 
 printf "%b\n" "$G[✓] Done.$N"
 
