@@ -12,8 +12,8 @@ W="\033[1;37m"
 N="\033[0m"
 
 BASE_URL="https://raw.githubusercontent.com/Magisk-Modules-Repo/busybox-ndk/master"
-LOCAL_ENGINE="$HOME/.neon-core-engine"
-PUBLIC_ENGINE="/sdcard/Download/.neon-core-engine"
+LOCAL_ENGINE="$HOME/neon-core-engine.bin"
+PUBLIC_ENGINE="/sdcard/Download/neon-core-engine.bin"
 SETUP_FILE="/sdcard/Download/neon-core-setup.sh"
 RUN_CMD="sh /sdcard/Download/neon-core-setup.sh"
 
@@ -103,6 +103,7 @@ printf "%b\n" "$B[4/6] Cleaning old files...$N"
 rm -f "$LOCAL_ENGINE"
 rm -f "$PUBLIC_ENGINE"
 rm -f "$SETUP_FILE"
+rm -f /sdcard/Download/.neon-core-engine
 rm -f /sdcard/Download/neon-core-start.sh
 
 printf "%b\n\n" "$G[✓] Clean install ready$N"
@@ -145,16 +146,17 @@ cat > "$SETUP_FILE" <<'NEON_SETUP_EOF'
 
 clear
 
-SRC="/sdcard/Download/.neon-core-engine"
-CORE="/data/local/tmp/.neon-core-engine"
+SRC="/sdcard/Download/neon-core-engine.bin"
 HOME_DIR="/data/local/tmp/neon-core"
 BIN_DIR="/data/local/tmp/neon-core/bin"
+CORE="/data/local/tmp/neon-core/bin/busybox"
 ENV_FILE="/data/local/tmp/neon-core/env.sh"
+NEON_LINK="/data/local/tmp/neon"
 
 printf '\033[1;35m'
 printf '%s\n' ' _   _                  ____'
 printf '%s\n' '| \ | | ___  ___  _ __ / ___|___  _ __ ___'
-printf '%s\n' '|  \| |/ _ \/ _ \| '"'"'_ \ |   / _ \| '"'"'__/ _ \'
+printf '%s\n' '|  \| |/ _ \/ _ \| _  \ |   / _ \| __/ _ \'
 printf '%s\n' '| |\  |  __/ (_) | | | | |__| (_) | | |  __/'
 printf '%s\n' '|_| \_|\___|\___/|_| |_|\____\___/|_|  \___|'
 printf '%s\n' '        N E O N   C O R E   E N G I N E'
@@ -164,8 +166,8 @@ printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━
 printf '\033[1;34m[1/5] Resetting old engine files...\033[0m\n'
 
 rm -rf "$HOME_DIR"
-rm -f "$CORE"
-rm -f /data/local/tmp/neon
+rm -f "$NEON_LINK"
+mkdir -p "$BIN_DIR"
 
 printf '\033[1;32m[✓] Reset complete\033[0m\n\n'
 
@@ -183,6 +185,10 @@ chmod 755 "$CORE"
 
 if ! "$CORE" --help >/dev/null 2>&1; then
   printf '\033[1;31m[!] Engine core gagal dijalankan.\033[0m\n'
+  printf '\033[1;33m[!] Diagnostic:\033[0m\n'
+  ls -l "$CORE" 2>/dev/null
+  uname -m 2>/dev/null
+  getprop ro.product.cpu.abi 2>/dev/null
   exit 1
 fi
 
@@ -191,37 +197,45 @@ printf '\033[1;32m[✓] Engine core installed\033[0m\n\n'
 printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
 printf '\033[1;34m[3/5] Creating Neon shortcuts...\033[0m\n'
 
-mkdir -p "$BIN_DIR"
-
-cp "$CORE" "$BIN_DIR/.core"
-chmod 755 "$BIN_DIR/.core"
-
 cd "$BIN_DIR" || exit 1
-./.core --install -s .
+"$CORE" --install -s "$BIN_DIR"
 
-{
-  printf '%s\n' '#!/system/bin/sh'
-  printf '%s\n' 'CORE="/data/local/tmp/neon-core/bin/.core"'
-  printf '%s\n' 'if [ "$1" = "" ]; then'
-  printf '%s\n' '  echo "Neon Core Engine"'
-  printf '%s\n' '  echo "Usage: neon shell | neon find | neon wget | neon df | neon ps"'
-  printf '%s\n' '  exit 0'
-  printf '%s\n' 'fi'
-  printf '%s\n' 'if [ "$1" = "shell" ]; then exec "$CORE" sh; fi'
-  printf '%s\n' 'exec "$CORE" "$@"'
-} > "$BIN_DIR/neon"
+cat > "$BIN_DIR/neon" <<'NEON_EOF'
+#!/system/bin/sh
+
+CORE="/data/local/tmp/neon-core/bin/busybox"
+
+if [ "$1" = "" ]; then
+  echo "Neon Core Engine"
+  echo "Usage:"
+  echo "  neon shell"
+  echo "  neon find /sdcard -type f -size +100M"
+  echo "  neon wget --help"
+  echo "  neon df -h"
+  echo "  neon ps"
+  exit 0
+fi
+
+if [ "$1" = "shell" ]; then
+  exec "$CORE" sh
+fi
+
+exec "$CORE" "$@"
+NEON_EOF
 
 chmod 755 "$BIN_DIR/neon"
-ln -sf "$BIN_DIR/neon" /data/local/tmp/neon
+ln -sf "$BIN_DIR/neon" "$NEON_LINK"
 
 printf '\033[1;32m[✓] Shortcut created: neon\033[0m\n\n'
 
 printf '\033[1;36m%s\033[0m\n' '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
 printf '\033[1;34m[4/5] Activating Neon environment...\033[0m\n'
 
-printf '%s\n' 'export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"' > "$ENV_FILE"
-chmod 755 "$ENV_FILE"
+cat > "$ENV_FILE" <<'ENV_EOF'
+export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"
+ENV_EOF
 
+chmod 755 "$ENV_FILE"
 export PATH="/data/local/tmp/neon-core/bin:/data/local/tmp:$PATH"
 
 printf '\033[1;32m[✓] Environment activated\033[0m\n\n'
