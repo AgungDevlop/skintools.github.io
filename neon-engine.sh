@@ -104,7 +104,6 @@ printf "%b\n" "$B[4/6] Cleaning old files...$N"
 rm -f "$LOCAL_ENGINE"
 rm -f "$PUBLIC_ENGINE"
 rm -f "$SETUP_FILE"
-rm -f /sdcard/Download/neon-core-start.sh
 
 printf "%b\n\n" "$G[✓] Clean install ready$N"
 
@@ -213,13 +212,10 @@ printf '\033[1;34m[4/4] Finalizing setup...\033[0m\n'
 
 printf '\033[1;32m[✓] Neon Core Engine is ready\033[0m\n\n'
 
-printf '\033[1;37mUntuk masuk shell sekarang:\033[0m\n'
-printf '\033[1;36m  busybox sh\033[0m\n\n'
+printf '\033[1;37mShell akan otomatis dibuka sekarang.\033[0m\n'
+printf '\033[1;37mUntuk sesi berikutnya gunakan:\033[0m\n'
+printf '\033[1;36m. /data/local/tmp/bb/env.sh; busybox sh\033[0m\n\n'
 
-printf '\033[1;37mUntuk sesi berikutnya:\033[0m\n'
-printf '\033[1;36m  . /data/local/tmp/bb/env.sh; busybox sh\033[0m\n\n'
-
-printf '\033[1;32mOpening BusyBox shell...\033[0m\n'
 exec "$BB" sh
 SETUP_EOF
 
@@ -235,4 +231,19 @@ printf "%b\n\n" "$G[✓] Setup file ready$N"
 line
 
 printf "%b\n" "$G[✓] TERMUX SETUP SUCCESS$N"
-printf "%b\n"
+printf "%b\n" "$C[•] Setup file:$N"
+printf "%b\n\n" "$W    $SETUP_FILE$N"
+
+printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
+printf "%b\n" "$Y║       STEP 1: RUN IN NEON CORE / SHELL     ║$N"
+printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
+printf "\n%b\n\n" "$C$RUN_SETUP$N"
+
+printf "%b\n" "$Y╔════════════════════════════════════════════╗$N"
+printf "%b\n" "$Y║       STEP 2: NEXT SESSION COMMAND         ║$N"
+printf "%b\n" "$Y╚════════════════════════════════════════════╝$N"
+printf "\n%b\n\n" "$C$RUN_NEXT$N"
+
+printf "%b\n" "$G[✓] Done.$N"
+
+exit 0
