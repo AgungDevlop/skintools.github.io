@@ -3,122 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neon Core Engine - Module Center</title>
+<title>Neon Core Engine - Termux Control</title>
 <link rel="icon" type="image/webp" href="../img/icon.webp">
 <script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Jura:wght@500;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  min-height:100vh;
-  color:#e5e7eb;
-  font-family:'Chakra Petch',sans-serif;
-  background:
-    radial-gradient(circle at 20% 0%,rgba(255,0,60,.16),transparent 34%),
-    radial-gradient(circle at 90% 10%,rgba(0,180,255,.10),transparent 34%),
-    linear-gradient(180deg,#080808 0%,#050505 100%);
-}
-.rog-red{color:#ff003c}
-.rog-neon{text-shadow:0 0 10px rgba(255,0,60,.65),0 0 18px rgba(255,0,60,.25)}
-.font-rajdhani{font-family:'Rajdhani',sans-serif}
-.font-jura{font-family:'Jura',sans-serif}
-.header-panel{
-  background:rgba(8,8,8,.82);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,0,60,.22);
-  box-shadow:0 4px 28px rgba(255,0,60,.10);
-}
-.search-box{
-  background:rgba(15,15,15,.86);
-  border:1px solid rgba(255,0,60,.25);
-  border-radius:16px;
-}
-.tab-btn,.filter-btn{
-  border:1px solid rgba(255,0,60,.20);
-  background:rgba(18,18,18,.75);
-  color:#9ca3af;
-  border-radius:14px;
-  transition:.22s ease;
-}
-.tab-btn:hover,.filter-btn:hover{color:#fff;border-color:rgba(255,0,60,.55);background:rgba(255,0,60,.07)}
-.tab-btn.active,.filter-btn.active{
-  color:#fff;
-  border-color:#ff003c;
-  background:rgba(255,0,60,.13);
-  box-shadow:0 0 16px rgba(255,0,60,.22);
-}
-.card{
-  background:linear-gradient(180deg,rgba(20,20,20,.92),rgba(8,8,8,.96));
-  border:1px solid rgba(255,0,60,.18);
-  border-radius:22px;
-  transition:.24s ease;
-  box-shadow:0 12px 36px rgba(0,0,0,.18);
-}
-.card:hover{
-  transform:translateY(-3px);
-  border-color:rgba(255,0,60,.45);
-  box-shadow:0 18px 42px rgba(255,0,60,.12);
-}
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  border-radius:999px;
-  padding:5px 8px;
-  font-size:8px;
-  font-weight:800;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-.badge-red{background:rgba(255,0,60,.08);border:1px solid rgba(255,0,60,.30);color:#ff8aa3}
-.badge-green{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#72ffc0}
-.badge-blue{background:rgba(0,150,255,.07);border:1px solid rgba(0,150,255,.25);color:#7cc7ff}
-.badge-yellow{background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.28);color:#ffd36b}
-.btn-main{
-  background:linear-gradient(90deg,#700018,#d00038);
-  border:1px solid rgba(255,0,60,.75);
-  border-radius:14px;
-  transition:.22s ease;
-}
-.btn-main:hover{filter:brightness(1.12);box-shadow:0 0 18px rgba(255,0,60,.32)}
-.soft-panel{
-  background:rgba(15,15,15,.72);
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:22px;
-}
-.loader{width:38px;height:38px;border:2px solid rgba(255,0,60,.12);border-top-color:#ff003c;border-radius:999px;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-thumb{background:#ff003c;border-radius:999px}
-::-webkit-scrollbar-track{background:#111}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#e5e7eb;font-family:'Chakra Petch',sans-serif;background:radial-gradient(circle at 20% 0%,rgba(255,0,60,.16),transparent 34%),radial-gradient(circle at 90% 10%,rgba(0,180,255,.10),transparent 34%),linear-gradient(180deg,#080808 0%,#050505 100%)}.rog-red{color:#ff003c}.rog-neon{text-shadow:0 0 10px rgba(255,0,60,.65),0 0 18px rgba(255,0,60,.25)}.font-rajdhani{font-family:'Rajdhani',sans-serif}.font-jura{font-family:'Jura',sans-serif}.header-panel{background:rgba(8,8,8,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,0,60,.22);box-shadow:0 4px 28px rgba(255,0,60,.10)}.search-box{background:rgba(15,15,15,.86);border:1px solid rgba(255,0,60,.25);border-radius:16px}.tab-btn,.filter-btn{border:1px solid rgba(255,0,60,.20);background:rgba(18,18,18,.75);color:#9ca3af;border-radius:14px;transition:.22s ease}.tab-btn:hover,.filter-btn:hover{color:#fff;border-color:rgba(255,0,60,.55);background:rgba(255,0,60,.07)}.tab-btn.active,.filter-btn.active{color:#fff;border-color:#ff003c;background:rgba(255,0,60,.13);box-shadow:0 0 16px rgba(255,0,60,.22)}.card{background:linear-gradient(180deg,rgba(20,20,20,.92),rgba(8,8,8,.96));border:1px solid rgba(255,0,60,.18);border-radius:22px;transition:.24s ease;box-shadow:0 12px 36px rgba(0,0,0,.18)}.card:hover{transform:translateY(-3px);border-color:rgba(255,0,60,.45);box-shadow:0 18px 42px rgba(255,0,60,.12)}.badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 8px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.badge-red{background:rgba(255,0,60,.08);border:1px solid rgba(255,0,60,.30);color:#ff8aa3}.badge-green{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#72ffc0}.badge-blue{background:rgba(0,150,255,.07);border:1px solid rgba(0,150,255,.25);color:#7cc7ff}.badge-yellow{background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.28);color:#ffd36b}.btn-main{background:linear-gradient(90deg,#700018,#d00038);border:1px solid rgba(255,0,60,.75);border-radius:14px;transition:.22s ease}.btn-main:hover{filter:brightness(1.12);box-shadow:0 0 18px rgba(255,0,60,.32)}.soft-panel{background:rgba(15,15,15,.72);border:1px solid rgba(255,255,255,.07);border-radius:22px}.loader{width:38px;height:38px;border:2px solid rgba(255,0,60,.12);border-top-color:#ff003c;border-radius:999px;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.codebox{position:relative;background:#050505;border:1px solid rgba(255,0,60,.24);border-radius:18px;padding:16px 48px 16px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#d1d5db;overflow:auto}.copy-btn{position:absolute;right:10px;top:10px;width:32px;height:32px;border-radius:12px;border:1px solid rgba(255,0,60,.35);background:rgba(255,0,60,.08);color:#ff8aa3}.step-dot{width:30px;height:30px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff003c,#5a0015);font-weight:900}.feature-card{background:rgba(10,10,10,.78);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}.feature-card i{color:#ff003c}::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#ff003c;border-radius:999px}::-webkit-scrollbar-track{background:#111}
 </style>
 </head>
-<body>
+<body x-data="neonDocs()">
 <header class="header-panel sticky top-0 z-50 px-3 md:px-6 py-3">
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
     <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='../index.html'">
-      <div class="w-10 h-10 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#4a0000] shadow-[0_0_18px_rgba(255,0,60,.35)]">
-        <i class="fas fa-microchip text-white"></i>
-      </div>
-      <div>
-        <h1 class="text-xl md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[.15em] leading-none">NEON CORE</h1>
-        <p class="text-[9px] text-gray-500 tracking-[.28em] font-mono mt-1">MODULE CENTER</p>
-      </div>
+      <div class="w-10 h-10 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#ff003c] to-[#4a0000] shadow-[0_0_18px_rgba(255,0,60,.35)]"><i class="fas fa-microchip text-white"></i></div>
+      <div><h1 class="text-xl md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[.15em] leading-none">NEON CORE</h1><p class="text-[9px] text-gray-500 tracking-[.28em] font-mono mt-1">TERMUX CONTROL</p></div>
     </div>
-    <div class="search-box relative w-full md:w-80">
+    <div class="search-box relative w-full md:w-80" x-show="activeTab!=='termux'">
       <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[#ff003c]/80 text-xs"></i>
       <input id="searchInput" class="w-full bg-transparent outline-none py-3 pl-10 pr-4 text-xs md:text-sm font-mono text-white placeholder-gray-600" placeholder="Cari module...">
     </div>
   </div>
-
   <div class="max-w-6xl mx-auto mt-3 flex gap-2 overflow-x-auto pb-1">
     <button class="tab-btn active px-4 py-2 text-[10px] md:text-xs font-jura font-bold uppercase tracking-widest whitespace-nowrap" data-tab="web"><i class="fas fa-globe mr-1"></i> Web Panel</button>
     <button class="tab-btn px-4 py-2 text-[10px] md:text-xs font-jura font-bold uppercase tracking-widest whitespace-nowrap" data-tab="shell"><i class="fas fa-terminal mr-1"></i> Module Shell</button>
+    <button class="tab-btn px-4 py-2 text-[10px] md:text-xs font-jura font-bold uppercase tracking-widest whitespace-nowrap" data-tab="termux"><i class="fas fa-mobile-screen-button mr-1"></i> Termux Control</button>
   </div>
-
   <div id="webFilters" class="max-w-6xl mx-auto mt-3 flex gap-2 overflow-x-auto pb-1">
     <button class="filter-btn active px-3 py-1.5 text-[9px] md:text-xs font-jura font-bold uppercase tracking-widest whitespace-nowrap" data-type="all">All Modules</button>
     <button class="filter-btn px-3 py-1.5 text-[9px] md:text-xs font-jura font-bold uppercase tracking-widest whitespace-nowrap" data-type="System">System</button>
@@ -127,187 +38,86 @@ body{
     <button class="filter-btn px-3 py-1.5 text-[9px] md:text-xs font-jura font-bold uppercase tracking-widest whitespace-nowrap" data-type="Security">Security</button>
   </div>
 </header>
-
 <main class="max-w-6xl mx-auto px-3 md:px-4 py-6 md:py-8">
   <section id="webSection">
-    <div id="webLoading" class="flex flex-col items-center justify-center py-20">
-      <div class="loader mb-4"></div>
-      <p class="text-xs font-mono text-[#ff003c] tracking-[.2em] uppercase animate-pulse">Loading Web Panel...</p>
-    </div>
-    <div id="webEmpty" class="hidden flex flex-col items-center justify-center py-20">
-      <i class="fas fa-database text-4xl text-gray-700 mb-4"></i>
-      <p class="text-xs font-mono text-gray-500 tracking-[.2em] uppercase text-center">Tidak ada data.</p>
-    </div>
+    <div id="webLoading" class="flex flex-col items-center justify-center py-20"><div class="loader mb-4"></div><p class="text-xs font-mono text-[#ff003c] tracking-[.2em] uppercase animate-pulse">Loading Web Panel...</p></div>
+    <div id="webEmpty" class="hidden flex flex-col items-center justify-center py-20"><i class="fas fa-database text-4xl text-gray-700 mb-4"></i><p class="text-xs font-mono text-gray-500 tracking-[.2em] uppercase text-center">Tidak ada data.</p></div>
     <div id="webGrid" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5 hidden"></div>
   </section>
-
   <section id="shellSection" class="hidden">
     <div class="soft-panel p-4 md:p-5 mb-5">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div>
-          <h2 class="text-lg md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[.15em]">Shell Module</h2>
-          <p class="text-[10px] md:text-xs text-gray-400 font-mono mt-1">Kumpulan module penting, populer, dan bermanfaat. Dibuat support root dan non-root.</p>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <span class="badge badge-green">Support Non Root</span>
-          <span class="badge badge-blue">Support Root</span>
-          <span class="badge badge-red">Iklan</span>
-        </div>
+        <div><h2 class="text-lg md:text-2xl font-bold rog-red rog-neon uppercase font-rajdhani tracking-[.15em]">Shell Module</h2><p class="text-[10px] md:text-xs text-gray-400 font-mono mt-1">Module ZIP dapat dijalankan dari Termux Control melalui menu, tanpa mengetik command panjang.</p></div>
+        <div class="flex flex-wrap gap-2"><span class="badge badge-green">execute.sh</span><span class="badge badge-blue">agresif.sh</span><span class="badge badge-red">del.sh</span></div>
       </div>
     </div>
-
-    <div id="shellLoading" class="flex flex-col items-center justify-center py-16">
-      <div class="loader mb-4"></div>
-      <p class="text-xs font-mono text-[#ff003c] tracking-[.2em] uppercase animate-pulse">Loading Module...</p>
-    </div>
-    <div id="shellEmpty" class="hidden flex flex-col items-center justify-center py-16">
-      <i class="fas fa-terminal text-4xl text-gray-700 mb-4"></i>
-      <p class="text-xs font-mono text-gray-500 tracking-[.2em] uppercase text-center">Tidak ada module.</p>
-    </div>
+    <div id="shellLoading" class="flex flex-col items-center justify-center py-16"><div class="loader mb-4"></div><p class="text-xs font-mono text-[#ff003c] tracking-[.2em] uppercase animate-pulse">Loading Module...</p></div>
+    <div id="shellEmpty" class="hidden flex flex-col items-center justify-center py-16"><i class="fas fa-terminal text-4xl text-gray-700 mb-4"></i><p class="text-xs font-mono text-gray-500 tracking-[.2em] uppercase text-center">Tidak ada module.</p></div>
     <div id="shellGrid" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5 hidden"></div>
   </section>
-</main>
-
-<footer class="py-5 text-center border-t border-[#ff003c]/20 mt-auto">
-  <p class="text-gray-500 font-bold text-[9px] tracking-[.3em] font-rajdhani uppercase"><span class="rog-red">&copy;</span> 2026 AGUNG DEV TEAM</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-let webData=[];
-let shellData=[];
-let activeTab='web';
-let currentFilter='all';
-let searchQuery='';
-
-const adLinks=[
-"https://omg10.com/4/10055984",
-"https://sorrowfulpsychology.com/HE9TFh",
-"https://dulyhagglermounting.com/2082665",
-"https://jb.xylenolshivahs.com/iLMNRjfsHJiW4/94691"
-];
-
-function pickAd(){return adLinks[Math.floor(Math.random()*adLinks.length)]}
-
-function cardTemplate(item, isShell=false){
-  const type=item.type||item.category||"Tools";
-  const hasAds=item.ads===true;
-  return `
-  <div class="card p-3 md:p-4 flex flex-col min-h-[230px]">
-    <div class="flex items-start gap-3 mb-3">
-      <div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-2xl bg-black/50 border border-[#ff003c]/25 flex items-center justify-center text-[#ff003c]">
-        <i class="${item.icon||'fas fa-terminal'}"></i>
-      </div>
-      <div class="min-w-0">
-        <h3 class="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate">${item.title}</h3>
-        <div class="flex flex-wrap gap-1 mt-1">
-          <span class="badge badge-yellow">${type}</span>
-          ${isShell?'<span class="badge badge-green">Non Root</span><span class="badge badge-blue">Root</span>':''}
-          ${hasAds?'<span class="badge badge-red">Iklan</span>':''}
+  <section id="termuxSection" class="hidden">
+    <div class="soft-panel p-5 md:p-7 mb-6 overflow-hidden relative">
+      <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#ff003c]/10 blur-3xl"></div>
+      <div class="relative grid lg:grid-cols-[1.15fr_.85fr] gap-6 items-center">
+        <div>
+          <span class="badge badge-red mb-3"><i class="fas fa-bolt"></i> Termux Control</span>
+          <h2 class="text-2xl md:text-4xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red rog-neon">Kontrol Neon Core dari Termux</h2>
+          <p class="text-sm text-gray-400 mt-3 leading-relaxed">Setup sekali, lalu buka panel menu di Termux. User bisa menjalankan module ZIP, melihat info device, backup APK, ambil screenshot, simpan log, tweak animasi, dan menjalankan command shell tanpa bolak-balik layar.</p>
+          <div class="flex flex-wrap gap-2 mt-4"><span class="badge badge-green">Menu Interaktif</span><span class="badge badge-blue">Module Runner</span><span class="badge badge-yellow">Copy Command</span></div>
+        </div>
+        <div class="feature-card">
+          <p class="text-[10px] text-gray-500 uppercase tracking-[.25em] font-mono mb-3">Command utama</p>
+          <div class="space-y-3">
+            <div class="codebox"><button class="copy-btn" @click="copy('neon panel')"><i class="fas fa-copy"></i></button><code>neon panel</code></div>
+            <div class="codebox"><button class="copy-btn" @click="copy('neon gui')"><i class="fas fa-copy"></i></button><code>neon gui</code></div>
+          </div>
         </div>
       </div>
     </div>
-    <p class="text-[9px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mb-3">${item.description||''}</p>
-    <div class="mt-auto pt-3 border-t border-white/10">
-      <div class="flex justify-between gap-2 mb-3 text-[8px] md:text-[9px] font-mono text-gray-500">
-        <span class="truncate"><i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer||'Agung Developer'}</span>
-        <span class="text-[#ff003c]">${item.size||'ZIP'}</span>
-      </div>
-      <button class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura" onclick="${isShell?`downloadShell('${item.file}','${hasAds?'1':'0'}')`:`startWebImport('${item.downloadUrl}','${item.id}')`}">
-        <i class="fas ${isShell?'fa-download':'fa-bolt'} mr-1"></i> ${isShell?'Download':'Deploy'}
-      </button>
+    <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div class="feature-card"><div class="step-dot mb-3">1</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Termux</h3><p class="text-xs text-gray-400 mt-2">Jalankan setup awal untuk memasang command <b>neon</b> di Termux.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">2</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Aktifkan Engine</h3><p class="text-xs text-gray-400 mt-2">Buka Neon Core Engine sampai status engine siap digunakan.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">3</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Buka Panel</h3><p class="text-xs text-gray-400 mt-2">Kembali ke Termux dan pilih fitur lewat menu.</p></div>
     </div>
-  </div>`;
-}
-
-function renderWeb(data){
-  const grid=document.getElementById('webGrid'), empty=document.getElementById('webEmpty');
-  grid.innerHTML='';
-  if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}
-  empty.classList.add('hidden');grid.classList.remove('hidden');
-  data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,false)));
-}
-
-function renderShell(data){
-  const grid=document.getElementById('shellGrid'), empty=document.getElementById('shellEmpty');
-  grid.innerHTML='';
-  if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}
-  empty.classList.add('hidden');grid.classList.remove('hidden');
-  data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,true)));
-}
-
-function filterWeb(){
-  let data=webData;
-  if(currentFilter!=='all') data=data.filter(item=>(item.type||'Tools')===currentFilter);
-  if(searchQuery){
-    const q=searchQuery.toLowerCase();
-    data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||(item.type||'').toLowerCase().includes(q));
-  }
-  renderWeb(data);
-}
-
-function filterShell(){
-  let data=shellData;
-  if(searchQuery){
-    const q=searchQuery.toLowerCase();
-    data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||'support root support non root iklan'.includes(q));
-  }
-  renderShell(data);
-}
-
-function switchTab(tab){
-  activeTab=tab;
-  document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.tab===tab));
-  document.getElementById('webSection').classList.toggle('hidden',tab!=='web');
-  document.getElementById('shellSection').classList.toggle('hidden',tab!=='shell');
-  document.getElementById('webFilters').classList.toggle('hidden',tab!=='web');
-  document.getElementById('searchInput').value='';
-  searchQuery='';
-  document.getElementById('searchInput').placeholder=tab==='shell'?'Cari shell module...':'Cari module...';
-  tab==='web'?filterWeb():filterShell();
-}
-
-function downloadShell(file, ads){
-  window.open('download.html?file='+encodeURIComponent(file)+'&session='+Date.now().toString(36),'_blank');
-  if(ads==='1') setTimeout(()=>{location.href=pickAd()},700);
-}
-
-function startWebImport(fileUrl,moduleName){
-  const absoluteUrl=new URL(fileUrl,window.location.href).href;
-  const selectedAd=pickAd();
-  const intentUrl=`intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(selectedAd)};end;`;
-  window.open(intentUrl,'_blank');
-  setTimeout(()=>{location.href=selectedAd},2000);
-}
-
-document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));
-document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  currentFilter=btn.dataset.type;
-  filterWeb();
-}));
-
-document.getElementById('searchInput').addEventListener('input',e=>{
-  searchQuery=e.target.value;
-  activeTab==='web'?filterWeb():filterShell();
-});
-
-fetch('tweak.json').then(r=>r.json()).then(data=>{
-  document.getElementById('webLoading').classList.add('hidden');
-  webData=Array.isArray(data)?data:[];
-  filterWeb();
-}).catch(()=>{
-  document.getElementById('webLoading').innerHTML='<p class="text-xs font-mono text-gray-500 uppercase tracking-widest">Web Panel Offline</p>';
-});
-
-fetch('modules-data.json').then(r=>r.json()).then(data=>{
-  document.getElementById('shellLoading').classList.add('hidden');
-  shellData=Array.isArray(data)?data:[];
-  filterShell();
-}).catch(()=>{
-  document.getElementById('shellLoading').innerHTML='<p class="text-xs font-mono text-gray-500 uppercase tracking-widest">Module Offline</p>';
-});
+    <div class="soft-panel p-5 md:p-6 mb-6">
+      <h3 class="text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red mb-4">Urutan Setup Paling Mudah</h3>
+      <div class="space-y-4">
+        <div><p class="text-xs text-gray-400 mb-2">1. Siapkan Termux</p><div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl -y &amp;&amp; termux-setup-storage</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">2. Install Neon Termux Control</p><div class="codebox"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh && chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">3. Setelah Neon Core Engine aktif, cek dan pasang engine shell</p><div class="codebox"><button class="copy-btn" @click="copy('neon test && neon install')"><i class="fas fa-copy"></i></button><code>neon test &amp;&amp; neon install</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">4. Buka interface Termux</p><div class="codebox"><button class="copy-btn" @click="copy('neon panel')"><i class="fas fa-copy"></i></button><code>neon panel</code></div></div>
+      </div>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-5 mb-6">
+      <div class="soft-panel p-5 md:p-6"><h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Module ZIP</h3><div class="space-y-3"><template x-for="cmd in moduleCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template></div></div>
+      <div class="soft-panel p-5 md:p-6"><h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Control Device</h3><div class="space-y-3"><template x-for="cmd in deviceCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template></div></div>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="feature-card"><i class="fas fa-box-open text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Module Runner</h4><p class="text-xs text-gray-400 mt-2">Download ZIP, extract, lalu pilih execute, agresif, atau del dari panel.</p></div>
+      <div class="feature-card"><i class="fas fa-mobile-screen text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Device Control</h4><p class="text-xs text-gray-400 mt-2">Battery, storage, network, thermal, animasi, dan cache.</p></div>
+      <div class="feature-card"><i class="fas fa-layer-group text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">App Tools</h4><p class="text-xs text-gray-400 mt-2">List aplikasi, info package, start, force stop, dan backup APK.</p></div>
+      <div class="feature-card"><i class="fas fa-camera text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Media Tools</h4><p class="text-xs text-gray-400 mt-2">Screenshot, screenrecord, input tap, swipe, text, dan keyevent.</p></div>
+    </div>
+  </section>
+</main>
+<footer class="py-5 text-center border-t border-[#ff003c]/20 mt-auto"><p class="text-gray-500 font-bold text-[9px] tracking-[.3em] font-rajdhani uppercase"><span class="rog-red">&copy;</span> 2026 AGUNG DEV TEAM</p></footer>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+let webData=[];let shellData=[];let activeTab='web';let currentFilter='all';let searchQuery='';
+const adLinks=["https://omg10.com/4/10055984","https://sorrowfulpsychology.com/HE9TFh","https://dulyhagglermounting.com/2082665","https://jb.xylenolshivahs.com/iLMNRjfsHJiW4/94691"];
+function neonDocs(){return{moduleCommands:['neon refresh','neon modules','neon search fps','neon info shell-047','neon get shell-047','neon exec shell-047','neon agresif shell-047','neon del shell-047'],deviceCommands:['neon device','neon battery','neon storage','neon report','neon apps','neon backupapk com.package.name','neon screenshot','neon anim-off'],copy(text){navigator.clipboard.writeText(text).then(()=>{Swal.fire({toast:true,position:'top-end',timer:1300,showConfirmButton:false,icon:'success',title:'Command disalin'})})}}}
+function pickAd(){return adLinks[Math.floor(Math.random()*adLinks.length)]}
+function cardTemplate(item,isShell=false){const type=item.type||item.category||'Tools';const hasAds=item.ads===true;const file=item.file||item.downloadUrl||'';return `<div class="card p-3 md:p-4 flex flex-col min-h-[230px]"><div class="flex items-start gap-3 mb-3"><div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-2xl bg-black/50 border border-[#ff003c]/25 flex items-center justify-center text-[#ff003c]"><i class="${item.icon||'fas fa-terminal'}"></i></div><div class="min-w-0"><h3 class="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate">${item.title}</h3><div class="flex flex-wrap gap-1 mt-1"><span class="badge badge-yellow">${type}</span>${isShell?'<span class="badge badge-green">Non Root</span><span class="badge badge-blue">Root</span>':''}${hasAds?'<span class="badge badge-red">Iklan</span>':''}</div></div></div><p class="text-[9px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mb-3">${item.description||''}</p><div class="mt-auto pt-3 border-t border-white/10"><div class="flex justify-between gap-2 mb-3 text-[8px] md:text-[9px] font-mono text-gray-500"><span class="truncate"><i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer||'Agung Developer'}</span><span class="text-[#ff003c]">${item.size||'ZIP'}</span></div><button class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura" onclick="${isShell?`downloadShell('${file}','${hasAds?'1':'0'}')`:`startWebImport('${item.downloadUrl}','${item.id}')`}"><i class="fas ${isShell?'fa-download':'fa-bolt'} mr-1"></i> ${isShell?'Download':'Deploy'}</button></div></div>`}
+function renderWeb(data){const grid=document.getElementById('webGrid'),empty=document.getElementById('webEmpty');grid.innerHTML='';if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}empty.classList.add('hidden');grid.classList.remove('hidden');data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,false)))}
+function renderShell(data){const grid=document.getElementById('shellGrid'),empty=document.getElementById('shellEmpty');grid.innerHTML='';if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}empty.classList.add('hidden');grid.classList.remove('hidden');data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,true)))}
+function filterWeb(){let data=webData;if(currentFilter!=='all')data=data.filter(item=>(item.type||'Tools')===currentFilter);if(searchQuery){const q=searchQuery.toLowerCase();data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||(item.type||'').toLowerCase().includes(q))}renderWeb(data)}
+function filterShell(){let data=shellData;if(searchQuery){const q=searchQuery.toLowerCase();data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||(item.id||'').toLowerCase().includes(q))}renderShell(data)}
+function switchTab(tab){activeTab=tab;document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.tab===tab));document.getElementById('webSection').classList.toggle('hidden',tab!=='web');document.getElementById('shellSection').classList.toggle('hidden',tab!=='shell');document.getElementById('termuxSection').classList.toggle('hidden',tab!=='termux');document.getElementById('webFilters').classList.toggle('hidden',tab!=='web');const s=document.getElementById('searchInput');if(s){s.value='';s.placeholder=tab==='shell'?'Cari shell module...':'Cari module...'}searchQuery='';tab==='web'?filterWeb():tab==='shell'?filterShell():null}
+function downloadShell(file,ads){window.open('download.html?file='+encodeURIComponent(file)+'&session='+Date.now().toString(36),'_blank');if(ads==='1')setTimeout(()=>{location.href=pickAd()},700)}
+function startWebImport(fileUrl,moduleName){const absoluteUrl=new URL(fileUrl,window.location.href).href;const selectedAd=pickAd();const intentUrl=`intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(selectedAd)};end;`;window.open(intentUrl,'_blank');setTimeout(()=>{location.href=selectedAd},2000)}
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentFilter=btn.dataset.type;filterWeb()}));document.getElementById('searchInput').addEventListener('input',e=>{searchQuery=e.target.value;activeTab==='web'?filterWeb():filterShell()});
+fetch('tweak.json').then(r=>r.json()).then(data=>{document.getElementById('webLoading').classList.add('hidden');webData=Array.isArray(data)?data:[];filterWeb()}).catch(()=>{document.getElementById('webLoading').innerHTML='<p class="text-xs font-mono text-gray-500 uppercase tracking-widest">Web Panel Offline</p>'});
+fetch('shell.json').then(r=>r.json()).then(data=>{document.getElementById('shellLoading').classList.add('hidden');shellData=Array.isArray(data)?data.map(x=>({...x,file:x.downloadUrl})):[];filterShell()}).catch(()=>fetch('shell.json').then(r=>r.json()).then(data=>{document.getElementById('shellLoading').classList.add('hidden');shellData=Array.isArray(data)?data:[];filterShell()}).catch(()=>{document.getElementById('shellLoading').innerHTML='<p class="text-xs font-mono text-gray-500 uppercase tracking-widest">Module Offline</p>'}));
 </script>
 </body>
 </html>
