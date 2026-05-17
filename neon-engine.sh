@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/sh
-# Neon Core Engine - Termux to Android Shell BusyBox Installer
-# Put this file at: https://neonmagisk.my.id/neon-engine.sh
+# Neon Core Engine - Non Root BusyBox Installer
+# Termux side: download static BusyBox + create Android shell installer
 
 set -u
 
@@ -16,16 +16,30 @@ N='\033[0m'
 BASE_URL='https://raw.githubusercontent.com/Magisk-Modules-Repo/busybox-ndk/master'
 LOCAL_DIR="$HOME/.neon-core"
 LOCAL_BUSYBOX="$LOCAL_DIR/busybox"
+
 PUBLIC_DIR='/sdcard/Download'
 PUBLIC_BUSYBOX="$PUBLIC_DIR/busybox"
 ADB_SETUP="$PUBLIC_DIR/neon-core-setup.sh"
-ADB_SHORTCUT="$PUBLIC_DIR/neon"
-TERMUX_SHORTCUT="$PREFIX/bin/neon-adb"
+SD_SHORTCUT="$PUBLIC_DIR/neon"
 
-say() { printf '%b\n' "$1"; }
-line() { printf '%b\n' "${C}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"; }
-fail() { say "${R}[!] $1${N}"; exit 1; }
-need_cmd() { command -v "$1" >/dev/null 2>&1 || return 1; }
+TERMUX_SHORTCUT="${PREFIX:-/data/data/com.termux/files/usr}/bin/neon-adb"
+
+say() {
+  printf '%b\n' "$1"
+}
+
+line() {
+  printf '%b\n' "${C}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+}
+
+fail() {
+  say "${R}[!] $1${N}"
+  exit 1
+}
+
+have() {
+  command -v "$1" >/dev/null 2>&1
+}
 
 clear 2>/dev/null || true
 
@@ -41,7 +55,7 @@ say "${N}"
 line
 say "${B}[1/7] Checking Termux tools...${N}"
 
-need_cmd curl || fail 'curl belum ada. Jalankan: pkg install curl -y'
+have curl || fail 'curl belum ada. Jalankan: pkg install curl -y'
 
 mkdir -p "$LOCAL_DIR" || fail "Gagal membuat folder $LOCAL_DIR"
 
@@ -51,7 +65,7 @@ line
 say "${B}[2/7] Checking storage access...${N}"
 
 if [ ! -d "$PUBLIC_DIR" ]; then
-  if need_cmd termux-setup-storage; then
+  if have termux-setup-storage; then
     say "${Y}[•] Meminta akses storage Termux...${N}"
     termux-setup-storage >/dev/null 2>&1 || true
     sleep 2
@@ -125,16 +139,16 @@ SIZE="$(wc -c < "$LOCAL_BUSYBOX" 2>/dev/null || echo 0)"
 chmod 755 "$LOCAL_BUSYBOX" || fail 'chmod BusyBox gagal.'
 
 cp "$LOCAL_BUSYBOX" "$PUBLIC_BUSYBOX" || fail "Gagal copy BusyBox ke $PUBLIC_BUSYBOX"
-chmod 755 "$PUBLIC_BUSYBOX" || true
+chmod 755 "$PUBLIC_BUSYBOX" 2>/dev/null || true
 
 say "${G}[✓] BusyBox ready: $PUBLIC_BUSYBOX${N}"
 
 line
-say "${B}[5/7] Creating ADB installer...${N}"
+say "${B}[5/7] Creating Android shell installer...${N}"
 
 cat > "$ADB_SETUP" <<'ADB_SETUP_EOF'
 #!/system/bin/sh
-# Neon Core Engine - Android shell side installer
+# Neon Core Engine - Android Shell / Brevent / ADB side installer
 
 R='\033[1;31m'
 G='\033[1;32m'
@@ -146,19 +160,31 @@ W='\033[1;37m'
 N='\033[0m'
 
 SRC='/sdcard/Download/busybox'
-BASE='/data/local/tmp/bb'
+
+BASE='/data/local/tmp/neon-core'
 BIN="$BASE/bin"
 BB="$BIN/busybox"
 ENV="$BASE/env.sh"
-SHORTCUT_TMP='/data/local/tmp/neon'
-SHORTCUT_SD='/sdcard/Download/neon'
+
+RUNNER='/data/local/tmp/neon'
+SD_RUNNER='/sdcard/Download/neon'
+
 WORK='/data/local/tmp/neon-work'
 DUMP='/data/local/tmp/neon-dump'
 LOG='/data/local/tmp/neon-log'
 
-say() { printf '%b\n' "$1"; }
-line() { printf '%b\n' "${C}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"; }
-fail() { say "${R}[!] $1${N}"; exit 1; }
+say() {
+  printf '%b\n' "$1"
+}
+
+line() {
+  printf '%b\n' "${C}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+}
+
+fail() {
+  say "${R}[!] $1${N}"
+  exit 1
+}
 
 clear 2>/dev/null || true
 
@@ -172,7 +198,7 @@ say '        N E O N   C O R E   E N G I N E'
 say "${N}"
 
 line
-say "${B}[1/5] Resetting old install...${N}"
+say "${B}[1/6] Preparing folders...${N}"
 
 rm -rf "$BASE"
 
@@ -181,112 +207,153 @@ mkdir -p "$BIN" "$WORK" "$DUMP" "$LOG" || fail 'Gagal membuat folder di /data/lo
 say "${G}[✓] Folder ready${N}"
 
 line
-say "${B}[2/5] Installing BusyBox...${N}"
+say "${B}[2/6] Installing BusyBox to executable path...${N}"
 
 [ -f "$SRC" ] || fail 'File /sdcard/Download/busybox tidak ditemukan. Jalankan neon-engine.sh dari Termux dulu.'
 
-cp "$SRC" "$BB" 2>/dev/null || cat "$SRC" > "$BB" || fail 'Gagal copy BusyBox.'
+cp "$SRC" "$BB" 2>/dev/null || cat "$SRC" > "$BB" || fail 'Gagal copy BusyBox ke /data/local/tmp.'
 
 chmod 755 "$BB" || fail 'chmod BusyBox gagal.'
 
 "$BB" --help >/dev/null 2>&1 || fail 'BusyBox gagal dijalankan. Kemungkinan ABI tidak cocok.'
 
-say "${G}[✓] BusyBox installed: $BB${N}"
+say "${G}[✓] BusyBox executable: $BB${N}"
 
 line
-say "${B}[3/5] Installing BusyBox applets...${N}"
+say "${B}[3/6] Creating BusyBox command links...${N}"
 
 cd "$BIN" || fail 'Gagal masuk folder bin.'
 
-"$BB" --install -s "$BIN" >/dev/null 2>&1 || fail 'Gagal membuat shortcut command BusyBox.'
+"$BB" --install -s "$BIN" >/dev/null 2>&1 || fail 'Gagal membuat symlink applet BusyBox.'
 
-say "${G}[✓] Applets installed${N}"
+say "${G}[✓] BusyBox applets ready${N}"
 
 line
-say "${B}[4/5] Creating auto environment and shortcuts...${N}"
+say "${B}[4/6] Creating auto environment...${N}"
 
 cat > "$ENV" <<'ENV_EOF'
-export PATH="/data/local/tmp/bb/bin:$PATH"
+export PATH="/data/local/tmp/neon-core/bin:$PATH"
 export TMPDIR="/data/local/tmp"
-export NEON_HOME="/data/local/tmp"
+
+export NEON_HOME="/data/local/tmp/neon-core"
 export NEON_WORK="/data/local/tmp/neon-work"
 export NEON_DUMP="/data/local/tmp/neon-dump"
 export NEON_LOG="/data/local/tmp/neon-log"
 
 alias ll='ls -lah'
 alias la='ls -la'
+
 alias grep='busybox grep'
 alias awk='busybox awk'
 alias sed='busybox sed'
 alias find='busybox find'
 alias tar='busybox tar'
+
 alias du='busybox du -h'
 alias df='busybox df -h'
+
 alias psx='ps -A'
 alias props='getprop'
+
 alias packages='pm list packages'
 alias userapps='pm list packages -3'
 alias sysapps='pm list packages -s'
 ENV_EOF
 
-chmod 755 "$ENV" || true
+chmod 755 "$ENV" 2>/dev/null || true
 
-cat > "$SHORTCUT_TMP" <<'RUN_EOF'
+say "${G}[✓] Environment ready: $ENV${N}"
+
+line
+say "${B}[5/6] Creating shortcuts...${N}"
+
+cat > "$RUNNER" <<'RUNNER_EOF'
 #!/system/bin/sh
 
-BB='/data/local/tmp/bb/bin/busybox'
-ENV='/data/local/tmp/bb/env.sh'
+BB='/data/local/tmp/neon-core/bin/busybox'
+ENV='/data/local/tmp/neon-core/env.sh'
 
-[ -x "$BB" ] || {
-  echo '[!] BusyBox belum terpasang. Jalankan: sh /sdcard/Download/neon-core-setup.sh'
+if [ ! -x "$BB" ]; then
+  echo '[!] Neon BusyBox belum terpasang.'
+  echo '[!] Jalankan: sh /sdcard/Download/neon-core-setup.sh'
   exit 1
-}
+fi
 
 [ -f "$ENV" ] && . "$ENV"
 
-echo '[+] Neon Core shell aktif'
-echo '[+] Work : /data/local/tmp/neon-work'
-echo '[+] Dump : /data/local/tmp/neon-dump'
-echo '[+] Log  : /data/local/tmp/neon-log'
+case "${1:-shell}" in
+  shell|sh)
+    echo '[+] Neon Core shell aktif'
+    echo '[+] BusyBox PATH otomatis aktif'
+    echo '[+] Work: /data/local/tmp/neon-work'
+    exec "$BB" sh
+    ;;
 
-exec "$BB" sh
-RUN_EOF
+  env)
+    cat "$ENV"
+    ;;
 
-chmod 755 "$SHORTCUT_TMP" || true
+  test)
+    . "$ENV"
+    echo '[+] busybox:' "$(command -v busybox 2>/dev/null)"
+    echo '[+] find:' "$(command -v find 2>/dev/null)"
+    echo '[+] grep:' "$(command -v grep 2>/dev/null)"
+    echo '[+] awk:' "$(command -v awk 2>/dev/null)"
+    echo '[+] sed:' "$(command -v sed 2>/dev/null)"
+    echo '[+] tar:' "$(command -v tar 2>/dev/null)"
+    ;;
 
-cat > "$SHORTCUT_SD" <<'RUN_EOF'
+  run)
+    shift
+    exec "$BB" sh -c "$*"
+    ;;
+
+  *)
+    . "$ENV"
+    exec "$@"
+    ;;
+esac
+RUNNER_EOF
+
+chmod 755 "$RUNNER" || fail 'Gagal chmod shortcut /data/local/tmp/neon.'
+
+cat > "$SD_RUNNER" <<'SD_RUNNER_EOF'
 #!/system/bin/sh
-sh /data/local/tmp/neon
-RUN_EOF
+sh /data/local/tmp/neon "$@"
+SD_RUNNER_EOF
 
-chmod 755 "$SHORTCUT_SD" || true
+chmod 755 "$SD_RUNNER" 2>/dev/null || true
 
 say "${G}[✓] Shortcut ready:${N}"
 say "${W}    /data/local/tmp/neon${N}"
-say "${W}    /sdcard/Download/neon${N}"
+say "${W}    sh /sdcard/Download/neon${N}"
 
 line
-say "${B}[5/5] Testing commands...${N}"
+say "${B}[6/6] Final test...${N}"
 
 . "$ENV"
 
+command -v busybox >/dev/null 2>&1 || fail 'busybox belum aktif di PATH.'
 command -v find >/dev/null 2>&1 || fail 'find belum aktif.'
 command -v grep >/dev/null 2>&1 || fail 'grep belum aktif.'
 command -v awk >/dev/null 2>&1 || fail 'awk belum aktif.'
 command -v sed >/dev/null 2>&1 || fail 'sed belum aktif.'
 command -v tar >/dev/null 2>&1 || fail 'tar belum aktif.'
 
-say "${G}[✓] Test OK: find grep awk sed tar${N}"
+say "${G}[✓] Test OK: busybox find grep awk sed tar${N}"
 
 line
 say "${G}[✓] NEON CORE ENGINE READY${N}"
 
-say "${C}Masuk kapan saja dari adb shell:${N}"
+say "${C}Masuk lagi nanti dari ADB / Brevent / Neon shell:${N}"
+say "${W}    /data/local/tmp/neon${N}"
 say "${W}    sh /sdcard/Download/neon${N}"
-say "${W}    atau: /data/local/tmp/neon${N}"
+
+say "${C}Test:${N}"
+say "${W}    /data/local/tmp/neon test${N}"
 
 say ""
-say "${Y}Catatan:${N} PATH tidak bisa dipasang permanen global tanpa root, jadi shortcut ini yang membuka shell dengan env otomatis. Tidak perlu load env manual."
+say "${Y}Catatan:${N} non-root tidak bisa memasang PATH global permanen ke sistem. Shortcut ini membuka shell dengan env otomatis, jadi tidak perlu load env manual."
 say ""
 
 exec "$BB" sh
@@ -294,36 +361,46 @@ ADB_SETUP_EOF
 
 chmod 755 "$ADB_SETUP" || fail "chmod gagal: $ADB_SETUP"
 
-line
-say "${B}[6/7] Creating Termux shortcut...${N}"
+say "${G}[✓] Android installer ready: $ADB_SETUP${N}"
 
-if [ -n "${PREFIX:-}" ] && [ -d "$PREFIX/bin" ]; then
+line
+say "${B}[6/7] Creating pre-shortcut and Termux shortcut...${N}"
+
+cat > "$SD_SHORTCUT" <<'SD_PRE_EOF'
+#!/system/bin/sh
+sh /data/local/tmp/neon "$@"
+SD_PRE_EOF
+
+chmod 755 "$SD_SHORTCUT" 2>/dev/null || true
+
+if [ -d "$(dirname "$TERMUX_SHORTCUT")" ]; then
   cat > "$TERMUX_SHORTCUT" <<'TERMUX_EOF'
 #!/data/data/com.termux/files/usr/bin/sh
-adb shell sh /sdcard/Download/neon
+adb shell sh /sdcard/Download/neon "$@"
 TERMUX_EOF
 
-  chmod 755 "$TERMUX_SHORTCUT" || true
+  chmod 755 "$TERMUX_SHORTCUT" 2>/dev/null || true
 
   say "${G}[✓] Termux shortcut ready: neon-adb${N}"
 else
-  say "${Y}[!] PREFIX tidak ditemukan, shortcut Termux dilewati.${N}"
+  say "${Y}[!] Folder bin Termux tidak ditemukan, shortcut neon-adb dilewati.${N}"
 fi
 
 line
 say "${B}[7/7] Final check...${N}"
 
-[ -s "$ADB_SETUP" ] || fail 'ADB setup kosong.'
-[ -s "$ADB_SHORTCUT" ] || fail 'ADB shortcut kosong.'
+[ -s "$PUBLIC_BUSYBOX" ] || fail 'BusyBox di /sdcard/Download kosong.'
+[ -s "$ADB_SETUP" ] || fail 'neon-core-setup.sh kosong.'
+[ -s "$SD_SHORTCUT" ] || fail 'Shortcut /sdcard/Download/neon kosong.'
 
 say "${G}[✓] TERMUX SIDE READY${N}"
+
 say ""
-say "${C}Sekarang jalankan:${N}"
+say "${C}Lanjut pasang ke shell Android:${N}"
 say "${W}    adb shell sh /sdcard/Download/neon-core-setup.sh${N}"
+
 say ""
-say "${C}Setelah selesai, masuk cepat dari Termux:${N}"
+say "${C}Setelah terpasang, masuk cepat:${N}"
 say "${W}    neon-adb${N}"
-say ""
-say "${C}Atau dari adb shell:${N}"
-say "${W}    sh /sdcard/Download/neon${N}"
-say "${W}    /data/local/tmp/neon${N}"
+say "${W}    adb shell sh /sdcard/Download/neon${N}"
+say "${W}    adb shell /data/local/tmp/neon${N}"
