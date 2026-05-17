@@ -58,54 +58,63 @@
   <section id="termuxSection" class="hidden">
     <div class="soft-panel p-5 md:p-7 mb-6 overflow-hidden relative">
       <div class="absolute -right-20 -top-20 w-60 h-60 rounded-full bg-[#ff003c]/10 blur-3xl"></div>
-      <div class="relative grid lg:grid-cols-[1.1fr_.9fr] gap-6 items-center">
+      <div class="relative grid lg:grid-cols-[1.08fr_.92fr] gap-6 items-center">
         <div>
           <span class="badge badge-red mb-3"><i class="fas fa-link"></i> Neon Core + Termux</span>
-          <h2 class="text-2xl md:text-4xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red rog-neon">Hubungkan Neon Core ke Termux</h2>
-          <p class="text-sm md:text-base text-gray-300 mt-3 leading-relaxed">Ikuti 3 langkah ini. Setelah terhubung, user bisa membuka panel web lokal dari Termux, klik fitur, menjalankan module ZIP, melihat info device, backup APK, screenshot, log, dan tweak aman tanpa mengetik command panjang.</p>
-          <div class="flex flex-wrap gap-2 mt-4"><span class="badge badge-green">Web Control</span><span class="badge badge-blue">Klik Tombol</span><span class="badge badge-yellow">Module ZIP</span><span class="badge badge-red">Non Root Shell</span></div>
+          <h2 class="text-2xl md:text-4xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red rog-neon">Dokumentasi Termux Control</h2>
+          <p class="text-sm md:text-base text-gray-300 mt-3 leading-relaxed">Halaman ini menjelaskan cara menghubungkan Neon Core Engine dengan Termux, menjalankan web panel lokal, memakai module ZIP, membuka tool device, mengelola aplikasi, mengambil screenshot, menyimpan log, dan memperbaiki koneksi jika panel tidak jalan.</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="badge badge-green">Local Web API</span>
+            <span class="badge badge-blue">BusyBox HTTPD</span>
+            <span class="badge badge-yellow">CGI Bridge</span>
+            <span class="badge badge-red">Neon Shell</span>
+          </div>
         </div>
         <div class="feature-card">
-          <p class="text-[10px] text-gray-500 uppercase tracking-[.25em] font-mono mb-3">Command paling penting</p>
+          <p class="text-[10px] text-gray-500 uppercase tracking-[.25em] font-mono mb-3">Command utama</p>
           <div class="space-y-3">
-            <div class="codebox"><button class="copy-btn" @click="copy('neon web')"><i class="fas fa-copy"></i></button><code>neon web</code></div>
+            <div class="codebox"><button class="copy-btn" @click="copy('neon test && neon install && neon web')"><i class="fas fa-copy"></i></button><code>neon test &amp;&amp; neon install &amp;&amp; neon web</code></div>
             <div class="codebox"><button class="copy-btn" @click="copy('http://127.0.0.1:8787')"><i class="fas fa-copy"></i></button><code>http://127.0.0.1:8787</code></div>
           </div>
-          <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Jalankan <b>neon web</b>, lalu buka alamat lokal tersebut dari browser di HP yang sama.</p>
+          <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Jalankan command pertama di Termux, lalu buka alamat lokal dari browser di HP yang sama. Panel tidak butuh internet untuk tombol lokal, kecuali saat download catalog atau module.</p>
         </div>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-4 mb-6">
-      <div class="feature-card"><div class="step-dot mb-3">1</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install di Termux</h3><p class="text-xs text-gray-400 mt-2">Pasang command <b>neon</b> dan file pendukungnya. Ini cukup dilakukan sekali.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">2</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Aktifkan Neon Core</h3><p class="text-xs text-gray-400 mt-2">Pastikan Neon Core Engine sudah aktif, lalu Termux bisa mengirim perintah ke shell engine.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">3</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Buka Web Panel</h3><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon web</b>, buka browser, lalu pilih fitur dari interface web.</p></div>
+    <div class="grid md:grid-cols-4 gap-4 mb-6">
+      <div class="feature-card"><div class="step-dot mb-3">1</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Termux</h3><p class="text-xs text-gray-400 mt-2">Siapkan curl, storage permission, dan file installer <b>neon-engine.sh</b>.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">2</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Pasang Client</h3><p class="text-xs text-gray-400 mt-2">Installer membuat command <b>neon</b>, folder kerja, BusyBox, catalog, dan web server lokal.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">3</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Engine</h3><p class="text-xs text-gray-400 mt-2"><b>neon install</b> mengirim BusyBox dan environment ke Neon Core Engine.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">4</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Buka Panel</h3><p class="text-xs text-gray-400 mt-2"><b>neon web</b> menjalankan panel lokal di port <b>8787</b>.</p></div>
     </div>
 
     <div class="soft-panel p-5 md:p-6 mb-6">
-      <h3 class="text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red mb-4">Urutan Setup Paling Mudah</h3>
+      <h3 class="text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red mb-4">Setup dari Nol</h3>
       <div class="space-y-4">
-        <div><p class="text-xs text-gray-400 mb-2">1. Siapkan Termux</p><div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl -y &amp;&amp; termux-setup-storage</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">2. Install Neon Termux Control</p><div class="codebox"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh && chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">3. Setelah Neon Core Engine aktif, cek koneksi dan pasang shell engine</p><div class="codebox"><button class="copy-btn" @click="copy('neon test && neon install')"><i class="fas fa-copy"></i></button><code>neon test &amp;&amp; neon install</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">4. Buka interface web lokal</p><div class="codebox"><button class="copy-btn" @click="copy('neon web')"><i class="fas fa-copy"></i></button><code>neon web</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">1. Update Termux dan aktifkan storage</p><div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl -y &amp;&amp; termux-setup-storage</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">2. Download dan jalankan installer Neon Engine</p><div class="codebox"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh && chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">3. Cek koneksi Neon Core Engine</p><div class="codebox"><button class="copy-btn" @click="copy('neon test')"><i class="fas fa-copy"></i></button><code>neon test</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">4. Install atau repair engine shell</p><div class="codebox"><button class="copy-btn" @click="copy('neon install')"><i class="fas fa-copy"></i></button><code>neon install</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">5. Jalankan web panel lokal</p><div class="codebox"><button class="copy-btn" @click="copy('neon web')"><i class="fas fa-copy"></i></button><code>neon web</code></div></div>
       </div>
     </div>
 
     <div class="grid lg:grid-cols-[.95fr_1.05fr] gap-5 mb-6">
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-2">Yang User Bisa Lakukan dari Web Panel</h3>
-        <p class="text-xs text-gray-400 mb-4 leading-relaxed">Setelah web panel terbuka, user tinggal klik tombol. Fitur tetap berjalan melalui Neon Core Engine yang sudah aktif.</p>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-2">Menu Baru di Web Panel Lokal</h3>
+        <p class="text-xs text-gray-400 mb-4 leading-relaxed">Web panel dari <b>neon web</b> sekarang punya tab yang lebih lengkap. Semua tombol memanggil API lokal di <b>/cgi-bin/api</b>, lalu diteruskan ke command <b>neon</b>.</p>
         <div class="grid sm:grid-cols-2 gap-3">
-          <div class="feature-card"><i class="fas fa-box-open text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Module ZIP</h4><p class="text-xs text-gray-400 mt-2">Cari module, download, lalu jalankan <b>execute.sh</b>, <b>agresif.sh</b>, atau <b>del.sh</b>.</p></div>
-          <div class="feature-card"><i class="fas fa-mobile-screen text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Device Tools</h4><p class="text-xs text-gray-400 mt-2">Cek baterai, storage, network, thermal, dan info device.</p></div>
-          <div class="feature-card"><i class="fas fa-layer-group text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">App Tools</h4><p class="text-xs text-gray-400 mt-2">List aplikasi, detail package, start app, force stop, dan backup APK.</p></div>
-          <div class="feature-card"><i class="fas fa-camera text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Media & Log</h4><p class="text-xs text-gray-400 mt-2">Screenshot, screenrecord, simpan logcat, dan buat report.</p></div>
+          <div class="feature-card"><i class="fas fa-gauge-high text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Dashboard</h4><p class="text-xs text-gray-400 mt-2">Status engine, install, doctor, fitur, report, dan quick actions.</p></div>
+          <div class="feature-card"><i class="fas fa-box-open text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Module Center</h4><p class="text-xs text-gray-400 mt-2">Refresh catalog, cari module, info, download, execute, agresif, dan del.</p></div>
+          <div class="feature-card"><i class="fas fa-mobile-screen text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Device Tools</h4><p class="text-xs text-gray-400 mt-2">Device info, battery, storage, CPU, memory, thermal, properties, dan process.</p></div>
+          <div class="feature-card"><i class="fas fa-layer-group text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">App Tools</h4><p class="text-xs text-gray-400 mt-2">List package, user app, system app, app info, start, force stop, backup APK, dan appops.</p></div>
+          <div class="feature-card"><i class="fas fa-camera text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Media Input</h4><p class="text-xs text-gray-400 mt-2">Screenshot, screenrecord, tap, swipe, input text, dan keyevent.</p></div>
+          <div class="feature-card"><i class="fas fa-terminal text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Terminal</h4><p class="text-xs text-gray-400 mt-2">Menjalankan command bebas lewat Neon Core Engine dan menampilkan output di panel.</p></div>
         </div>
       </div>
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Command Cadangan</h3>
-        <p class="text-xs text-gray-400 mb-4 leading-relaxed">Kalau web panel belum dibuka, command ini tetap bisa dipakai dari Termux.</p>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Command Cepat</h3>
+        <p class="text-xs text-gray-400 mb-4 leading-relaxed">Pakai command ini jika browser belum terbuka atau user ingin menjalankan fitur langsung dari Termux.</p>
         <div class="space-y-3">
           <template x-for="cmd in webCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
         </div>
@@ -114,19 +123,50 @@
 
     <div class="soft-panel p-5 md:p-6 mb-6">
       <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Module ZIP dari Domain</h3>
-      <p class="text-xs text-gray-400 leading-relaxed mb-4">Module diambil dari catalog <b>shell.json</b>. Setiap ZIP module sebaiknya berisi tiga file: <b>execute.sh</b> untuk mode normal, <b>agresif.sh</b> untuk mode kuat, dan <b>del.sh</b> untuk reset atau hapus efek module.</p>
+      <p class="text-xs text-gray-400 leading-relaxed mb-4">Module diambil dari <b>shell.json</b>. Setiap ZIP module sebaiknya berisi <b>execute.sh</b> untuk mode normal, <b>agresif.sh</b> untuk mode kuat, dan <b>del.sh</b> untuk reset. Setelah download, script module dijalankan dari folder <b>/sdcard/Download/NeonEngine/modules</b>.</p>
       <div class="grid md:grid-cols-2 gap-3">
+        <div class="codebox"><button class="copy-btn" @click="copy('neon refresh')"><i class="fas fa-copy"></i></button><code>neon refresh</code></div>
         <div class="codebox"><button class="copy-btn" @click="copy('neon search battery')"><i class="fas fa-copy"></i></button><code>neon search battery</code></div>
+        <div class="codebox"><button class="copy-btn" @click="copy('neon info shell-047')"><i class="fas fa-copy"></i></button><code>neon info shell-047</code></div>
+        <div class="codebox"><button class="copy-btn" @click="copy('neon get shell-047')"><i class="fas fa-copy"></i></button><code>neon get shell-047</code></div>
         <div class="codebox"><button class="copy-btn" @click="copy('neon exec shell-047')"><i class="fas fa-copy"></i></button><code>neon exec shell-047</code></div>
         <div class="codebox"><button class="copy-btn" @click="copy('neon agresif shell-047')"><i class="fas fa-copy"></i></button><code>neon agresif shell-047</code></div>
-        <div class="codebox"><button class="copy-btn" @click="copy('neon del shell-047')"><i class="fas fa-copy"></i></button><code>neon del shell-047</code></div>
+        <div class="codebox md:col-span-2"><button class="copy-btn" @click="copy('neon del shell-047')"><i class="fas fa-copy"></i></button><code>neon del shell-047</code></div>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-5 mb-6">
+      <div class="soft-panel p-5 md:p-6">
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Folder Hasil</h3>
+        <div class="space-y-3">
+          <div class="codebox"><button class="copy-btn" @click="copy('/sdcard/Download/NeonEngine/modules')"><i class="fas fa-copy"></i></button><code>/sdcard/Download/NeonEngine/modules</code></div>
+          <div class="codebox"><button class="copy-btn" @click="copy('/sdcard/Download/NeonEngine/apk')"><i class="fas fa-copy"></i></button><code>/sdcard/Download/NeonEngine/apk</code></div>
+          <div class="codebox"><button class="copy-btn" @click="copy('/sdcard/Download/NeonEngine/media')"><i class="fas fa-copy"></i></button><code>/sdcard/Download/NeonEngine/media</code></div>
+          <div class="codebox"><button class="copy-btn" @click="copy('/sdcard/Download/NeonEngine/report')"><i class="fas fa-copy"></i></button><code>/sdcard/Download/NeonEngine/report</code></div>
+        </div>
+      </div>
+      <div class="soft-panel p-5 md:p-6">
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Troubleshooting</h3>
+        <div class="space-y-3">
+          <div><p class="text-xs text-gray-400 mb-2">Panel tidak kebuka</p><div class="codebox"><button class="copy-btn" @click="copy('neon web-stop && neon web')"><i class="fas fa-copy"></i></button><code>neon web-stop &amp;&amp; neon web</code></div></div>
+          <div><p class="text-xs text-gray-400 mb-2">Engine belum aktif</p><div class="codebox"><button class="copy-btn" @click="copy('neon test')"><i class="fas fa-copy"></i></button><code>neon test</code></div></div>
+          <div><p class="text-xs text-gray-400 mb-2">Command hilang atau rusak</p><div class="codebox"><button class="copy-btn" @click="copy('sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>sh neon-engine.sh</code></div></div>
+        </div>
+      </div>
+      <div class="soft-panel p-5 md:p-6">
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Catatan Aman</h3>
+        <div class="space-y-3 text-xs text-gray-400 leading-relaxed">
+          <p><b class="text-gray-200">Non-root:</b> fitur mengikuti akses shell yang diberikan Neon Core Engine. Kalau Android menolak command tertentu, panel akan menampilkan output error.</p>
+          <p><b class="text-gray-200">Root:</b> module yang memang butuh akses lebih tinggi tetap bergantung pada izin engine dan isi script module.</p>
+          <p><b class="text-gray-200">Terminal:</b> jangan menjalankan command yang menghapus data jika user tidak paham efeknya. Komputer kecil di saku manusia itu sudah cukup sering jadi korban eksperimen.</p>
+        </div>
       </div>
     </div>
 
     <div class="grid md:grid-cols-3 gap-4">
-      <div class="feature-card"><i class="fas fa-circle-check text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Mudah Dipakai</h4><p class="text-xs text-gray-400 mt-2">Setup dibuat urut dan command punya tombol copy.</p></div>
-      <div class="feature-card"><i class="fas fa-server text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Web Lokal</h4><p class="text-xs text-gray-400 mt-2">Panel berjalan di HP user sendiri lewat alamat lokal.</p></div>
-      <div class="feature-card"><i class="fas fa-shield-halved text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Non Root Friendly</h4><p class="text-xs text-gray-400 mt-2">Fitur mengikuti akses Neon Core Engine yang aktif di perangkat.</p></div>
+      <div class="feature-card"><i class="fas fa-circle-check text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Dokumentasi Lengkap</h4><p class="text-xs text-gray-400 mt-2">Alur install, panel, module, folder hasil, dan troubleshooting sudah dijelaskan langsung di tab Termux Control.</p></div>
+      <div class="feature-card"><i class="fas fa-server text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Web Lokal</h4><p class="text-xs text-gray-400 mt-2">Panel berjalan di HP user sendiri melalui BusyBox HTTPD dan API CGI lokal.</p></div>
+      <div class="feature-card"><i class="fas fa-shield-halved text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Mudah Dipahami</h4><p class="text-xs text-gray-400 mt-2">Command penting tersedia dengan tombol copy agar user tidak perlu mengetik manual seperti zaman batu digital.</p></div>
     </div>
   </section>
 </main>
@@ -135,7 +175,7 @@
 <script>
 let webData=[];let shellData=[];let activeTab='web';let currentFilter='all';let searchQuery='';
 const adLinks=["https://omg10.com/4/10055984","https://sorrowfulpsychology.com/HE9TFh","https://dulyhagglermounting.com/2082665","https://jb.xylenolshivahs.com/iLMNRjfsHJiW4/94691"];
-function neonDocs(){return{moduleCommands:['neon refresh','neon modules','neon search fps','neon info shell-047','neon get shell-047','neon exec shell-047','neon agresif shell-047','neon del shell-047'],deviceCommands:['neon device','neon battery','neon storage','neon report','neon apps','neon backupapk com.package.name','neon screenshot','neon anim-off'],webCommands:['neon test','neon install','neon web','neon panel','neon report','neon features','neon web-stop'],copy(text){navigator.clipboard.writeText(text).then(()=>{Swal.fire({toast:true,position:'top-end',timer:1300,showConfirmButton:false,icon:'success',title:'Command disalin'})})}}}
+function neonDocs(){return{moduleCommands:['neon refresh','neon modules','neon search fps','neon info shell-047','neon get shell-047','neon exec shell-047','neon agresif shell-047','neon del shell-047'],deviceCommands:['neon device','neon battery','neon storage','neon report','neon apps','neon backupapk com.package.name','neon screenshot','neon anim-off'],webCommands:['neon test','neon install','neon web','neon panel','neon doctor','neon features','neon refresh','neon modules','neon device','neon battery','neon storage','neon apps','neon screenshot','neon logerr','neon report','neon web-stop'],copy(text){navigator.clipboard.writeText(text).then(()=>{Swal.fire({toast:true,position:'top-end',timer:1300,showConfirmButton:false,icon:'success',title:'Command disalin'})})}}}
 function pickAd(){return adLinks[Math.floor(Math.random()*adLinks.length)]}
 function cardTemplate(item,isShell=false){const type=item.type||item.category||'Tools';const hasAds=item.ads===true;const file=item.file||item.downloadUrl||'';return `<div class="card p-3 md:p-4 flex flex-col min-h-[230px]"><div class="flex items-start gap-3 mb-3"><div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-2xl bg-black/50 border border-[#ff003c]/25 flex items-center justify-center text-[#ff003c]"><i class="${item.icon||'fas fa-terminal'}"></i></div><div class="min-w-0"><h3 class="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate">${item.title}</h3><div class="flex flex-wrap gap-1 mt-1"><span class="badge badge-yellow">${type}</span>${isShell?'<span class="badge badge-green">Non Root</span><span class="badge badge-blue">Root</span>':''}${hasAds?'<span class="badge badge-red">Iklan</span>':''}</div></div></div><p class="text-[9px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mb-3">${item.description||''}</p><div class="mt-auto pt-3 border-t border-white/10"><div class="flex justify-between gap-2 mb-3 text-[8px] md:text-[9px] font-mono text-gray-500"><span class="truncate"><i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer||'Agung Developer'}</span><span class="text-[#ff003c]">${item.size||'ZIP'}</span></div><button class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura" onclick="${isShell?`downloadShell('${file}','${hasAds?'1':'0'}')`:`startWebImport('${item.downloadUrl}','${item.id}')`}"><i class="fas ${isShell?'fa-download':'fa-bolt'} mr-1"></i> ${isShell?'Download':'Deploy'}</button></div></div>`}
 function renderWeb(data){const grid=document.getElementById('webGrid'),empty=document.getElementById('webEmpty');grid.innerHTML='';if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}empty.classList.add('hidden');grid.classList.remove('hidden');data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,false)))}
