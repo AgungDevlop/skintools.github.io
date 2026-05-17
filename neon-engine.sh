@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/sh
-# Neon Core Engine - Non Root BusyBox Installer
-# Termux side: download static BusyBox + create Brevent / Neon Core shell setup
+# Neon Engine - Termux controller for Neon/Brevent daemon
+# No adb command needed. Termux talks to local daemon 127.0.0.1:45555.
 
 set -u
 
@@ -15,14 +15,17 @@ N='\033[0m'
 
 BASE_URL='https://raw.githubusercontent.com/Magisk-Modules-Repo/busybox-ndk/master'
 
-LOCAL_DIR="$HOME/.neon-core"
-LOCAL_BUSYBOX="$LOCAL_DIR/busybox"
+HOME_DIR="$HOME/.neon-engine"
+BIN_DIR="$HOME_DIR/bin"
+TERMUX_BB="$BIN_DIR/busybox"
+
+CLIENT="${PREFIX:-/data/data/com.termux/files/usr}/bin/neon"
 
 PUBLIC_DIR='/sdcard/Download'
-PUBLIC_BUSYBOX="$PUBLIC_DIR/busybox"
+PUBLIC_BB="$PUBLIC_DIR/busybox"
 
-SHELL_SETUP="$PUBLIC_DIR/neon-core-setup.sh"
-SD_SHORTCUT="$PUBLIC_DIR/neon"
+DAEMON_HOST='127.0.0.1'
+DAEMON_PORT='45555'
 
 say() {
   printf '%b\n' "$1"
@@ -49,20 +52,20 @@ say '| \ | | ___  ___  _ __ / ___|___  _ __ ___'
 say '|  \| |/ _ \/ _ \| _  \ |   / _ \| __/ _ \'
 say '| |\  |  __/ (_) | | | | |__| (_) | | |  __/'
 say '|_| \_|\___|\___/|_| |_|\____\___/|_|  \___|'
-say '        N E O N   C O R E   E N G I N E'
+say '        N E O N   E N G I N E   T E R M U X'
 say "${N}"
 
 line
-say "${B}[1/7] Checking Termux tools...${N}"
+say "${B}[1/6] Checking Termux tools...${N}"
 
 have curl || fail 'curl belum ada. Jalankan: pkg install curl -y'
 
-mkdir -p "$LOCAL_DIR" || fail "Gagal membuat folder $LOCAL_DIR"
+mkdir -p "$BIN_DIR" || fail "Gagal membuat $BIN_DIR"
 
 say "${G}[✓] curl ready${N}"
 
 line
-say "${B}[2/7] Checking storage access...${N}"
+say "${B}[2/6] Checking storage access...${N}"
 
 if [ ! -d "$PUBLIC_DIR" ]; then
   if have termux-setup-storage; then
@@ -72,12 +75,12 @@ if [ ! -d "$PUBLIC_DIR" ]; then
   fi
 fi
 
-[ -d "$PUBLIC_DIR" ] || fail 'Storage belum aktif. Izinkan storage Termux, lalu jalankan ulang.'
+[ -d "$PUBLIC_DIR" ] || fail 'Storage belum aktif. Izinkan storage Termux lalu jalankan ulang.'
 
 say "${G}[✓] Storage ready: $PUBLIC_DIR${N}"
 
 line
-say "${B}[3/7] Detecting Android ABI...${N}"
+say "${B}[3/6] Detecting ABI...${N}"
 
 ABI="$(getprop ro.product.cpu.abi 2>/dev/null || true)"
 
@@ -120,282 +123,295 @@ say "${G}[✓] ABI: ${ABI:-unknown}${N}"
 say "${G}[✓] Package: $ENGINE_FILE${N}"
 
 line
-say "${B}[4/7] Downloading BusyBox static...${N}"
+say "${B}[4/6] Downloading static BusyBox...${N}"
 
-DOWNLOAD_URL="$BASE_URL/$ENGINE_FILE"
+URL="$BASE_URL/$ENGINE_FILE"
 
-rm -f "$LOCAL_BUSYBOX" "$PUBLIC_BUSYBOX"
+rm -f "$TERMUX_BB" "$PUBLIC_BB"
 
 curl -L --fail --connect-timeout 15 --max-time 180 --retry 3 --retry-delay 2 \
-  "$DOWNLOAD_URL" -o "$LOCAL_BUSYBOX" || fail 'Download BusyBox gagal. Cek internet atau URL source.'
+  "$URL" -o "$TERMUX_BB" || fail 'Download BusyBox gagal.'
 
-SIZE="$(wc -c < "$LOCAL_BUSYBOX" 2>/dev/null || echo 0)"
+SIZE="$(wc -c < "$TERMUX_BB" 2>/dev/null || echo 0)"
 
-[ "$SIZE" -gt 100000 ] || {
-  rm -f "$LOCAL_BUSYBOX"
-  fail 'File BusyBox tidak valid atau terlalu kecil.'
-}
+[ "$SIZE" -gt 100000 ] || fail 'File BusyBox tidak valid.'
 
-chmod 755 "$LOCAL_BUSYBOX" || fail 'chmod BusyBox gagal.'
+chmod 755 "$TERMUX_BB" || fail 'chmod BusyBox gagal.'
 
-cp "$LOCAL_BUSYBOX" "$PUBLIC_BUSYBOX" || fail "Gagal copy BusyBox ke $PUBLIC_BUSYBOX"
-chmod 755 "$PUBLIC_BUSYBOX" 2>/dev/null || true
+cp "$TERMUX_BB" "$PUBLIC_BB" || fail "Gagal copy BusyBox ke $PUBLIC_BB"
+chmod 755 "$PUBLIC_BB" 2>/dev/null || true
 
-say "${G}[✓] BusyBox ready: $PUBLIC_BUSYBOX${N}"
+say "${G}[✓] BusyBox Termux: $TERMUX_BB${N}"
+say "${G}[✓] BusyBox public: $PUBLIC_BB${N}"
 
 line
-say "${B}[5/7] Creating Brevent / Neon Core shell setup...${N}"
+say "${B}[5/6] Creating Termux command: neon${N}"
 
-cat > "$SHELL_SETUP" <<'SHELL_SETUP_EOF'
-#!/system/bin/sh
-# Neon Core Engine - Brevent / Neon Core Shell side installer
+cat > "$CLIENT" <<'CLIENT_EOF'
+#!/data/data/com.termux/files/usr/bin/sh
+# Neon Termux Client - talks to Neon/Brevent daemon at 127.0.0.1:45555
 
-R='\033[1;31m'
-G='\033[1;32m'
-Y='\033[1;33m'
-B='\033[1;34m'
-C='\033[1;36m'
-M='\033[1;35m'
-W='\033[1;37m'
-N='\033[0m'
+set -u
 
-SRC='/sdcard/Download/busybox'
+HOST='127.0.0.1'
+PORT='45555'
+BB="$HOME/.neon-engine/bin/busybox"
 
-BASE='/data/local/tmp/neon-core'
-BIN="$BASE/bin"
-BB="$BIN/busybox"
-ENV="$BASE/env.sh"
+send_cmd() {
+  CMD="$*"
 
-RUNNER='/data/local/tmp/neon'
-SD_RUNNER='/sdcard/Download/neon'
+  [ -n "$CMD" ] || return 1
 
-WORK='/data/local/tmp/neon-work'
-DUMP='/data/local/tmp/neon-dump'
-LOG='/data/local/tmp/neon-log'
+  if [ -x "$BB" ]; then
+    printf '%s\n' "$CMD" | "$BB" nc -w 15 "$HOST" "$PORT"
+    return $?
+  fi
 
-say() {
-  printf '%b\n' "$1"
+  if command -v nc >/dev/null 2>&1; then
+    printf '%s\n' "$CMD" | nc -w 15 "$HOST" "$PORT"
+    return $?
+  fi
+
+  if command -v toybox >/dev/null 2>&1; then
+    printf '%s\n' "$CMD" | toybox nc -w 15 "$HOST" "$PORT"
+    return $?
+  fi
+
+  echo '[!] Tidak ada nc. BusyBox client tidak ditemukan.'
+  echo '[!] Jalankan ulang installer neon-engine.sh dari Termux.'
+  return 1
 }
 
-line() {
-  printf '%b\n' "${C}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+daemon_alive() {
+  OUT="$(send_cmd 'echo NEON_DAEMON_OK' 2>/dev/null || true)"
+  printf '%s' "$OUT" | grep -q 'NEON_DAEMON_OK'
 }
 
-fail() {
-  say "${R}[!] $1${N}"
+remote_setup_cmd() {
+  cat <<'EOS'
+SRC=/sdcard/Download/busybox
+BASE=/data/local/tmp/neon-core
+BIN=$BASE/bin
+BB=$BIN/busybox
+ENV=$BASE/env.sh
+RUN=/data/local/tmp/neon
+SDRUN=/sdcard/Download/neon
+
+mkdir -p $BIN /data/local/tmp/neon-work /data/local/tmp/neon-dump /data/local/tmp/neon-log || exit 1
+
+[ -f $SRC ] || {
+  echo '[!] /sdcard/Download/busybox tidak ada'
   exit 1
 }
 
-clear 2>/dev/null || true
+cp $SRC $BB 2>/dev/null || cat $SRC > $BB || exit 1
+chmod 755 $BB || exit 1
 
-say "${M}"
-say ' _   _                  ____'
-say '| \ | | ___  ___  _ __ / ___|___  _ __ ___'
-say '|  \| |/ _ \/ _ \| _  \ |   / _ \| __/ _ \'
-say '| |\  |  __/ (_) | | | | |__| (_) | | |  __/'
-say '|_| \_|\___|\___/|_| |_|\____\___/|_|  \___|'
-say '        N E O N   C O R E   S H E L L'
-say "${N}"
-
-line
-say "${B}[1/6] Preparing non-root workspace...${N}"
-
-rm -rf "$BASE"
-
-mkdir -p "$BIN" "$WORK" "$DUMP" "$LOG" || fail 'Gagal membuat folder kerja di /data/local/tmp.'
-
-say "${G}[✓] Workspace ready${N}"
-
-line
-say "${B}[2/6] Moving BusyBox to executable path...${N}"
-
-[ -f "$SRC" ] || fail 'File /sdcard/Download/busybox tidak ditemukan. Jalankan installer dari Termux dulu.'
-
-cp "$SRC" "$BB" 2>/dev/null || cat "$SRC" > "$BB" || fail 'Gagal menyalin BusyBox.'
-
-chmod 755 "$BB" || fail 'chmod BusyBox gagal.'
-
-"$BB" --help >/dev/null 2>&1 || fail 'BusyBox gagal dijalankan. Kemungkinan ABI tidak cocok.'
-
-say "${G}[✓] BusyBox executable: $BB${N}"
-
-line
-say "${B}[3/6] Installing BusyBox applets...${N}"
-
-cd "$BIN" || fail 'Gagal masuk folder BusyBox bin.'
-
-"$BB" --install -s "$BIN" >/dev/null 2>&1 || fail 'Gagal membuat shortcut applet BusyBox.'
-
-say "${G}[✓] Applets ready: find grep awk sed tar unzip wget du df${N}"
-
-line
-say "${B}[4/6] Creating auto environment...${N}"
-
-cat > "$ENV" <<'ENV_EOF'
-export PATH="/data/local/tmp/neon-core/bin:$PATH"
-export TMPDIR="/data/local/tmp"
-
-export NEON_HOME="/data/local/tmp/neon-core"
-export NEON_WORK="/data/local/tmp/neon-work"
-export NEON_DUMP="/data/local/tmp/neon-dump"
-export NEON_LOG="/data/local/tmp/neon-log"
-
-alias ll='ls -lah'
-alias la='ls -la'
-
-alias grep='busybox grep'
-alias awk='busybox awk'
-alias sed='busybox sed'
-alias find='busybox find'
-alias tar='busybox tar'
-
-alias du='busybox du -h'
-alias df='busybox df -h'
-
-alias psx='ps -A'
-alias props='getprop'
-
-alias packages='pm list packages'
-alias userapps='pm list packages -3'
-alias sysapps='pm list packages -s'
-ENV_EOF
-
-chmod 755 "$ENV" 2>/dev/null || true
-
-say "${G}[✓] Auto env ready${N}"
-
-line
-say "${B}[5/6] Creating simple shortcuts...${N}"
-
-cat > "$RUNNER" <<'RUNNER_EOF'
-#!/system/bin/sh
-
-BB='/data/local/tmp/neon-core/bin/busybox'
-ENV='/data/local/tmp/neon-core/env.sh'
-
-if [ ! -x "$BB" ]; then
-  echo '[!] Neon BusyBox belum terpasang.'
-  echo '[!] Jalankan di Brevent/Neon Core shell:'
-  echo '    sh /sdcard/Download/neon-core-setup.sh'
+$BB --help >/dev/null 2>&1 || {
+  echo '[!] BusyBox tidak bisa execute'
   exit 1
-fi
+}
 
-[ -f "$ENV" ] && . "$ENV"
+cd $BIN || exit 1
+$BB --install -s $BIN >/dev/null 2>&1 || exit 1
 
-case "${1:-shell}" in
-  shell|sh)
-    echo '[+] Neon Core shell aktif'
-    echo '[+] BusyBox env otomatis aktif'
-    echo '[+] Ketik: exit untuk keluar'
-    exec "$BB" sh
-    ;;
+printf '%s\n' \
+'export PATH="/data/local/tmp/neon-core/bin:$PATH"' \
+'export TMPDIR="/data/local/tmp"' \
+'export NEON_HOME="/data/local/tmp/neon-core"' \
+'export NEON_WORK="/data/local/tmp/neon-work"' \
+'export NEON_DUMP="/data/local/tmp/neon-dump"' \
+'export NEON_LOG="/data/local/tmp/neon-log"' \
+'alias ll="ls -lah"' \
+'alias la="ls -la"' \
+'alias packages="pm list packages"' \
+'alias userapps="pm list packages -3"' \
+'alias sysapps="pm list packages -s"' \
+> $ENV
 
+chmod 755 $ENV
+
+printf '%s\n' \
+'#!/system/bin/sh' \
+'BB="/data/local/tmp/neon-core/bin/busybox"' \
+'ENV="/data/local/tmp/neon-core/env.sh"' \
+'[ -x "$BB" ] || { echo "[!] BusyBox belum terpasang"; exit 1; }' \
+'export PATH="/data/local/tmp/neon-core/bin:$PATH"' \
+'[ -f "$ENV" ] && . "$ENV"' \
+'case "${1:-shell}" in' \
+'  shell|sh)' \
+'    echo "[+] Neon Core shell aktif"' \
+'    echo "[+] BusyBox env otomatis aktif"' \
+'    exec "$BB" sh' \
+'    ;;' \
+'  test)' \
+'    echo "[+] busybox: $(command -v busybox 2>/dev/null)"' \
+'    echo "[+] wget   : $(command -v wget 2>/dev/null)"' \
+'    echo "[+] unzip  : $(command -v unzip 2>/dev/null)"' \
+'    echo "[+] find   : $(command -v find 2>/dev/null)"' \
+'    ;;' \
+'  run)' \
+'    shift' \
+'    exec "$BB" sh -c "$*"' \
+'    ;;' \
+'  *)' \
+'    exec "$@"' \
+'    ;;' \
+'esac' \
+> $RUN
+
+chmod 755 $RUN
+
+printf '%s\n' \
+'#!/system/bin/sh' \
+'sh /data/local/tmp/neon "$@"' \
+> $SDRUN
+
+chmod 755 $SDRUN 2>/dev/null || true
+
+. $ENV
+
+command -v busybox >/dev/null 2>&1 || exit 1
+command -v wget >/dev/null 2>&1 || exit 1
+command -v unzip >/dev/null 2>&1 || exit 1
+
+echo '[✓] Neon BusyBox shell installed'
+echo '[✓] Shortcut shell: /data/local/tmp/neon'
+echo '[✓] Shortcut sdcard: sh /sdcard/Download/neon'
+EOS
+}
+
+install_engine() {
+  if ! daemon_alive; then
+    echo '[!] Daemon Neon/Brevent belum aktif di 127.0.0.1:45555.'
+    echo '[!] Buka Neon Core/Brevent, aktifkan engine sampai status connected/ready.'
+    echo '[!] Setelah itu jalankan: neon install'
+    return 1
+  fi
+
+  CMD="$(remote_setup_cmd | tr '\n' ';')"
+  send_cmd "$CMD"
+}
+
+repl() {
+  if ! daemon_alive; then
+    echo '[!] Daemon belum aktif. Jalankan: neon test'
+    return 1
+  fi
+
+  RPWD='/'
+
+  echo '[+] Neon daemon shell dari Termux'
+  echo '[+] Ketik exit untuk keluar'
+
+  while true; do
+    printf 'neon:%s $ ' "$RPWD"
+    IFS= read -r LINE || break
+
+    case "$LINE" in
+      exit|quit)
+        break
+        ;;
+      pwd)
+        echo "$RPWD"
+        continue
+        ;;
+      cd|'cd ')
+        RPWD='/'
+        continue
+        ;;
+      cd\ *)
+        TARGET="${LINE#cd }"
+        OUT="$(send_cmd "cd '$RPWD' 2>/dev/null; cd '$TARGET' 2>/dev/null && pwd || echo __CD_FAIL__")"
+
+        if printf '%s' "$OUT" | grep -q '__CD_FAIL__'; then
+          echo '[!] cd gagal'
+        else
+          RPWD="$(printf '%s\n' "$OUT" | tail -n 1)"
+        fi
+        continue
+        ;;
+    esac
+
+    send_cmd "cd '$RPWD' 2>/dev/null; export PATH=/data/local/tmp/neon-core/bin:\$PATH; $LINE"
+  done
+}
+
+case "${1:-help}" in
   test)
-    echo '[+] busybox:' "$(command -v busybox 2>/dev/null)"
-    echo '[+] find   :' "$(command -v find 2>/dev/null)"
-    echo '[+] grep   :' "$(command -v grep 2>/dev/null)"
-    echo '[+] awk    :' "$(command -v awk 2>/dev/null)"
-    echo '[+] sed    :' "$(command -v sed 2>/dev/null)"
-    echo '[+] tar    :' "$(command -v tar 2>/dev/null)"
+    if daemon_alive; then
+      echo '[✓] Daemon aktif: 127.0.0.1:45555'
+      send_cmd 'id; echo SHELL=$(whoami 2>/dev/null); echo PATH=$PATH'
+    else
+      echo '[!] Daemon belum aktif: 127.0.0.1:45555'
+      echo '[!] Aktifkan Neon Core/Brevent engine dulu, lalu ulangi: neon test'
+      exit 1
+    fi
     ;;
 
-  env)
-    cat "$ENV"
+  install|setup|engine-install)
+    install_engine
+    ;;
+
+  sh|shell)
+    repl
     ;;
 
   run)
     shift
-    exec "$BB" sh -c "$*"
+    send_cmd "export PATH=/data/local/tmp/neon-core/bin:\$PATH; $*"
+    ;;
+
+  busybox-test)
+    send_cmd '/data/local/tmp/neon test'
+    ;;
+
+  help|-h|--help)
+    echo 'Neon Termux Client'
+    echo ''
+    echo 'Command:'
+    echo '  neon test              cek daemon Neon/Brevent aktif'
+    echo '  neon install           pasang BusyBox ke shell daemon Android'
+    echo '  neon sh                buka pseudo-shell dari Termux'
+    echo '  neon run "id"          jalankan command sekali via daemon'
+    echo '  neon busybox-test      cek BusyBox shell side'
+    echo ''
+    echo 'Contoh:'
+    echo '  neon run "pm list packages | head"'
+    echo '  neon run "mkdir -p /storage/emulated/0/zipestrak"'
     ;;
 
   *)
-    exec "$@"
+    send_cmd "export PATH=/data/local/tmp/neon-core/bin:\$PATH; $*"
     ;;
 esac
-RUNNER_EOF
+CLIENT_EOF
 
-chmod 755 "$RUNNER" || fail 'Gagal chmod /data/local/tmp/neon.'
+chmod 755 "$CLIENT" || fail "Gagal chmod $CLIENT"
 
-cat > "$SD_RUNNER" <<'SD_RUNNER_EOF'
-#!/system/bin/sh
-sh /data/local/tmp/neon "$@"
-SD_RUNNER_EOF
-
-chmod 755 "$SD_RUNNER" 2>/dev/null || true
-
-say "${G}[✓] Shortcut ready:${N}"
-say "${W}    /data/local/tmp/neon${N}"
-say "${W}    sh /sdcard/Download/neon${N}"
+say "${G}[✓] Command ready: neon${N}"
 
 line
-say "${B}[6/6] Testing installed commands...${N}"
+say "${B}[6/6] Checking daemon...${N}"
 
-. "$ENV"
-
-command -v busybox >/dev/null 2>&1 || fail 'busybox belum aktif.'
-command -v find >/dev/null 2>&1 || fail 'find belum aktif.'
-command -v grep >/dev/null 2>&1 || fail 'grep belum aktif.'
-command -v awk >/dev/null 2>&1 || fail 'awk belum aktif.'
-command -v sed >/dev/null 2>&1 || fail 'sed belum aktif.'
-command -v tar >/dev/null 2>&1 || fail 'tar belum aktif.'
-
-say "${G}[✓] Test OK${N}"
+if "$CLIENT" test >/dev/null 2>&1; then
+  say "${G}[✓] Daemon aktif. Installing BusyBox into daemon shell...${N}"
+  "$CLIENT" install || fail 'Install BusyBox ke daemon shell gagal.'
+else
+  say "${Y}[!] Daemon belum aktif di 127.0.0.1:45555.${N}"
+  say "${Y}[!] Buka Neon Core/Brevent lalu aktifkan engine sampai ready.${N}"
+fi
 
 line
-say "${G}[✓] NEON CORE SHELL READY${N}"
-
-say "${C}Masuk kapan saja dari Brevent / Neon Core shell:${N}"
-say "${W}    /data/local/tmp/neon${N}"
-say "${W}    sh /sdcard/Download/neon${N}"
-
-say "${C}Cek install:${N}"
-say "${W}    /data/local/tmp/neon test${N}"
-
-say ""
-say "${Y}Non-root note:${N} PATH global Android tidak bisa dibuat permanen tanpa root. Shortcut ini sudah auto-load env, jadi tidak perlu load env manual."
-say ""
-
-exec "$BB" sh
-SHELL_SETUP_EOF
-
-chmod 755 "$SHELL_SETUP" || fail "chmod gagal: $SHELL_SETUP"
-
-say "${G}[✓] Shell setup ready: $SHELL_SETUP${N}"
-
-line
-say "${B}[6/7] Creating pre-shortcut...${N}"
-
-cat > "$SD_SHORTCUT" <<'SD_PRE_EOF'
-#!/system/bin/sh
-sh /data/local/tmp/neon "$@"
-SD_PRE_EOF
-
-chmod 755 "$SD_SHORTCUT" 2>/dev/null || true
-
-say "${G}[✓] Pre-shortcut ready: $SD_SHORTCUT${N}"
-
-line
-say "${B}[7/7] Final check...${N}"
-
-[ -s "$PUBLIC_BUSYBOX" ] || fail 'BusyBox di /sdcard/Download kosong.'
-[ -s "$SHELL_SETUP" ] || fail 'neon-core-setup.sh kosong.'
-[ -s "$SD_SHORTCUT" ] || fail 'Shortcut /sdcard/Download/neon kosong.'
-
 say "${G}[✓] TERMUX SETUP COMPLETE${N}"
 
 say ""
-say "${Y}╔════════════════════════════════════════════╗${N}"
-say "${Y}║        NEXT STEP IN BREVENT / NEON CORE    ║${N}"
-say "${Y}╚════════════════════════════════════════════╝${N}"
-say ""
-
-say "${C}Salin dan jalankan command ini di Brevent / Neon Core shell:${N}"
-say "${W}    sh /sdcard/Download/neon-core-setup.sh${N}"
+say "${C}Command utama di Termux:${N}"
+say "${W}    neon test${N}"
+say "${W}    neon install${N}"
+say "${W}    neon sh${N}"
+say "${W}    neon run 'pm list packages'${N}"
 
 say ""
-say "${C}Setelah sukses, masuk lagi kapan saja dengan:${N}"
-say "${W}    /data/local/tmp/neon${N}"
-say "${W}    sh /sdcard/Download/neon${N}"
-
-say ""
-say "${G}[✓] Done. Tidak perlu command adb di tahap ini.${N}"
+say "${C}Kalau daemon sudah aktif, semua bisa dari Termux. Tidak perlu bolak-balik shell.${N}"
+say "${Y}Catatan: daemon Neon/Brevent tetap harus hidup dulu. Termux tidak bisa menciptakan akses shell sendiri tanpa daemon awal.${N}"
