@@ -94,7 +94,7 @@
       <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
         <div class="min-w-0">
           <h3 class="safe-text text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.1em] rog-red">API Route Fix &amp; Test</h3>
-          <p class="mini mt-2">Kalau request ke <b>/cgi-bin/api</b> menghasilkan HTML <b>404 Not Found</b>, biasanya API file belum dibuat oleh <b>neon web</b> terbaru atau server lama masih hidup. Restart Web Control dulu, lalu test ulang endpoint.</p>
+          <p class="mini mt-2">Kalau request ke <b>/cgi-bin/api</b> menghasilkan HTML <b>404 Not Found</b>, cek ukuran file API. Jika <b>~/.neon-engine/web/cgi-bin/api</b> berukuran <b>0 byte</b>, jalankan ulang installer <b>neon-engine.zip</b> terbaru. Versi ini memperbaiki generator CGI agar tidak kosong saat <b>neon web</b> dijalankan.</p>
         </div>
         <span class="pill">Base URL: 127.0.0.1:8787</span>
       </div>
@@ -113,7 +113,7 @@
         </div>
         <div class="min-w-0">
           <p class="mini mb-2">4. Test POST shell bridge</p>
-          <div class="codebox"><button class="copy-btn" @click="copy('curl -X POST http://127.0.0.1:8787/cgi-bin/api -d act=shell --data-urlencode cmd=pm list packages')"><i class="fas fa-copy"></i></button><code>curl -X POST http://127.0.0.1:8787/cgi-bin/api -d act=shell --data-urlencode cmd="pm list packages"</code></div>
+          <div class="codebox"><button class="copy-btn" @click="copy('curl -X POST "http://127.0.0.1:8787/cgi-bin/api" -d "act=shell" --data-urlencode "cmd=pm list packages"')"><i class="fas fa-copy"></i></button><code>curl -X POST "http://127.0.0.1:8787/cgi-bin/api" -d "act=shell" --data-urlencode "cmd=pm list packages"</code></div>
         </div>
       </div>
       <div class="feature-card mt-4">
@@ -131,7 +131,7 @@
         </div>
         <div class="api-card">
           <h4 class="font-bold uppercase text-sm text-white mb-2">POST format</h4>
-          <div class="codebox"><button class="copy-btn" @click="copy('curl -X POST http://127.0.0.1:8787/cgi-bin/api -d act=shell --data-urlencode cmd=dumpsys battery')"><i class="fas fa-copy"></i></button><code>curl -X POST http://127.0.0.1:8787/cgi-bin/api -d act=shell --data-urlencode cmd="dumpsys battery"</code></div>
+          <div class="codebox"><button class="copy-btn" @click="copy('curl -X POST "http://127.0.0.1:8787/cgi-bin/api" -d "act=shell" --data-urlencode "cmd=dumpsys battery"')"><i class="fas fa-copy"></i></button><code>curl -X POST "http://127.0.0.1:8787/cgi-bin/api" -d "act=shell" --data-urlencode "cmd=dumpsys battery"</code></div>
         </div>
       </div>
       <div class="table-wrap">
@@ -188,7 +188,7 @@
     <div class="soft-panel p-4 sm:p-5 md:p-6">
       <h3 class="safe-text text-xl font-rajdhani font-bold uppercase rog-red mb-4">Troubleshooting Cepat</h3>
       <div class="grid md:grid-cols-2 gap-4">
-        <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">API balas HTML 404</h4><p class="mini mt-2">Jalankan <b>neon web-stop &amp;&amp; neon web</b>, lalu cek <b>~/.neon-engine/web/cgi-bin/api</b>. Jika file belum ada, jalankan ulang installer dari <b>neon-engine.zip</b>.</p></div>
+        <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">API balas HTML 404</h4><p class="mini mt-2">Jalankan <b>neon web-stop &amp;&amp; neon web</b>, lalu cek <b>~/.neon-engine/web/cgi-bin/api</b>. Jika file belum ada atau ukurannya 0 byte, jalankan ulang installer dari <b>neon-engine.zip</b> terbaru, lalu jalankan <b>neon web-stop &amp;&amp; neon web</b>.</p></div>
         <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Command shell kosong atau gagal</h4><p class="mini mt-2">Pastikan daemon Neon Core aktif, lalu jalankan <b>neon doctor</b> dan <b>neon install</b>.</p></div>
         <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Layout melebar ke samping</h4><p class="mini mt-2">Bagian command dan tabel sudah dibuat scroll/wrap internal. Kalau masih melebar, clear cache browser lalu reload halaman.</p></div>
         <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Output file tidak ketemu</h4><p class="mini mt-2">Cek folder <b>/sdcard/Download/NeonEngine</b> untuk media, log, report, dan APK.</p></div>
