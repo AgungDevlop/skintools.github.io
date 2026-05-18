@@ -5,28 +5,61 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Download Module</title>
 <style>
-*{box-sizing:border-box}html,body{width:100%;overflow-x:hidden}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 0%,rgba(255,0,60,.18),transparent 34%),linear-gradient(180deg,#080808,#020202);font-family:Arial,Helvetica,sans-serif;color:#fff;padding:16px}.box{width:min(560px,100%);max-width:100%;background:rgba(8,8,8,.92);border:1px solid rgba(255,0,60,.34);border-radius:22px;padding:24px;text-align:center;box-shadow:0 22px 60px rgba(0,0,0,.35);overflow:hidden}.icon{width:64px;height:64px;margin:0 auto 16px;display:grid;place-items:center;background:linear-gradient(135deg,#5b0015,#ff003c);border-radius:20px;font-size:30px;box-shadow:0 0 22px rgba(255,0,60,.32)}h1{margin:0;color:#ff003c;text-shadow:0 0 12px rgba(255,0,60,.55);font-size:24px;letter-spacing:.04em;text-transform:uppercase}p{color:#a1a1aa;line-height:1.65;font-size:13px;margin:12px 0}.file{word-break:break-word;overflow-wrap:anywhere;background:rgba(255,255,255,.04);border:1px solid rgba(255,0,60,.22);padding:13px;border-radius:14px;margin:18px 0;color:#fff;font-weight:700;font-size:13px}.status{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#a7f3d0;padding:11px;border-radius:14px;font-size:12px;margin:14px 0;display:none}.btn{display:inline-flex;width:100%;justify-content:center;align-items:center;gap:8px;text-decoration:none;border:1px solid #ff003c;background:linear-gradient(90deg,#620014,#cc0033);color:white;border-radius:14px;padding:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:12px;overflow-wrap:anywhere}.btn.secondary{margin-top:10px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14);letter-spacing:.06em;color:#e5e7eb}.err{display:none;color:#fecaca;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);padding:13px;border-radius:14px;font-size:13px;margin-top:14px}.small{font-size:11px;color:#71717a;margin-top:13px;line-height:1.5}@media(max-width:420px){body{padding:10px}.box{padding:18px;border-radius:18px}h1{font-size:20px}.btn{font-size:10px;padding:13px;letter-spacing:.06em}.file{font-size:12px}}
+*{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 0%,rgba(255,0,60,.18),transparent 34%),linear-gradient(180deg,#080808,#020202);font-family:Arial,Helvetica,sans-serif;color:#fff;padding:18px}.box{width:min(560px,100%);background:rgba(8,8,8,.92);border:1px solid rgba(255,0,60,.34);border-radius:22px;padding:26px;text-align:center;box-shadow:0 22px 60px rgba(0,0,0,.35);overflow:hidden}.icon{width:66px;height:66px;margin:0 auto 16px;display:grid;place-items:center;background:linear-gradient(135deg,#5b0015,#ff003c);border-radius:20px;font-size:30px;box-shadow:0 0 22px rgba(255,0,60,.32)}h1{margin:0;color:#ff003c;text-shadow:0 0 12px rgba(255,0,60,.55);font-size:24px;letter-spacing:.04em;text-transform:uppercase}p{color:#a1a1aa;line-height:1.65;font-size:13px;margin:12px 0}.file{word-break:break-word;overflow-wrap:anywhere;background:rgba(255,255,255,.04);border:1px solid rgba(255,0,60,.22);padding:13px;border-radius:14px;margin:18px 0;color:#fff;font-weight:700;font-size:13px}.status{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#a7f3d0;padding:11px;border-radius:14px;font-size:12px;margin:14px 0;display:none}.btn{display:inline-flex;width:100%;justify-content:center;align-items:center;gap:8px;text-decoration:none;border:1px solid #ff003c;background:linear-gradient(90deg,#620014,#cc0033);color:white;border-radius:14px;padding:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:12px}.btn.secondary{margin-top:10px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14);letter-spacing:.06em;color:#e5e7eb}.err{display:none;color:#fecaca;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);padding:13px;border-radius:14px;font-size:13px;margin-top:14px}.small{font-size:11px;color:#71717a;margin-top:13px}@media(max-width:420px){body{padding:12px}.box{padding:20px;border-radius:18px}h1{font-size:20px}.btn{font-size:11px;padding:13px}.file{font-size:12px}}
 </style>
 </head>
 <body>
 <main class="box">
 <div class="icon">↓</div>
 <h1>Download Module</h1>
-<p>Download module akan dimulai otomatis. Jika browser memblokir auto-download, tekan tombol download ulang.</p>
+<p>Download module berjalan di tab ini. Tab utama akan berpindah directlink otomatis dari halaman index.</p>
 <div id="fileName" class="file"></div>
 <div id="status" class="status">Menyiapkan direct download...</div>
 <div id="err" class="err"></div>
 <a id="btn" class="btn" href="#">Download Ulang</a>
 <a class="btn secondary" href="index.html">Kembali ke Panel</a>
-<div class="small">File hanya boleh berasal dari folder <b>shell/</b> dan format <b>.zip</b>.</div>
+<div class="small">Path valid: <b>shell/nama-module.zip</b>. Path luar, URL eksternal, dan ../ diblokir.</div>
 </main>
 <script>
-const params=new URLSearchParams(location.search);const raw=params.get('file')||'';const fileName=document.getElementById('fileName');const err=document.getElementById('err');const btn=document.getElementById('btn');const statusBox=document.getElementById('status');
+const params=new URLSearchParams(location.search);
+const raw=params.get('file')||'';
+const fileName=document.getElementById('fileName');
+const err=document.getElementById('err');
+const btn=document.getElementById('btn');
+const statusBox=document.getElementById('status');
 function decodeSafe(value){try{return decodeURIComponent(value)}catch(e){return value}}
-function normalizeFile(value){let f=decodeSafe(String(value||'').trim()).replace(/\\+/g,'/').replace(/^\/+/, '');if(!f)return '';if(/^https?:\/\//i.test(f))return '';if(f.includes('..')||f.includes('//'))return '';if(!/^shell\//i.test(f))return '';if(!/\.zip$/i.test(f))return '';return f}
+function normalizeFile(value){
+  let f=decodeSafe(String(value||'').trim()).replace(/\\+/g,'/').replace(/^\/+/, '');
+  if(!f)return '';
+  if(/^https?:\/\//i.test(f)||f.includes('..')||f.includes('//'))return '';
+  if(!/^shell\//i.test(f)||!/\.zip$/i.test(f))return '';
+  return f;
+}
 function encodePath(path){return path.split('/').map(part=>encodeURIComponent(part)).join('/')}
 const safeFile=normalizeFile(raw);
-if(!safeFile){err.style.display='block';err.textContent='File tidak valid atau bukan dari folder shell/.';fileName.style.display='none';btn.style.display='none';statusBox.style.display='none'}else{const directUrl=encodePath(safeFile);const name=safeFile.split('/').pop();fileName.textContent=name;btn.href=directUrl;btn.setAttribute('download',name);statusBox.style.display='block';setTimeout(()=>{const a=document.createElement('a');a.href=directUrl;a.download=name;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();statusBox.textContent='Jika belum terunduh, tekan Download Ulang.'},450)}
+if(!safeFile){
+  err.style.display='block';
+  err.textContent='File tidak valid atau bukan dari folder shell/.';
+  fileName.style.display='none';
+  btn.style.display='none';
+}else{
+  const directUrl=encodePath(safeFile);
+  const name=safeFile.split('/').pop();
+  fileName.textContent=name;
+  btn.href=directUrl;
+  btn.setAttribute('download',name);
+  statusBox.style.display='block';
+  setTimeout(()=>{
+    const a=document.createElement('a');
+    a.href=directUrl;
+    a.download=name;
+    a.rel='noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    statusBox.textContent='Jika belum terunduh, tekan Download Ulang.';
+  },550);
+}
 </script>
 </body>
 </html>
