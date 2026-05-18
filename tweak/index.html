@@ -11,6 +11,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Jura:wght@500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;color:#e5e7eb;font-family:'Chakra Petch',sans-serif;background:radial-gradient(circle at 20% 0%,rgba(255,0,60,.16),transparent 34%),radial-gradient(circle at 90% 10%,rgba(0,180,255,.10),transparent 34%),linear-gradient(180deg,#080808 0%,#050505 100%)}.rog-red{color:#ff003c}.rog-neon{text-shadow:0 0 10px rgba(255,0,60,.65),0 0 18px rgba(255,0,60,.25)}.font-rajdhani{font-family:'Rajdhani',sans-serif}.font-jura{font-family:'Jura',sans-serif}.header-panel{background:rgba(8,8,8,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,0,60,.22);box-shadow:0 4px 28px rgba(255,0,60,.10)}.search-box{background:rgba(15,15,15,.86);border:1px solid rgba(255,0,60,.25);border-radius:16px}.tab-btn,.filter-btn{border:1px solid rgba(255,0,60,.20);background:rgba(18,18,18,.75);color:#9ca3af;border-radius:14px;transition:.22s ease}.tab-btn:hover,.filter-btn:hover{color:#fff;border-color:rgba(255,0,60,.55);background:rgba(255,0,60,.07)}.tab-btn.active,.filter-btn.active{color:#fff;border-color:#ff003c;background:rgba(255,0,60,.13);box-shadow:0 0 16px rgba(255,0,60,.22)}.card{background:linear-gradient(180deg,rgba(20,20,20,.92),rgba(8,8,8,.96));border:1px solid rgba(255,0,60,.18);border-radius:22px;transition:.24s ease;box-shadow:0 12px 36px rgba(0,0,0,.18)}.card:hover{transform:translateY(-3px);border-color:rgba(255,0,60,.45);box-shadow:0 18px 42px rgba(255,0,60,.12)}.badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 8px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.badge-red{background:rgba(255,0,60,.08);border:1px solid rgba(255,0,60,.30);color:#ff8aa3}.badge-green{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#72ffc0}.badge-blue{background:rgba(0,150,255,.07);border:1px solid rgba(0,150,255,.25);color:#7cc7ff}.badge-yellow{background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.28);color:#ffd36b}.btn-main{background:linear-gradient(90deg,#700018,#d00038);border:1px solid rgba(255,0,60,.75);border-radius:14px;transition:.22s ease}.btn-main:hover{filter:brightness(1.12);box-shadow:0 0 18px rgba(255,0,60,.32)}.soft-panel{background:rgba(15,15,15,.72);border:1px solid rgba(255,255,255,.07);border-radius:22px}.loader{width:38px;height:38px;border:2px solid rgba(255,0,60,.12);border-top-color:#ff003c;border-radius:999px;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.codebox{position:relative;max-width:100%;white-space:pre-wrap;word-break:break-word;background:#050505;border:1px solid rgba(255,0,60,.24);border-radius:18px;padding:16px 48px 16px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#d1d5db;overflow:auto}.copy-btn{position:absolute;right:10px;top:10px;width:32px;height:32px;border-radius:12px;border:1px solid rgba(255,0,60,.35);background:rgba(255,0,60,.08);color:#ff8aa3}.step-dot{width:30px;height:30px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff003c,#5a0015);font-weight:900}.feature-card{background:rgba(10,10,10,.78);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}.feature-card i{color:#ff003c}::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#ff003c;border-radius:999px}::-webkit-scrollbar-track{background:#111}
+
+/* Responsive hardening for Termux Control */
+html,body{max-width:100%;overflow-x:hidden}
+main,header,footer{max-width:100%;overflow-x:clip}
+#termuxSection,#termuxSection *{min-width:0}
+#termuxSection{max-width:100%;overflow-x:hidden}
+#termuxSection .soft-panel,#termuxSection .feature-card{max-width:100%;overflow:hidden}
+#termuxSection .grid{max-width:100%;min-width:0}
+#termuxSection h2,#termuxSection h3,#termuxSection h4,#termuxSection p,#termuxSection span,#termuxSection b,#termuxSection code{overflow-wrap:anywhere;word-break:break-word}
+#termuxSection .badge{max-width:100%;white-space:normal;line-height:1.35;text-align:left;align-items:flex-start;border-radius:14px}
+#termuxSection .codebox{max-width:100%;min-width:0;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;overflow-x:hidden;line-height:1.6}
+#termuxSection .codebox code{display:block;max-width:100%;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;padding-right:4px}
+#termuxSection .copy-btn{flex:0 0 auto}
+#termuxSection .feature-card{line-height:1.55}
+#termuxSection .feature-card .codebox{margin-top:10px}
+@media(max-width:767px){
+  header{position:sticky;top:0}
+  main{padding-left:10px!important;padding-right:10px!important}
+  #termuxSection .soft-panel{border-radius:18px;padding:16px!important}
+  #termuxSection .feature-card{border-radius:16px;padding:13px!important}
+  #termuxSection h2{font-size:1.65rem!important;line-height:1.08!important;letter-spacing:.055em!important}
+  #termuxSection h3{font-size:1.15rem!important;line-height:1.15!important;letter-spacing:.055em!important}
+  #termuxSection .codebox{font-size:10.5px!important;padding:13px 42px 13px 12px!important;border-radius:14px!important}
+  #termuxSection .copy-btn{width:30px!important;height:30px!important;right:7px!important;top:7px!important;border-radius:10px!important}
+  #termuxSection .badge{font-size:7.5px!important;letter-spacing:.05em!important;padding:6px 8px!important}
+  #termuxSection .step-dot{width:28px;height:28px;border-radius:10px}
+}
+@media(max-width:380px){
+  #termuxSection h2{font-size:1.45rem!important}
+  #termuxSection .codebox{font-size:10px!important;padding-right:38px!important}
+  #termuxSection .feature-card{padding:11px!important}
+}
+
 </style>
 </head>
 <body x-data="neonDocs()">
