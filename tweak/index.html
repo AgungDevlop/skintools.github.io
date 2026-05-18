@@ -11,7 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&family=Jura:wght@500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;color:#e5e7eb;font-family:'Chakra Petch',sans-serif;background:radial-gradient(circle at 20% 0%,rgba(255,0,60,.16),transparent 34%),radial-gradient(circle at 90% 10%,rgba(0,180,255,.10),transparent 34%),linear-gradient(180deg,#080808 0%,#050505 100%)}.rog-red{color:#ff003c}.rog-neon{text-shadow:0 0 10px rgba(255,0,60,.65),0 0 18px rgba(255,0,60,.25)}.font-rajdhani{font-family:'Rajdhani',sans-serif}.font-jura{font-family:'Jura',sans-serif}.header-panel{background:rgba(8,8,8,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,0,60,.22);box-shadow:0 4px 28px rgba(255,0,60,.10)}.search-box{background:rgba(15,15,15,.86);border:1px solid rgba(255,0,60,.25);border-radius:16px}.tab-btn,.filter-btn{border:1px solid rgba(255,0,60,.20);background:rgba(18,18,18,.75);color:#9ca3af;border-radius:14px;transition:.22s ease}.tab-btn:hover,.filter-btn:hover{color:#fff;border-color:rgba(255,0,60,.55);background:rgba(255,0,60,.07)}.tab-btn.active,.filter-btn.active{color:#fff;border-color:#ff003c;background:rgba(255,0,60,.13);box-shadow:0 0 16px rgba(255,0,60,.22)}.card{background:linear-gradient(180deg,rgba(20,20,20,.92),rgba(8,8,8,.96));border:1px solid rgba(255,0,60,.18);border-radius:22px;transition:.24s ease;box-shadow:0 12px 36px rgba(0,0,0,.18)}.card:hover{transform:translateY(-3px);border-color:rgba(255,0,60,.45);box-shadow:0 18px 42px rgba(255,0,60,.12)}.badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 8px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.badge-red{background:rgba(255,0,60,.08);border:1px solid rgba(255,0,60,.30);color:#ff8aa3}.badge-green{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#72ffc0}.badge-blue{background:rgba(0,150,255,.07);border:1px solid rgba(0,150,255,.25);color:#7cc7ff}.badge-yellow{background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.28);color:#ffd36b}.btn-main{background:linear-gradient(90deg,#700018,#d00038);border:1px solid rgba(255,0,60,.75);border-radius:14px;transition:.22s ease}.btn-main:hover{filter:brightness(1.12);box-shadow:0 0 18px rgba(255,0,60,.32)}.soft-panel{background:rgba(15,15,15,.72);border:1px solid rgba(255,255,255,.07);border-radius:22px}.loader{width:38px;height:38px;border:2px solid rgba(255,0,60,.12);border-top-color:#ff003c;border-radius:999px;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.codebox{position:relative;background:#050505;border:1px solid rgba(255,0,60,.24);border-radius:18px;padding:16px 48px 16px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#d1d5db;overflow:auto}.copy-btn{position:absolute;right:10px;top:10px;width:32px;height:32px;border-radius:12px;border:1px solid rgba(255,0,60,.35);background:rgba(255,0,60,.08);color:#ff8aa3}.step-dot{width:30px;height:30px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff003c,#5a0015);font-weight:900}.feature-card{background:rgba(10,10,10,.78);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}.feature-card i{color:#ff003c}::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#ff003c;border-radius:999px}::-webkit-scrollbar-track{background:#111}
-html,body{max-width:100%;overflow-x:hidden}.card,.feature-card,.soft-panel,.codebox{min-width:0;max-width:100%}.codebox code{white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}</style>
+.card,.soft-panel,.feature-card,.codebox{max-width:100%;overflow-wrap:anywhere}.codebox code{white-space:pre-wrap;word-break:break-word}@media(max-width:480px){main{padding-left:10px!important;padding-right:10px!important}.card{min-width:0}.badge{font-size:7px}}
+</style>
 </head>
 <body x-data="neonDocs()">
 <header class="header-panel sticky top-0 z-50 px-3 md:px-6 py-3">
@@ -146,39 +147,45 @@ let webData=[];let shellData=[];let activeTab='web';let currentFilter='all';let 
 const adLinks=["https://omg10.com/4/10055984","https://sorrowfulpsychology.com/HE9TFh","https://dulyhagglermounting.com/2082665","https://jb.xylenolshivahs.com/iLMNRjfsHJiW4/94691"];
 function neonDocs(){return{moduleCommands:['neon refresh','neon modules','neon search fps','neon info shell-047','neon get shell-047','neon exec shell-047','neon agresif shell-047','neon del shell-047'],shellBridgeCommands:['neon shell "id"','neon shell "pm list packages | head"','neon busybox "ls -la /sdcard"','neon toybox "ps -A | head"','neon pm "list packages"','neon am "force-stop com.package.name"','neon cmd "package list packages"','neon dumpsys "battery"','neon settings "get system screen_brightness"','neon input "keyevent 3"'],deviceCommands:['neon device','neon battery','neon storage','neon memory','neon cpu','neon thermal','neon props','neon uptime','neon services','neon net','neon dns','neon iproute','neon ping 8.8.8.8'],appCommands:['neon apps','neon userapps','neon sysapps','neon appinfo com.package.name','neon app-start com.package.name','neon app-stop com.package.name','neon backupapk com.package.name','neon appops com.package.name'],mediaCommands:['neon screenshot','neon record 10','neon tap 500 1200','neon swipe 500 1500 500 500 300','neon text halo','neon key 3','neon wm-size','neon wm-density','neon wm-reset','neon anim-off','neon anim-normal','neon brightness 120'],logCommands:['neon report','neon logerr','neon logsave','neon bugmini','neon open-folder','neon features','neon tools','neon termuxapi'],webCommands:['neon test','neon doctor','neon install','neon web','neon web-status','neon panel','neon web-stop'],copy(text){navigator.clipboard.writeText(text).then(()=>{Swal.fire({toast:true,position:'top-end',timer:1300,showConfirmButton:false,icon:'success',title:'Command disalin'})})}}}
 function pickAd(){return adLinks[Math.floor(Math.random()*adLinks.length)]}
-function cardTemplate(item,isShell=false){const type=item.type||item.category||'Tools';const hasAds=item.ads===true||String(item.tier||'').toLowerCase()==='premium';const file=item.file||item.downloadUrl||'';return `<div class="card p-3 md:p-4 flex flex-col min-h-[230px]"><div class="flex items-start gap-3 mb-3"><div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-2xl bg-black/50 border border-[#ff003c]/25 flex items-center justify-center text-[#ff003c]"><i class="${item.icon||'fas fa-terminal'}"></i></div><div class="min-w-0"><h3 class="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate">${item.title}</h3><div class="flex flex-wrap gap-1 mt-1"><span class="badge badge-yellow">${type}</span>${isShell?'<span class="badge badge-green">Non Root</span><span class="badge badge-blue">Root</span>':''}${hasAds?'<span class="badge badge-red">Iklan</span>':''}</div></div></div><p class="text-[9px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mb-3">${item.description||''}</p><div class="mt-auto pt-3 border-t border-white/10"><div class="flex justify-between gap-2 mb-3 text-[8px] md:text-[9px] font-mono text-gray-500"><span class="truncate"><i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer||'Agung Developer'}</span><span class="text-[#ff003c]">${item.size||'ZIP'}</span></div><button class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura" onclick="${isShell?`downloadShell('${file}','${hasAds?'1':'0'}')`:`startWebImport('${item.downloadUrl}','${item.id}')`}"><i class="fas ${isShell?'fa-download':'fa-bolt'} mr-1"></i> ${isShell?'Download':'Deploy'}</button></div></div>`}
-function renderWeb(data){const grid=document.getElementById('webGrid'),empty=document.getElementById('webEmpty');grid.innerHTML='';if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}empty.classList.add('hidden');grid.classList.remove('hidden');data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,false)))}
-function renderShell(data){const grid=document.getElementById('shellGrid'),empty=document.getElementById('shellEmpty');grid.innerHTML='';if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}empty.classList.add('hidden');grid.classList.remove('hidden');data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,true)))}
-function filterWeb(){let data=webData;if(currentFilter!=='all')data=data.filter(item=>(item.type||'Tools')===currentFilter);if(searchQuery){const q=searchQuery.toLowerCase();data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||(item.type||'').toLowerCase().includes(q))}renderWeb(data)}
-function filterShell(){let data=shellData;if(searchQuery){const q=searchQuery.toLowerCase();data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||(item.id||'').toLowerCase().includes(q))}renderShell(data)}
-function switchTab(tab){activeTab=tab;document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.tab===tab));document.getElementById('webSection').classList.toggle('hidden',tab!=='web');document.getElementById('shellSection').classList.toggle('hidden',tab!=='shell');document.getElementById('termuxSection').classList.toggle('hidden',tab!=='termux');document.getElementById('webFilters').classList.toggle('hidden',tab!=='web');const s=document.getElementById('searchInput');if(s){s.value='';s.placeholder=tab==='shell'?'Cari shell module...':'Cari module...'}searchQuery='';tab==='web'?filterWeb():tab==='shell'?filterShell():null}
+function escapeHtml(value){return String(value??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))}
+function attr(value){return escapeHtml(value)}
 function normalizeShellFile(file){
   let f=String(file||'').trim();
   if(!f)return '';
   try{f=decodeURIComponent(f)}catch(e){}
   f=f.replace(/\\+/g,'/').replace(/^\/+/, '');
-  if(/^https?:\/\//i.test(f))return '';
-  if(f.includes('..')||f.includes('//'))return '';
-  if(!/^shell\//i.test(f))return '';
-  if(!/\.zip$/i.test(f))return '';
+  if(/^https?:\/\//i.test(f)||f.includes('..')||f.includes('//')||!/^shell\//i.test(f)||!/\.zip$/i.test(f))return '';
   return f;
 }
-function downloadShell(file,ads){
-  const safeFile=normalizeShellFile(file);
+function shellDownloadHref(file){const safe=normalizeShellFile(file);return safe?'download.html?file='+encodeURIComponent(safe)+'&session='+Date.now().toString(36):'#'}
+function cardTemplate(item,isShell=false){
+  const type=item.type||item.category||'Tools';
+  const hasAds=item.ads===true||String(item.tier||'').toLowerCase()==='premium';
+  const file=item.file||item.downloadUrl||'';
+  const icon=item.icon||'fas fa-terminal';
+  const title=escapeHtml(item.title||'Untitled Module');
+  const desc=escapeHtml(item.description||'');
+  const dev=escapeHtml(item.developer||'Agung Developer');
+  const size=escapeHtml(item.size||'ZIP');
+  const typeText=escapeHtml(type);
+  const badges=`<span class="badge badge-yellow">${typeText}</span>${isShell?'<span class="badge badge-green">Non Root</span><span class="badge badge-blue">Root</span>':''}${hasAds?'<span class="badge badge-red">Directlink</span>':''}`;
+  const action=isShell
+    ? `<a class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura text-center inline-flex items-center justify-center" href="${attr(shellDownloadHref(file))}" target="_blank" rel="noopener" onclick="return downloadShell(event,this,'${attr(file)}')"><i class="fas fa-download mr-1"></i> Download</a>`
+    : `<button class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura" onclick="startWebImport('${attr(item.downloadUrl||'')}','${attr(item.id||'')}')"><i class="fas fa-bolt mr-1"></i> Deploy</button>`;
+  return `<div class="card p-3 md:p-4 flex flex-col min-h-[230px] overflow-hidden"><div class="flex items-start gap-3 mb-3 min-w-0"><div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-2xl bg-black/50 border border-[#ff003c]/25 flex items-center justify-center text-[#ff003c]"><i class="${attr(icon)}"></i></div><div class="min-w-0 flex-1"><h3 class="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate">${title}</h3><div class="flex flex-wrap gap-1 mt-1">${badges}</div></div></div><p class="text-[9px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mb-3">${desc}</p><div class="mt-auto pt-3 border-t border-white/10 min-w-0"><div class="flex justify-between gap-2 mb-3 text-[8px] md:text-[9px] font-mono text-gray-500 min-w-0"><span class="truncate min-w-0"><i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${dev}</span><span class="text-[#ff003c] shrink-0">${size}</span></div>${action}</div></div>`
+}
+function downloadShell(event,link,file){
+  const safeFile=normalizeShellFile(file || link?.getAttribute('href') || '');
   if(!safeFile){
+    event?.preventDefault?.();
     Swal.fire({icon:'error',title:'Download gagal',text:'Path module tidak valid.'});
-    return;
+    return false;
   }
-  const session=Date.now().toString(36);
-  const downloadUrl='download.html?file='+encodeURIComponent(safeFile)+'&session='+session;
+  const href='download.html?file='+encodeURIComponent(safeFile)+'&session='+Date.now().toString(36);
+  if(link) link.href=href;
   const direct=pickAd();
-  const win=window.open(downloadUrl,'_blank','noopener,noreferrer');
-  if(!win){
-    Swal.fire({icon:'warning',title:'Tab baru diblokir',text:'Browser memblokir tab baru. Halaman download akan dibuka di tab ini.'});
-    setTimeout(()=>{ window.location.href=downloadUrl; },250);
-    return;
-  }
-  setTimeout(()=>{ window.location.href=direct; },2000);
+  setTimeout(()=>{ window.location.replace(direct); },2000);
+  return true;
 }
 function startWebImport(fileUrl,moduleName){const absoluteUrl=new URL(fileUrl,window.location.href).href;const selectedAd=pickAd();const intentUrl=`intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(selectedAd)};end;`;window.open(intentUrl,'_blank');setTimeout(()=>{location.href=selectedAd},2000)}
 document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentFilter=btn.dataset.type;filterWeb()}));document.getElementById('searchInput').addEventListener('input',e=>{searchQuery=e.target.value;activeTab==='web'?filterWeb():filterShell()});
