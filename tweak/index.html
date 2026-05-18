@@ -56,70 +56,67 @@
     <div id="shellGrid" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5 hidden"></div>
   </section>
   <section id="termuxSection" class="hidden">
-    <div class="soft-panel p-5 md:p-7 mb-6 overflow-hidden relative">
-      <div class="absolute -right-20 -top-20 w-60 h-60 rounded-full bg-[#ff003c]/10 blur-3xl"></div>
+    <div class="soft-panel p-5 md:p-8 mb-6 overflow-hidden relative">
+      <div class="absolute -right-24 -top-24 w-72 h-72 rounded-full bg-[#ff003c]/10 blur-3xl"></div>
       <div class="relative grid lg:grid-cols-[1.08fr_.92fr] gap-6 items-center">
         <div>
-          <span class="badge badge-red mb-3"><i class="fas fa-link"></i> Web GUI → Termux → Neon Core ADB</span>
-          <h2 class="text-2xl md:text-4xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red rog-neon">Termux Control V5</h2>
-          <p class="text-sm md:text-base text-gray-300 mt-3 leading-relaxed">Dokumentasi ini mengikuti web GUI baru di <b>neon-engine.sh</b>. Alurnya bukan pajangan: browser membuka panel lokal, tombol memanggil CGI di Termux, CGI menjalankan command <b>neon</b>, lalu command diteruskan ke daemon Neon Core ADB pada port lokal.</p>
-          <div class="flex flex-wrap gap-2 mt-4"><span class="badge badge-green">CGI API</span><span class="badge badge-blue">127.0.0.1:8787</span><span class="badge badge-yellow">ADB Bridge</span><span class="badge badge-red">Functional Button</span></div>
+          <span class="badge badge-red mb-3"><i class="fas fa-shield-halved"></i> Enterprise Termux Control</span>
+          <h2 class="text-2xl md:text-4xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red rog-neon">Termux Control Deployment</h2>
+          <p class="text-sm md:text-base text-gray-300 mt-3 leading-relaxed">Termux Control adalah jalur resmi untuk memasang dan menjalankan Neon Core Engine dari Android. Paket wajib diambil sebagai <b>neon-engine.zip</b>, karena installer tidak hanya membutuhkan <b>neon-engine.sh</b>, tetapi juga <b>webgui.html</b> sebagai panel lokal. Jadi bukan curl langsung ke file <b>.sh</b>, karena itu membuat instalasi tidak lengkap. Sungguh mengejutkan, file pendamping ternyata perlu ikut dibawa.</p>
+          <div class="flex flex-wrap gap-2 mt-4"><span class="badge badge-green">ZIP Bundle</span><span class="badge badge-blue">BusyBox HTTPD</span><span class="badge badge-yellow">CGI Bridge</span><span class="badge badge-red">ADB Daemon</span></div>
         </div>
         <div class="feature-card">
-          <p class="text-[10px] text-gray-500 uppercase tracking-[.25em] font-mono mb-3">Command inti</p>
-          <div class="space-y-3">
-            <div class="codebox"><button class="copy-btn" @click="copy('neon doctor')"><i class="fas fa-copy"></i></button><code>neon doctor</code></div>
-            <div class="codebox"><button class="copy-btn" @click="copy('neon install')"><i class="fas fa-copy"></i></button><code>neon install</code></div>
-            <div class="codebox"><button class="copy-btn" @click="copy('neon web')"><i class="fas fa-copy"></i></button><code>neon web</code></div>
-            <div class="codebox"><button class="copy-btn" @click="copy('http://127.0.0.1:8787')"><i class="fas fa-copy"></i></button><code>http://127.0.0.1:8787</code></div>
-          </div>
-          <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Kalau <b>neon doctor</b> gagal di bagian daemon, aktifkan dulu daemon Neon Core ADB. Web GUI tidak bisa menyihir daemon yang belum hidup, meski manusia sering berharap begitu.</p>
+          <p class="text-[10px] text-gray-500 uppercase tracking-[.25em] font-mono mb-3">Quick Start</p>
+          <div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl unzip -y && termux-setup-storage && curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip && unzip -o neon-engine.zip && chmod +x neon-engine.sh && sh neon-engine.sh && neon doctor && neon install && neon web')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl unzip -y &amp;&amp; termux-setup-storage &amp;&amp; curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip &amp;&amp; unzip -o neon-engine.zip &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh &amp;&amp; neon doctor &amp;&amp; neon install &amp;&amp; neon web</code></div>
+          <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Gunakan command satu baris ini untuk deployment cepat. Jika izin storage muncul, izinkan dulu lalu ulangi command dari bagian download ZIP jika proses terhenti.</p>
         </div>
       </div>
     </div>
 
     <div class="grid md:grid-cols-4 gap-4 mb-6">
-      <div class="feature-card"><div class="step-dot mb-3">1</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Termux</h3><p class="text-xs text-gray-400 mt-2">Siapkan storage, curl, dan file installer <b>neon-engine.sh</b>.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">2</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Aktifkan Daemon</h3><p class="text-xs text-gray-400 mt-2">Neon Core ADB harus aktif agar Termux bisa mengirim command.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">3</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Engine</h3><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon install</b> untuk memasang helper shell di sisi daemon.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">4</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Buka GUI</h3><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon web</b>, lalu klik fitur dari browser lokal.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">1</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Prepare</h3><p class="text-xs text-gray-400 mt-2">Update package Termux, install <b>curl</b> dan <b>unzip</b>, lalu aktifkan akses storage.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">2</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Download ZIP</h3><p class="text-xs text-gray-400 mt-2">Ambil <b>neon-engine.zip</b> dari domain resmi agar script dan web GUI ikut lengkap.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">3</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Engine</h3><p class="text-xs text-gray-400 mt-2">Extract ZIP, jalankan installer, lalu gunakan <b>neon doctor</b> untuk validasi.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">4</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Run Control</h3><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon install</b> dan <b>neon web</b>, lalu buka panel lokal.</p></div>
     </div>
 
     <div class="soft-panel p-5 md:p-6 mb-6">
-      <h3 class="text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red mb-4">Setup dari Nol</h3>
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
+        <div><h3 class="text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red">Standard Installation Procedure</h3><p class="text-xs text-gray-400 mt-1 font-mono">Gunakan prosedur ini untuk instalasi baru, reinstall, atau repair deployment.</p></div>
+        <span class="badge badge-green">Recommended Flow</span>
+      </div>
       <div class="space-y-4">
-        <div><p class="text-xs text-gray-400 mb-2">1. Siapkan Termux dan izin storage</p><div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl -y &amp;&amp; termux-setup-storage</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">2. Ambil installer terbaru</p><div class="codebox"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh && chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">3. Cek jembatan Termux ke daemon</p><div class="codebox"><button class="copy-btn" @click="copy('neon doctor')"><i class="fas fa-copy"></i></button><code>neon doctor</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">4. Pasang atau repair engine shell di daemon</p><div class="codebox"><button class="copy-btn" @click="copy('neon install')"><i class="fas fa-copy"></i></button><code>neon install</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">5. Jalankan web GUI lokal</p><div class="codebox"><button class="copy-btn" @click="copy('neon web')"><i class="fas fa-copy"></i></button><code>neon web</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">1. Update Termux, pasang dependency, dan aktifkan storage</p><div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl unzip -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl unzip -y &amp;&amp; termux-setup-storage</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">2. Download paket resmi Neon Engine dalam format ZIP</p><div class="codebox"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">3. Extract paket agar <b>neon-engine.sh</b> dan <b>webgui.html</b> tersedia dalam folder yang sama</p><div class="codebox"><button class="copy-btn" @click="copy('unzip -o neon-engine.zip')"><i class="fas fa-copy"></i></button><code>unzip -o neon-engine.zip</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">4. Beri izin eksekusi dan jalankan installer</p><div class="codebox"><button class="copy-btn" @click="copy('chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">5. Validasi bridge, install engine shell ke daemon, lalu buka web control</p><div class="codebox"><button class="copy-btn" @click="copy('neon doctor && neon install && neon web')"><i class="fas fa-copy"></i></button><code>neon doctor &amp;&amp; neon install &amp;&amp; neon web</code></div></div>
       </div>
     </div>
 
     <div class="grid lg:grid-cols-[1fr_1fr] gap-5 mb-6">
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-2">Bagaimana Web GUI Bekerja</h3>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Deployment Architecture</h3>
         <div class="space-y-3 text-xs text-gray-400 leading-relaxed">
-          <div class="feature-card"><i class="fas fa-window-maximize text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Browser Lokal</h4><p class="mt-2">User membuka <b>http://127.0.0.1:8787</b>. Tombol di GUI mengirim request ke <b>/cgi-bin/api</b>.</p></div>
-          <div class="feature-card"><i class="fas fa-terminal text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Termux CGI</h4><p class="mt-2">CGI membaca action seperti <b>status</b>, <b>install</b>, <b>screenshot</b>, lalu memanggil command <b>neon</b>.</p></div>
-          <div class="feature-card"><i class="fas fa-plug text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Daemon Neon Core ADB</h4><p class="mt-2">Command dikirim melalui bridge lokal ke daemon. Output dari daemon dikembalikan lagi ke console web GUI.</p></div>
+          <div class="feature-card"><i class="fas fa-file-zipper text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">ZIP Bundle</h4><p class="mt-2"><b>neon-engine.zip</b> membawa installer dan Web GUI dalam satu paket. Ini mencegah error <b>webgui.html tidak ditemukan</b> saat script dijalankan.</p></div>
+          <div class="feature-card"><i class="fas fa-terminal text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Termux CLI</h4><p class="mt-2">Installer membuat command <b>neon</b> di Termux untuk menjalankan doctor, install, module, device tools, report, dan web server lokal.</p></div>
+          <div class="feature-card"><i class="fas fa-server text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Local Web Control</h4><p class="mt-2"><b>neon web</b> menjalankan BusyBox HTTPD di <b>127.0.0.1:8787</b>. Tombol GUI mengirim action ke endpoint CGI lokal.</p></div>
+          <div class="feature-card"><i class="fas fa-plug text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Neon Core ADB Daemon</h4><p class="mt-2">Command dari Termux diteruskan ke daemon lokal melalui bridge. Output command ditampilkan kembali di CLI atau Web GUI.</p></div>
         </div>
       </div>
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Menu Web GUI Baru</h3>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Operational Checklist</h3>
         <div class="grid sm:grid-cols-2 gap-3">
-          <div class="feature-card"><i class="fas fa-gauge-high text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Dashboard</h4><p class="text-xs text-gray-400 mt-2">Status, install, doctor, report, tools, dan folder output.</p></div>
-          <div class="feature-card"><i class="fas fa-box-open text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Module</h4><p class="text-xs text-gray-400 mt-2">Refresh catalog, cari, info, download, execute, agresif, dan reset.</p></div>
-          <div class="feature-card"><i class="fas fa-mobile-screen text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Device</h4><p class="text-xs text-gray-400 mt-2">Device info, baterai, storage, thermal, CPU, memori, props, top, process.</p></div>
-          <div class="feature-card"><i class="fas fa-layer-group text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Apps</h4><p class="text-xs text-gray-400 mt-2">List app, info package, start, force stop, appops, dan backup APK.</p></div>
-          <div class="feature-card"><i class="fas fa-camera text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Media Input</h4><p class="text-xs text-gray-400 mt-2">Screenshot, screenrecord, tap, swipe, input teks, dan keyevent.</p></div>
-          <div class="feature-card"><i class="fas fa-network-wired text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Network Logs</h4><p class="text-xs text-gray-400 mt-2">Network, DNS, service list, error log, save logcat, dan full report.</p></div>
+          <div class="feature-card"><i class="fas fa-circle-check text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Package Valid</h4><p class="text-xs text-gray-400 mt-2">Pastikan ZIP berhasil diextract dan file <b>neon-engine.sh</b> serta <b>webgui.html</b> ada.</p></div>
+          <div class="feature-card"><i class="fas fa-shield text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Storage Ready</h4><p class="text-xs text-gray-400 mt-2">Termux harus punya izin storage agar output masuk ke <b>/sdcard/Download/NeonEngine</b>.</p></div>
+          <div class="feature-card"><i class="fas fa-stethoscope text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Doctor Passed</h4><p class="text-xs text-gray-400 mt-2"><b>neon doctor</b> dipakai untuk mengecek command, BusyBox, curl, unzip, dan status daemon.</p></div>
+          <div class="feature-card"><i class="fas fa-window-maximize text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Web Online</h4><p class="text-xs text-gray-400 mt-2">Panel berjalan di <b>http://127.0.0.1:8787</b> setelah command <b>neon web</b> berhasil.</p></div>
         </div>
       </div>
     </div>
 
     <div class="soft-panel p-5 md:p-6 mb-6">
-      <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Command Lengkap yang Didukung</h3>
+      <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Command Reference</h3>
       <div class="grid md:grid-cols-3 gap-3">
         <template x-for="cmd in webCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
         <template x-for="cmd in moduleCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
@@ -129,31 +126,29 @@
 
     <div class="grid lg:grid-cols-[.9fr_1.1fr] gap-5 mb-6">
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Teknologi yang Digabungkan</h3>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Supported Components</h3>
         <div class="grid sm:grid-cols-2 gap-3">
-          <div class="feature-card"><i class="fas fa-server text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">BusyBox HTTPD</h4><p class="text-xs text-gray-400 mt-2">Server lokal ringan untuk menjalankan web GUI.</p></div>
-          <div class="feature-card"><i class="fas fa-code text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">CGI Shell API</h4><p class="text-xs text-gray-400 mt-2">Endpoint lokal yang menghubungkan tombol GUI ke command Termux.</p></div>
-          <div class="feature-card"><i class="fas fa-toolbox text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Toybox Android</h4><p class="text-xs text-gray-400 mt-2">Fallback utilitas bawaan Android untuk command tertentu.</p></div>
-          <div class="feature-card"><i class="fas fa-mobile text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Termux API Optional</h4><p class="text-xs text-gray-400 mt-2">Dipakai jika tersedia untuk akses fitur Android tambahan dari Termux.</p></div>
-          <div class="feature-card"><i class="fas fa-gears text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Android Shell</h4><p class="text-xs text-gray-400 mt-2">cmd, dumpsys, pm, settings, wm, input, logcat, screencap, screenrecord.</p></div>
-          <div class="feature-card"><i class="fas fa-download text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Curl Wget Unzip</h4><p class="text-xs text-gray-400 mt-2">Download catalog/module dan extract ZIP module.</p></div>
+          <div class="feature-card"><i class="fas fa-server text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">BusyBox HTTPD</h4><p class="text-xs text-gray-400 mt-2">Server lokal ringan untuk menjalankan panel tanpa Python.</p></div>
+          <div class="feature-card"><i class="fas fa-code text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">CGI Shell API</h4><p class="text-xs text-gray-400 mt-2">Endpoint lokal yang menghubungkan tombol GUI ke command <b>neon</b>.</p></div>
+          <div class="feature-card"><i class="fas fa-gears text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Android Shell</h4><p class="text-xs text-gray-400 mt-2">Mendukung cmd, dumpsys, pm, settings, wm, input, logcat, screencap, dan screenrecord.</p></div>
+          <div class="feature-card"><i class="fas fa-mobile text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Termux API Optional</h4><p class="text-xs text-gray-400 mt-2">Dipakai jika tersedia untuk baterai, WiFi, clipboard, notifikasi, dan integrasi Android tambahan.</p></div>
         </div>
       </div>
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Troubleshooting Cepat</h3>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Troubleshooting</h3>
         <div class="space-y-3">
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Web GUI terbuka tapi tombol gagal</h4><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon doctor</b>. Jika API lokal hidup tapi daemon gagal, aktifkan daemon Neon Core ADB dulu.</p></div>
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">httpd tidak tersedia</h4><p class="text-xs text-gray-400 mt-2">Jalankan ulang installer agar BusyBox static yang punya <b>httpd</b> dan <b>nc</b> dipasang.</p></div>
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Module gagal extract</h4><p class="text-xs text-gray-400 mt-2">Cek koneksi internet, lalu jalankan <b>neon refresh</b> dan <b>neon get id</b> ulang.</p></div>
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Hasil file tidak ketemu</h4><p class="text-xs text-gray-400 mt-2">Cek folder <b>/sdcard/Download/NeonEngine</b>. Semua output media, log, report, dan APK diarahkan ke sana.</p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Error: webgui.html tidak ditemukan</h4><p class="text-xs text-gray-400 mt-2">Jangan curl langsung ke <b>neon-engine.sh</b>. Download <b>neon-engine.zip</b>, extract, lalu jalankan script dari folder hasil extract.</p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Web GUI terbuka tapi tombol gagal</h4><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon doctor</b>. Jika daemon belum aktif, aktifkan Neon Core ADB lalu jalankan <b>neon install</b>.</p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">httpd tidak tersedia</h4><p class="text-xs text-gray-400 mt-2">Jalankan ulang installer dari ZIP agar BusyBox pendukung dengan applet <b>httpd</b> dan <b>nc</b> dipasang ulang.</p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Output tidak ditemukan</h4><p class="text-xs text-gray-400 mt-2">Cek folder <b>/sdcard/Download/NeonEngine</b>. Media, log, report, module, dan backup APK diarahkan ke sana.</p></div>
         </div>
       </div>
     </div>
 
     <div class="grid md:grid-cols-3 gap-4">
-      <div class="feature-card"><i class="fas fa-circle-check text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Evaluasi Built-in</h4><p class="text-xs text-gray-400 mt-2"><b>neon doctor</b> mengecek Termux, BusyBox, daemon, engine shell, dan web server.</p></div>
-      <div class="feature-card"><i class="fas fa-terminal text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">CLI Tetap Ada</h4><p class="text-xs text-gray-400 mt-2">Semua fitur web GUI tetap bisa dipanggil dari command <b>neon</b>.</p></div>
-      <div class="feature-card"><i class="fas fa-shield-halved text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Functional Asli Aman</h4><p class="text-xs text-gray-400 mt-2">Alur module, install engine, daemon bridge, dan folder output tetap dipertahankan.</p></div>
+      <div class="feature-card"><i class="fas fa-file-circle-check text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">ZIP First Policy</h4><p class="text-xs text-gray-400 mt-2">Dokumentasi sekarang konsisten: download ZIP, extract, chmod, install, doctor, install daemon, web.</p></div>
+      <div class="feature-card"><i class="fas fa-terminal text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">CLI + GUI</h4><p class="text-xs text-gray-400 mt-2">Semua fitur tetap bisa dijalankan melalui command <b>neon</b> maupun panel browser lokal.</p></div>
+      <div class="feature-card"><i class="fas fa-lock text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Local Control</h4><p class="text-xs text-gray-400 mt-2">Panel berjalan di loopback lokal, bukan server publik. Browser cuma jadi control surface.</p></div>
     </div>
   </section>
 </main>
