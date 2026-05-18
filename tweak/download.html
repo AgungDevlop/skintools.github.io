@@ -31,19 +31,44 @@ const raw=params.get("file")||"";
 const fileName=document.getElementById("fileName");
 const err=document.getElementById("err");
 const btn=document.getElementById("btn");
-function valid(f){return f&&!f.includes("..")&&!f.includes("/")&&!f.includes("\\")&&/\.zip$/i.test(f)}
-if(!valid(raw)){
-err.style.display="block";
-err.textContent="File tidak valid.";
-fileName.style.display="none";
-btn.style.display="none";
+
+function normalizeModulePath(value){
+  let file=String(value||"").trim().replace(/\\/g,"/");
+  try{file=decodeURIComponent(file)}catch(e){}
+  file=file.replace(/^\/+/, "");
+  if(!file)return "";
+  if(file.includes("..")||file.startsWith("//")||/^https?:/i.test(file))return "";
+  if(!/\.zip$/i.test(file))return "";
+  if(!file.startsWith("shell/"))file="shell/"+file.split("/").pop();
+  return file;
+}
+
+function encodePath(path){
+  return path.split("/").map(part=>encodeURIComponent(part)).join("/");
+}
+
+const safePath=normalizeModulePath(raw);
+if(!safePath){
+  err.style.display="block";
+  err.textContent="File module tidak valid atau path download kosong.";
+  fileName.style.display="none";
+  btn.style.display="none";
 }else{
-const f=raw.trim();
-const u="shell/"+encodeURIComponent(f).replace(/%20/g," ");
-fileName.textContent=f;
-btn.href=u;
-btn.download=f;
-setTimeout(()=>{const a=document.createElement("a");a.href=u;a.download=f;document.body.appendChild(a);a.click();a.remove()},650);
+  const displayName=safePath.split("/").pop();
+  const url=encodePath(safePath);
+  fileName.textContent=displayName;
+  btn.href=url;
+  btn.setAttribute("download",displayName);
+  btn.setAttribute("rel","noopener");
+  setTimeout(()=>{
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=displayName;
+    a.rel="noopener";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  },650);
 }
 </script>
 </body>
