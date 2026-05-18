@@ -58,102 +58,84 @@
   <section id="termuxSection" class="hidden">
     <div class="soft-panel p-5 md:p-7 mb-6 overflow-hidden relative">
       <div class="absolute -right-20 -top-20 w-60 h-60 rounded-full bg-[#ff003c]/10 blur-3xl"></div>
-      <div class="relative grid lg:grid-cols-[1.08fr_.92fr] gap-6 items-center">
+      <div class="relative grid lg:grid-cols-[1.08fr_.92fr] gap-6 items-start">
         <div>
-          <span class="badge badge-red mb-3"><i class="fas fa-link"></i> Web GUI → Termux → Neon Core ADB</span>
-          <h2 class="text-2xl md:text-4xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red rog-neon">Termux Control V5</h2>
-          <p class="text-sm md:text-base text-gray-300 mt-3 leading-relaxed">Dokumentasi ini mengikuti web GUI baru di <b>neon-engine.sh</b>. Alurnya bukan pajangan: browser membuka panel lokal, tombol memanggil CGI di Termux, CGI menjalankan command <b>neon</b>, lalu command diteruskan ke daemon Neon Core ADB pada port lokal.</p>
-          <div class="flex flex-wrap gap-2 mt-4"><span class="badge badge-green">CGI API</span><span class="badge badge-blue">127.0.0.1:8787</span><span class="badge badge-yellow">ADB Bridge</span><span class="badge badge-red">Functional Button</span></div>
+          <span class="badge badge-red mb-3"><i class="fas fa-code"></i> Termux Control + Developer API</span>
+          <h2 class="text-2xl md:text-4xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red rog-neon">Neon Engine Developer Bridge</h2>
+          <p class="text-sm md:text-base text-gray-300 mt-3 leading-relaxed">Neon Engine menyediakan WebGUI lokal dan command <b>neon</b> di Termux agar user, developer aplikasi, atau developer web lokal bisa menjalankan device info, package tools, media tools, log tools, dan shell command melalui API lokal.</p>
+          <div class="grid sm:grid-cols-2 gap-3 mt-5">
+            <div class="feature-card"><p class="text-[9px] text-gray-500 uppercase tracking-[.2em]">Input</p><p class="text-sm font-bold text-white mt-1">WebGUI / Client App → API Request → Termux → Daemon</p></div>
+            <div class="feature-card"><p class="text-[9px] text-gray-500 uppercase tracking-[.2em]">Output</p><p class="text-sm font-bold text-white mt-1">Daemon Process → Termux → API Response → WebGUI / Client App</p></div>
+          </div>
         </div>
         <div class="feature-card">
-          <p class="text-[10px] text-gray-500 uppercase tracking-[.25em] font-mono mb-3">Command inti</p>
-          <div class="space-y-3">
-            <div class="codebox"><button class="copy-btn" @click="copy('neon doctor')"><i class="fas fa-copy"></i></button><code>neon doctor</code></div>
-            <div class="codebox"><button class="copy-btn" @click="copy('neon install')"><i class="fas fa-copy"></i></button><code>neon install</code></div>
-            <div class="codebox"><button class="copy-btn" @click="copy('neon web')"><i class="fas fa-copy"></i></button><code>neon web</code></div>
-            <div class="codebox"><button class="copy-btn" @click="copy('http://127.0.0.1:8787')"><i class="fas fa-copy"></i></button><code>http://127.0.0.1:8787</code></div>
-          </div>
-          <p class="text-[11px] text-gray-500 mt-3 leading-relaxed">Kalau <b>neon doctor</b> gagal di bagian daemon, aktifkan dulu daemon Neon Core ADB. Web GUI tidak bisa menyihir daemon yang belum hidup, meski manusia sering berharap begitu.</p>
+          <p class="text-[10px] text-gray-500 uppercase tracking-[.25em] font-mono mb-3">Quick install</p>
+          <div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl unzip -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl unzip -y &amp;&amp; termux-setup-storage</code></div>
+          <div class="codebox mt-3"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip && unzip -o neon-engine.zip && chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip &amp;&amp; unzip -o neon-engine.zip &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div>
+          <div class="codebox mt-3"><button class="copy-btn" @click="copy('neon doctor && neon install && neon web')"><i class="fas fa-copy"></i></button><code>neon doctor &amp;&amp; neon install &amp;&amp; neon web</code></div>
         </div>
       </div>
     </div>
 
     <div class="grid md:grid-cols-4 gap-4 mb-6">
-      <div class="feature-card"><div class="step-dot mb-3">1</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Termux</h3><p class="text-xs text-gray-400 mt-2">Siapkan storage, curl, dan file installer <b>neon-engine.sh</b>.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">2</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Aktifkan Daemon</h3><p class="text-xs text-gray-400 mt-2">Neon Core ADB harus aktif agar Termux bisa mengirim command.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">3</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install Engine</h3><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon install</b> untuk memasang helper shell di sisi daemon.</p></div>
-      <div class="feature-card"><div class="step-dot mb-3">4</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Buka GUI</h3><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon web</b>, lalu klik fitur dari browser lokal.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">1</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Install ZIP</h3><p class="text-xs text-gray-400 mt-2">Download <b>neon-engine.zip</b>, extract, lalu jalankan installer dari folder hasil extract.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">2</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Validate</h3><p class="text-xs text-gray-400 mt-2">Gunakan <b>neon doctor</b> untuk mengecek Termux, tool, WebGUI, dan daemon.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">3</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Operate</h3><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon web</b>, buka <b>127.0.0.1:8787</b>, lalu pakai WebGUI.</p></div>
+      <div class="feature-card"><div class="step-dot mb-3">4</div><h3 class="font-rajdhani text-xl font-bold uppercase text-white">Integrate</h3><p class="text-xs text-gray-400 mt-2">Client app bisa request ke <b>/cgi-bin/api</b> untuk device info, shell, apps, media, dan logs.</p></div>
     </div>
 
     <div class="soft-panel p-5 md:p-6 mb-6">
-      <h3 class="text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red mb-4">Setup dari Nol</h3>
+      <h3 class="text-xl md:text-2xl font-rajdhani font-bold uppercase tracking-[.12em] rog-red mb-4">User Installation Guide</h3>
       <div class="space-y-4">
-        <div><p class="text-xs text-gray-400 mb-2">1. Siapkan Termux dan izin storage</p><div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl -y &amp;&amp; termux-setup-storage</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">2. Ambil installer terbaru</p><div class="codebox"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh && chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.sh -o neon-engine.sh &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">3. Cek jembatan Termux ke daemon</p><div class="codebox"><button class="copy-btn" @click="copy('neon doctor')"><i class="fas fa-copy"></i></button><code>neon doctor</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">4. Pasang atau repair engine shell di daemon</p><div class="codebox"><button class="copy-btn" @click="copy('neon install')"><i class="fas fa-copy"></i></button><code>neon install</code></div></div>
-        <div><p class="text-xs text-gray-400 mb-2">5. Jalankan web GUI lokal</p><div class="codebox"><button class="copy-btn" @click="copy('neon web')"><i class="fas fa-copy"></i></button><code>neon web</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">1. Siapkan Termux</p><div class="codebox"><button class="copy-btn" @click="copy('pkg update -y && pkg install curl unzip -y && termux-setup-storage')"><i class="fas fa-copy"></i></button><code>pkg update -y &amp;&amp; pkg install curl unzip -y &amp;&amp; termux-setup-storage</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">2. Download paket ZIP resmi</p><div class="codebox"><button class="copy-btn" @click="copy('curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip')"><i class="fas fa-copy"></i></button><code>curl -L https://neonmagisk.my.id/neon-engine.zip -o neon-engine.zip</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">3. Extract dan jalankan installer</p><div class="codebox"><button class="copy-btn" @click="copy('unzip -o neon-engine.zip && chmod +x neon-engine.sh && sh neon-engine.sh')"><i class="fas fa-copy"></i></button><code>unzip -o neon-engine.zip &amp;&amp; chmod +x neon-engine.sh &amp;&amp; sh neon-engine.sh</code></div></div>
+        <div><p class="text-xs text-gray-400 mb-2">4. Validasi dan jalankan WebGUI</p><div class="codebox"><button class="copy-btn" @click="copy('neon doctor && neon install && neon web')"><i class="fas fa-copy"></i></button><code>neon doctor &amp;&amp; neon install &amp;&amp; neon web</code></div></div>
       </div>
     </div>
 
     <div class="grid lg:grid-cols-[1fr_1fr] gap-5 mb-6">
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-2">Bagaimana Web GUI Bekerja</h3>
-        <div class="space-y-3 text-xs text-gray-400 leading-relaxed">
-          <div class="feature-card"><i class="fas fa-window-maximize text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Browser Lokal</h4><p class="mt-2">User membuka <b>http://127.0.0.1:8787</b>. Tombol di GUI mengirim request ke <b>/cgi-bin/api</b>.</p></div>
-          <div class="feature-card"><i class="fas fa-terminal text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Termux CGI</h4><p class="mt-2">CGI membaca action seperti <b>status</b>, <b>install</b>, <b>screenshot</b>, lalu memanggil command <b>neon</b>.</p></div>
-          <div class="feature-card"><i class="fas fa-plug text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm text-white">Daemon Neon Core ADB</h4><p class="mt-2">Command dikirim melalui bridge lokal ke daemon. Output dari daemon dikembalikan lagi ke console web GUI.</p></div>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Developer API Standard</h3>
+        <div class="space-y-3">
+          <div class="codebox"><button class="copy-btn" @click="copy('curl http://127.0.0.1:8787/cgi-bin/api?act=deviceinfo')"><i class="fas fa-copy"></i></button><code>curl http://127.0.0.1:8787/cgi-bin/api?act=deviceinfo</code></div>
+          <div class="codebox"><button class="copy-btn" @click="copy('curl -X POST http://127.0.0.1:8787/cgi-bin/api -d act=shell --data-urlencode cmd=pm list packages')"><i class="fas fa-copy"></i></button><code>curl -X POST http://127.0.0.1:8787/cgi-bin/api -d act=shell --data-urlencode cmd="pm list packages"</code></div>
+          <div class="codebox"><button class="copy-btn" @click="copy('fetch(`http://127.0.0.1:8787/cgi-bin/api`, {method:`POST`, headers:{`Content-Type`:`application/x-www-form-urlencoded`}, body:new URLSearchParams({act:`shell`, cmd:`dumpsys battery`})})')"><i class="fas fa-copy"></i></button><code>fetch('http://127.0.0.1:8787/cgi-bin/api', {
+  method: 'POST',
+  headers: {'Content-Type':'application/x-www-form-urlencoded'},
+  body: new URLSearchParams({act:'shell', cmd:'dumpsys battery'})
+})</code></div>
         </div>
       </div>
       <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Menu Web GUI Baru</h3>
+        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Core API Actions</h3>
         <div class="grid sm:grid-cols-2 gap-3">
-          <div class="feature-card"><i class="fas fa-gauge-high text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Dashboard</h4><p class="text-xs text-gray-400 mt-2">Status, install, doctor, report, tools, dan folder output.</p></div>
-          <div class="feature-card"><i class="fas fa-box-open text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Module</h4><p class="text-xs text-gray-400 mt-2">Refresh catalog, cari, info, download, execute, agresif, dan reset.</p></div>
-          <div class="feature-card"><i class="fas fa-mobile-screen text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Device</h4><p class="text-xs text-gray-400 mt-2">Device info, baterai, storage, thermal, CPU, memori, props, top, process.</p></div>
-          <div class="feature-card"><i class="fas fa-layer-group text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Apps</h4><p class="text-xs text-gray-400 mt-2">List app, info package, start, force stop, appops, dan backup APK.</p></div>
-          <div class="feature-card"><i class="fas fa-camera text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Media Input</h4><p class="text-xs text-gray-400 mt-2">Screenshot, screenrecord, tap, swipe, input teks, dan keyevent.</p></div>
-          <div class="feature-card"><i class="fas fa-network-wired text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Network Logs</h4><p class="text-xs text-gray-400 mt-2">Network, DNS, service list, error log, save logcat, dan full report.</p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Health</h4><p class="text-xs text-gray-400 mt-2"><b>apihealth</b>, <b>doctor</b>, <b>features</b>, <b>tools</b></p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Shell Bridge</h4><p class="text-xs text-gray-400 mt-2"><b>shell</b>, <b>busybox</b>, <b>toybox</b>, <b>pm</b>, <b>am</b>, <b>cmd</b>, <b>dumpsys</b>, <b>settings</b>, <b>input</b></p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Device</h4><p class="text-xs text-gray-400 mt-2"><b>deviceinfo</b>, <b>battery</b>, <b>storage</b>, <b>memory</b>, <b>cpu</b>, <b>thermal</b>, <b>props</b></p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Apps</h4><p class="text-xs text-gray-400 mt-2"><b>apps</b>, <b>userapps</b>, <b>sysapps</b>, <b>appinfo</b>, <b>appstart</b>, <b>appstop</b>, <b>backupapk</b></p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Media</h4><p class="text-xs text-gray-400 mt-2"><b>screenshot</b>, <b>record</b>, <b>tap</b>, <b>swipe</b>, <b>text</b>, <b>key</b></p></div>
+          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Logs</h4><p class="text-xs text-gray-400 mt-2"><b>logerr</b>, <b>logsave</b>, <b>bugmini</b>, <b>report</b>, <b>openfolder</b></p></div>
         </div>
       </div>
     </div>
 
     <div class="soft-panel p-5 md:p-6 mb-6">
-      <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Command Lengkap yang Didukung</h3>
+      <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Neon Command Reference</h3>
       <div class="grid md:grid-cols-3 gap-3">
         <template x-for="cmd in webCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
-        <template x-for="cmd in moduleCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
+        <template x-for="cmd in shellBridgeCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
         <template x-for="cmd in deviceCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
-      </div>
-    </div>
-
-    <div class="grid lg:grid-cols-[.9fr_1.1fr] gap-5 mb-6">
-      <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Teknologi yang Digabungkan</h3>
-        <div class="grid sm:grid-cols-2 gap-3">
-          <div class="feature-card"><i class="fas fa-server text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">BusyBox HTTPD</h4><p class="text-xs text-gray-400 mt-2">Server lokal ringan untuk menjalankan web GUI.</p></div>
-          <div class="feature-card"><i class="fas fa-code text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">CGI Shell API</h4><p class="text-xs text-gray-400 mt-2">Endpoint lokal yang menghubungkan tombol GUI ke command Termux.</p></div>
-          <div class="feature-card"><i class="fas fa-toolbox text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Toybox Android</h4><p class="text-xs text-gray-400 mt-2">Fallback utilitas bawaan Android untuk command tertentu.</p></div>
-          <div class="feature-card"><i class="fas fa-mobile text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Termux API Optional</h4><p class="text-xs text-gray-400 mt-2">Dipakai jika tersedia untuk akses fitur Android tambahan dari Termux.</p></div>
-          <div class="feature-card"><i class="fas fa-gears text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Android Shell</h4><p class="text-xs text-gray-400 mt-2">cmd, dumpsys, pm, settings, wm, input, logcat, screencap, screenrecord.</p></div>
-          <div class="feature-card"><i class="fas fa-download text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Curl Wget Unzip</h4><p class="text-xs text-gray-400 mt-2">Download catalog/module dan extract ZIP module.</p></div>
-        </div>
-      </div>
-      <div class="soft-panel p-5 md:p-6">
-        <h3 class="text-xl font-rajdhani font-bold uppercase rog-red mb-4">Troubleshooting Cepat</h3>
-        <div class="space-y-3">
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Web GUI terbuka tapi tombol gagal</h4><p class="text-xs text-gray-400 mt-2">Jalankan <b>neon doctor</b>. Jika API lokal hidup tapi daemon gagal, aktifkan daemon Neon Core ADB dulu.</p></div>
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">httpd tidak tersedia</h4><p class="text-xs text-gray-400 mt-2">Jalankan ulang installer agar BusyBox static yang punya <b>httpd</b> dan <b>nc</b> dipasang.</p></div>
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Module gagal extract</h4><p class="text-xs text-gray-400 mt-2">Cek koneksi internet, lalu jalankan <b>neon refresh</b> dan <b>neon get id</b> ulang.</p></div>
-          <div class="feature-card"><h4 class="font-bold uppercase text-sm text-white">Hasil file tidak ketemu</h4><p class="text-xs text-gray-400 mt-2">Cek folder <b>/sdcard/Download/NeonEngine</b>. Semua output media, log, report, dan APK diarahkan ke sana.</p></div>
-        </div>
+        <template x-for="cmd in appCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
+        <template x-for="cmd in mediaCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
+        <template x-for="cmd in logCommands"><div class="codebox"><button class="copy-btn" @click="copy(cmd)"><i class="fas fa-copy"></i></button><code x-text="cmd"></code></div></template>
       </div>
     </div>
 
     <div class="grid md:grid-cols-3 gap-4">
-      <div class="feature-card"><i class="fas fa-circle-check text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Evaluasi Built-in</h4><p class="text-xs text-gray-400 mt-2"><b>neon doctor</b> mengecek Termux, BusyBox, daemon, engine shell, dan web server.</p></div>
-      <div class="feature-card"><i class="fas fa-terminal text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">CLI Tetap Ada</h4><p class="text-xs text-gray-400 mt-2">Semua fitur web GUI tetap bisa dipanggil dari command <b>neon</b>.</p></div>
-      <div class="feature-card"><i class="fas fa-shield-halved text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Functional Asli Aman</h4><p class="text-xs text-gray-400 mt-2">Alur module, install engine, daemon bridge, dan folder output tetap dipertahankan.</p></div>
+      <div class="feature-card"><i class="fas fa-circle-check text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">For Users</h4><p class="text-xs text-gray-400 mt-2">User cukup pakai <b>neon doctor</b>, <b>neon install</b>, <b>neon web</b>, dan tombol WebGUI.</p></div>
+      <div class="feature-card"><i class="fas fa-code text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">For Developers</h4><p class="text-xs text-gray-400 mt-2">Developer bisa integrasi ke API lokal untuk shell, device info, apps, media, dan logs.</p></div>
+      <div class="feature-card"><i class="fas fa-shield-halved text-2xl mb-3"></i><h4 class="font-bold uppercase text-sm">Local First</h4><p class="text-xs text-gray-400 mt-2">Endpoint berjalan di <b>127.0.0.1</b>, cocok untuk client lokal yang dikontrol user.</p></div>
     </div>
   </section>
 </main>
@@ -162,16 +144,37 @@
 <script>
 let webData=[];let shellData=[];let activeTab='web';let currentFilter='all';let searchQuery='';
 const adLinks=["https://omg10.com/4/10055984","https://sorrowfulpsychology.com/HE9TFh","https://dulyhagglermounting.com/2082665","https://jb.xylenolshivahs.com/iLMNRjfsHJiW4/94691"];
-function neonDocs(){return{moduleCommands:['neon refresh','neon modules','neon search fps','neon info shell-047','neon get shell-047','neon exec shell-047','neon agresif shell-047','neon del shell-047'],deviceCommands:['neon device','neon battery','neon storage','neon cpu','neon mem','neon thermal','neon apps','neon appinfo com.package.name','neon backupapk com.package.name','neon screenshot','neon record 10','neon anim-off','neon wm-reset','neon logsave'],webCommands:['neon test','neon doctor','neon install','neon web','neon web-status','neon panel','neon report','neon features','neon tools','neon termuxapi','neon open-folder','neon web-stop'],copy(text){navigator.clipboard.writeText(text).then(()=>{Swal.fire({toast:true,position:'top-end',timer:1300,showConfirmButton:false,icon:'success',title:'Command disalin'})})}}}
+function neonDocs(){return{moduleCommands:['neon refresh','neon modules','neon search fps','neon info shell-047','neon get shell-047','neon exec shell-047','neon agresif shell-047','neon del shell-047'],shellBridgeCommands:['neon shell "id"','neon shell "pm list packages | head"','neon busybox "ls -la /sdcard"','neon toybox "ps -A | head"','neon pm "list packages"','neon am "force-stop com.package.name"','neon cmd "package list packages"','neon dumpsys "battery"','neon settings "get system screen_brightness"','neon input "keyevent 3"'],deviceCommands:['neon device','neon battery','neon storage','neon memory','neon cpu','neon thermal','neon props','neon uptime','neon services','neon net','neon dns','neon iproute','neon ping 8.8.8.8'],appCommands:['neon apps','neon userapps','neon sysapps','neon appinfo com.package.name','neon app-start com.package.name','neon app-stop com.package.name','neon backupapk com.package.name','neon appops com.package.name'],mediaCommands:['neon screenshot','neon record 10','neon tap 500 1200','neon swipe 500 1500 500 500 300','neon text halo','neon key 3','neon wm-size','neon wm-density','neon wm-reset','neon anim-off','neon anim-normal','neon brightness 120'],logCommands:['neon report','neon logerr','neon logsave','neon bugmini','neon open-folder','neon features','neon tools','neon termuxapi'],webCommands:['neon test','neon doctor','neon install','neon web','neon web-status','neon panel','neon web-stop'],copy(text){navigator.clipboard.writeText(text).then(()=>{Swal.fire({toast:true,position:'top-end',timer:1300,showConfirmButton:false,icon:'success',title:'Command disalin'})})}}}
 function pickAd(){return adLinks[Math.floor(Math.random()*adLinks.length)]}
-function cardTemplate(item,isShell=false){const type=item.type||item.category||'Tools';const hasAds=item.ads===true;const file=item.file||item.downloadUrl||'';return `<div class="card p-3 md:p-4 flex flex-col min-h-[230px]"><div class="flex items-start gap-3 mb-3"><div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-2xl bg-black/50 border border-[#ff003c]/25 flex items-center justify-center text-[#ff003c]"><i class="${item.icon||'fas fa-terminal'}"></i></div><div class="min-w-0"><h3 class="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate">${item.title}</h3><div class="flex flex-wrap gap-1 mt-1"><span class="badge badge-yellow">${type}</span>${isShell?'<span class="badge badge-green">Non Root</span><span class="badge badge-blue">Root</span>':''}${hasAds?'<span class="badge badge-red">Iklan</span>':''}</div></div></div><p class="text-[9px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mb-3">${item.description||''}</p><div class="mt-auto pt-3 border-t border-white/10"><div class="flex justify-between gap-2 mb-3 text-[8px] md:text-[9px] font-mono text-gray-500"><span class="truncate"><i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer||'Agung Developer'}</span><span class="text-[#ff003c]">${item.size||'ZIP'}</span></div><button class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura" onclick="${isShell?`downloadShell('${encodeURIComponent(file)}','${hasAds?'1':'0'}')`:`startWebImport('${item.downloadUrl}','${item.id}')`}"><i class="fas ${isShell?'fa-download':'fa-bolt'} mr-1"></i> ${isShell?'Download':'Deploy'}</button></div></div>`}
+function cardTemplate(item,isShell=false){const type=item.type||item.category||'Tools';const hasAds=item.ads===true||String(item.tier||'').toLowerCase()==='premium';const file=item.file||item.downloadUrl||'';return `<div class="card p-3 md:p-4 flex flex-col min-h-[230px]"><div class="flex items-start gap-3 mb-3"><div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-2xl bg-black/50 border border-[#ff003c]/25 flex items-center justify-center text-[#ff003c]"><i class="${item.icon||'fas fa-terminal'}"></i></div><div class="min-w-0"><h3 class="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider font-rajdhani rog-neon truncate">${item.title}</h3><div class="flex flex-wrap gap-1 mt-1"><span class="badge badge-yellow">${type}</span>${isShell?'<span class="badge badge-green">Non Root</span><span class="badge badge-blue">Root</span>':''}${hasAds?'<span class="badge badge-red">Iklan</span>':''}</div></div></div><p class="text-[9px] md:text-[10px] text-gray-400 line-clamp-2 leading-relaxed font-mono mb-3">${item.description||''}</p><div class="mt-auto pt-3 border-t border-white/10"><div class="flex justify-between gap-2 mb-3 text-[8px] md:text-[9px] font-mono text-gray-500"><span class="truncate"><i class="fas fa-code text-[#ff003c]/70 mr-1"></i>${item.developer||'Agung Developer'}</span><span class="text-[#ff003c]">${item.size||'ZIP'}</span></div><button class="btn-main w-full py-2 text-white font-bold text-[9px] md:text-[11px] uppercase tracking-[.18em] font-jura" onclick="${isShell?`downloadShell('${file}','${hasAds?'1':'0'}')`:`startWebImport('${item.downloadUrl}','${item.id}')`}"><i class="fas ${isShell?'fa-download':'fa-bolt'} mr-1"></i> ${isShell?'Download':'Deploy'}</button></div></div>`}
 function renderWeb(data){const grid=document.getElementById('webGrid'),empty=document.getElementById('webEmpty');grid.innerHTML='';if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}empty.classList.add('hidden');grid.classList.remove('hidden');data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,false)))}
 function renderShell(data){const grid=document.getElementById('shellGrid'),empty=document.getElementById('shellEmpty');grid.innerHTML='';if(!data.length){grid.classList.add('hidden');empty.classList.remove('hidden');return}empty.classList.add('hidden');grid.classList.remove('hidden');data.forEach(item=>grid.insertAdjacentHTML('beforeend',cardTemplate(item,true)))}
 function filterWeb(){let data=webData;if(currentFilter!=='all')data=data.filter(item=>(item.type||'Tools')===currentFilter);if(searchQuery){const q=searchQuery.toLowerCase();data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||(item.type||'').toLowerCase().includes(q))}renderWeb(data)}
 function filterShell(){let data=shellData;if(searchQuery){const q=searchQuery.toLowerCase();data=data.filter(item=>(item.title||'').toLowerCase().includes(q)||(item.category||'').toLowerCase().includes(q)||(item.description||'').toLowerCase().includes(q)||(item.id||'').toLowerCase().includes(q))}renderShell(data)}
 function switchTab(tab){activeTab=tab;document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.tab===tab));document.getElementById('webSection').classList.toggle('hidden',tab!=='web');document.getElementById('shellSection').classList.toggle('hidden',tab!=='shell');document.getElementById('termuxSection').classList.toggle('hidden',tab!=='termux');document.getElementById('webFilters').classList.toggle('hidden',tab!=='web');const s=document.getElementById('searchInput');if(s){s.value='';s.placeholder=tab==='shell'?'Cari shell module...':'Cari module...'}searchQuery='';tab==='web'?filterWeb():tab==='shell'?filterShell():null}
-function normalizeShellFile(file){try{file=decodeURIComponent(file)}catch(e){}file=String(file||'').trim().replace(/\\/g,'/');file=file.replace(/^\/+/, '');if(!file)return'';if(file.includes('..')||/^https?:/i.test(file)||file.startsWith('//'))return'';if(!file.toLowerCase().endsWith('.zip'))return'';if(!file.startsWith('shell/'))file='shell/'+file.split('/').pop();return file}
-function downloadShell(file,ads){const safe=normalizeShellFile(file);if(!safe){Swal.fire({icon:'error',title:'Download gagal',text:'Path module tidak valid.'});return}window.open('download.html?file='+encodeURIComponent(safe)+'&session='+Date.now().toString(36),'_blank');if(ads==='1')setTimeout(()=>{location.href=pickAd()},700)}
+function normalizeShellFile(file){
+  let f=String(file||'').trim();
+  if(!f)return '';
+  try{f=decodeURIComponent(f)}catch(e){}
+  f=f.replace(/\\+/g,'/').replace(/^\/+/, '');
+  if(/^https?:\/\//i.test(f)||f.includes('..')||!/^shell\//i.test(f)||!/\.zip$/i.test(f))return '';
+  return f;
+}
+function downloadShell(file,ads){
+  const safeFile=normalizeShellFile(file);
+  if(!safeFile){
+    Swal.fire({icon:'error',title:'Download gagal',text:'Path module tidak valid.'});
+    return;
+  }
+  const session=Date.now().toString(36);
+  const downloadUrl='download.html?file='+encodeURIComponent(safeFile)+'&session='+session;
+  const win=window.open(downloadUrl,'_blank','noopener');
+  if(!win) location.href=downloadUrl;
+  if(ads==='1'){
+    const direct=pickAd();
+    setTimeout(()=>{ window.location.href=direct; },850);
+  }
+}
 function startWebImport(fileUrl,moduleName){const absoluteUrl=new URL(fileUrl,window.location.href).href;const selectedAd=pickAd();const intentUrl=`intent://import?url=${encodeURIComponent(absoluteUrl)}&name=${encodeURIComponent(moduleName)}#Intent;scheme=neoncore;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(selectedAd)};end;`;window.open(intentUrl,'_blank');setTimeout(()=>{location.href=selectedAd},2000)}
 document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentFilter=btn.dataset.type;filterWeb()}));document.getElementById('searchInput').addEventListener('input',e=>{searchQuery=e.target.value;activeTab==='web'?filterWeb():filterShell()});
 fetch('tweak.json').then(r=>r.json()).then(data=>{document.getElementById('webLoading').classList.add('hidden');webData=Array.isArray(data)?data:[];filterWeb()}).catch(()=>{document.getElementById('webLoading').innerHTML='<p class="text-xs font-mono text-gray-500 uppercase tracking-widest">Web Panel Offline</p>'});
