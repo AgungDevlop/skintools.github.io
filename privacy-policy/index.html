@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id" x-data="privacyPage()" :class="darkMode ? 'dark' : ''">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Privacy Policy resmi untuk Game Nuke - Gaming Optimization oleh Agung Developer.">
+  <meta name="robots" content="index, follow">
+  <title>Privacy Policy - Game Nuke</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.8/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Arial']
+          },
+          colors: {
+            nuke: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              900: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+  <div class="min-h-screen overflow-hidden">
+    <header class="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white">
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blue-500 blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-cyan-400 blur-3xl"></div>
+      </div>
+      <nav class="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-6">
+        <a href="https://neonmagisk.my.id" class="flex items-center gap-3" aria-label="Game Nuke Website">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20 backdrop-blur">
+            <i class="fa-solid fa-bolt text-xl text-cyan-300"></i>
+          </div>
+          <div>
+            <p class="text-sm uppercase tracking-[0.3em] text-cyan-200">Game Nuke</p>
+            <h1 class="text-lg font-bold leading-tight">Privacy Policy</h1>
+          </div>
+        </a>
+        <button @click="darkMode = !darkMode" class="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-lg backdrop-blur transition hover:bg-white/20" type="button">
+          <i :class="darkMode ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"></i>
+          <span class="ml-2" x-text="darkMode ? 'Light' : 'Dark'"></span>
+        </button>
+      </nav>
+      <section class="relative mx-auto max-w-6xl px-5 pb-20 pt-10">
+        <div class="max-w-3xl">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm text-cyan-100">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Transparansi data, iklan, dan izin aplikasi</span>
+          </div>
+          <h2 class="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">Kebijakan Privasi Game Nuke</h2>
+          <p class="mt-6 text-lg leading-8 text-slate-200">Privacy Policy ini menjelaskan bagaimana Game Nuke - Gaming Optimization, yang dikembangkan oleh Agung Developer, menangani data, izin, layanan iklan, dan keamanan pengguna.</p>
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+              <i class="fa-solid fa-user-shield text-cyan-300"></i>
+              <p class="mt-2 text-sm text-slate-200">Tidak menjual data pribadi pengguna</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+              <i class="fa-brands fa-google text-cyan-300"></i>
+              <p class="mt-2 text-sm text-slate-200">Menggunakan Google AdMob untuk iklan</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur">
+              <i class="fa-solid fa-mobile-screen text-cyan-300"></i>
+              <p class="mt-2 text-sm text-slate-200">Fitur optimasi berjalan secara lokal</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main class="relative mx-auto -mt-10 max-w-6xl px-5 pb-20">
+      <div class="grid gap-8 lg:grid-cols-[280px_1fr]">
+        <aside class="lg:sticky lg:top-6 lg:self-start">
+          <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/70 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+            <p class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Daftar Isi</p>
+            <div class="mt-4 space-y-1">
+              <template x-for="item in sections" :key="item.id">
+                <a :href="'#' + item.id" class="flex items-center gap-3 rounded-2xl px-3 py-2 text-sm text-slate-600 transition hover:bg-blue-50 hover:text-blue-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-cyan-300">
+                  <i :class="item.icon" class="w-5 text-center"></i>
+                  <span x-text="item.title"></span>
+                </a>
+              </template>
+            </div>
+            <div class="mt-6 rounded-2xl bg-blue-50 p-4 text-sm text-blue-900 dark:bg-blue-950/50 dark:text-blue-100">
+              <p class="font-semibold">Terakhir diperbarui</p>
+              <p>19 Mei 2026</p>
+            </div>
+          </div>
+        </aside>
+
+        <article class="space-y-6">
+          <section id="intro" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-circle-info"></i></div>
+            <h3>1. Pendahuluan</h3>
+            <p>Game Nuke - Gaming Optimization adalah aplikasi utilitas gaming yang membantu pengguna mengatur kenyamanan perangkat saat bermain game. Aplikasi ini dikembangkan dan dikelola oleh Agung Developer.</p>
+            <p>Dengan menggunakan Game Nuke, pengguna dianggap telah membaca dan memahami Kebijakan Privasi ini. Jika pengguna tidak setuju dengan kebijakan ini, pengguna dapat menghentikan penggunaan aplikasi.</p>
+          </section>
+
+          <section id="developer" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-code"></i></div>
+            <h3>2. Informasi Pengembang</h3>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl bg-slate-50 p-4 dark:bg-slate-800/70">
+                <p class="text-sm text-slate-500 dark:text-slate-400">Developer</p>
+                <p class="font-semibold">Agung Developer</p>
+              </div>
+              <div class="rounded-2xl bg-slate-50 p-4 dark:bg-slate-800/70">
+                <p class="text-sm text-slate-500 dark:text-slate-400">Website</p>
+                <a href="https://neonmagisk.my.id" class="font-semibold text-blue-600 hover:underline dark:text-cyan-300">https://neonmagisk.my.id</a>
+              </div>
+            </div>
+          </section>
+
+          <section id="data" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-database"></i></div>
+            <h3>3. Data yang Dikumpulkan</h3>
+            <p>Game Nuke tidak dirancang untuk mengumpulkan data pribadi pengguna secara langsung seperti nama, alamat rumah, nomor telepon, kontak, pesan, foto pribadi, atau informasi akun pribadi.</p>
+            <p>Fitur optimasi Game Nuke berjalan secara lokal di perangkat pengguna. Pengaturan yang dibuat oleh pengguna, seperti preferensi optimasi, mode engine, pointer speed, atau konfigurasi terkait kenyamanan bermain, digunakan untuk menjalankan fungsi aplikasi pada perangkat pengguna.</p>
+            <p>Namun, aplikasi ini menggunakan layanan pihak ketiga, yaitu Google AdMob, untuk menampilkan iklan. Layanan iklan pihak ketiga dapat memproses data tertentu sesuai kebijakan Google, seperti Advertising ID, informasi perangkat, interaksi iklan, informasi performa iklan, dan data teknis lain yang diperlukan untuk penayangan, pengukuran, keamanan, serta pencegahan penyalahgunaan iklan.</p>
+          </section>
+
+          <section id="admob" class="policy-card">
+            <div class="policy-icon"><i class="fa-brands fa-google"></i></div>
+            <h3>4. Iklan dan Google AdMob</h3>
+            <p>Game Nuke menampilkan iklan melalui Google AdMob. Iklan digunakan untuk mendukung pengembangan, pemeliharaan, dan peningkatan aplikasi.</p>
+            <p>Google AdMob dapat menggunakan identifier perangkat, termasuk Advertising ID, serta data teknis lain untuk menampilkan iklan, mengukur performa iklan, membatasi penyalahgunaan, dan menjalankan layanan periklanan sesuai kebijakan Google.</p>
+            <p>Pengguna dapat mengatur preferensi iklan melalui pengaturan privasi perangkat Android atau pengaturan akun Google. Pengguna juga dapat mereset atau menghapus Advertising ID melalui pengaturan perangkat jika fitur tersebut tersedia pada versi Android yang digunakan.</p>
+            <div class="mt-5 grid gap-3 sm:grid-cols-2">
+              <a href="https://policies.google.com/technologies/ads" class="rounded-2xl border border-slate-200 p-4 transition hover:border-blue-400 hover:bg-blue-50 dark:border-slate-700 dark:hover:border-cyan-400 dark:hover:bg-slate-800">
+                <i class="fa-solid fa-arrow-up-right-from-square text-blue-600 dark:text-cyan-300"></i>
+                <span class="ml-2 font-semibold">Google Ads Policy</span>
+              </a>
+              <a href="https://policies.google.com/privacy" class="rounded-2xl border border-slate-200 p-4 transition hover:border-blue-400 hover:bg-blue-50 dark:border-slate-700 dark:hover:border-cyan-400 dark:hover:bg-slate-800">
+                <i class="fa-solid fa-arrow-up-right-from-square text-blue-600 dark:text-cyan-300"></i>
+                <span class="ml-2 font-semibold">Google Privacy Policy</span>
+              </a>
+            </div>
+          </section>
+
+          <section id="use" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-gears"></i></div>
+            <h3>5. Penggunaan Data</h3>
+            <p>Data dan konfigurasi lokal digunakan untuk menjalankan fitur aplikasi, menyesuaikan pengalaman pengguna, mengaktifkan mode optimasi, menjalankan floating booster, dan mendukung fungsi engine sesuai izin yang diberikan pengguna.</p>
+            <p>Data yang diproses oleh Google AdMob digunakan oleh Google sesuai kebijakan mereka untuk penayangan iklan, pengukuran performa iklan, keamanan, pembatasan fraud, dan kepatuhan hukum yang berlaku.</p>
+          </section>
+
+          <section id="permissions" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-key"></i></div>
+            <h3>6. Izin Aplikasi</h3>
+            <p>Game Nuke dapat meminta beberapa izin agar fitur tertentu dapat berjalan. Izin yang tersedia dapat berbeda tergantung versi Android, perangkat, dan konfigurasi pengguna.</p>
+            <div class="mt-5 space-y-3">
+              <div class="permission-item"><i class="fa-solid fa-wifi"></i><span>Akses jaringan digunakan untuk koneksi internet, penayangan iklan, dan fitur yang membutuhkan komunikasi jaringan.</span></div>
+              <div class="permission-item"><i class="fa-solid fa-layer-group"></i><span>Izin tampil di atas aplikasi lain digunakan untuk menampilkan Floating Booster saat pengguna bermain game.</span></div>
+              <div class="permission-item"><i class="fa-solid fa-bell"></i><span>Izin notifikasi dapat digunakan untuk menampilkan informasi status, panduan, atau proses yang relevan dengan fitur aplikasi.</span></div>
+              <div class="permission-item"><i class="fa-solid fa-network-wired"></i><span>Izin terkait perangkat sekitar, Wi-Fi, atau jaringan lokal dapat digunakan untuk fitur engine, daemon, atau koneksi lokal sesuai dukungan perangkat.</span></div>
+              <div class="permission-item"><i class="fa-solid fa-sliders"></i><span>Izin atau akses pengaturan sistem tertentu dapat diperlukan untuk menjalankan fitur optimasi yang dipilih pengguna.</span></div>
+            </div>
+          </section>
+
+          <section id="sharing" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-share-nodes"></i></div>
+            <h3>7. Pembagian Data kepada Pihak Ketiga</h3>
+            <p>Game Nuke tidak menjual data pribadi pengguna kepada pihak ketiga. Aplikasi ini dapat menggunakan layanan pihak ketiga seperti Google AdMob untuk menampilkan iklan. Data yang diproses oleh layanan tersebut tunduk pada kebijakan privasi, persyaratan layanan, dan praktik keamanan masing-masing penyedia.</p>
+            <p>Jika diwajibkan oleh hukum, peraturan, proses hukum, atau permintaan otoritas yang sah, data tertentu dapat diproses sesuai ketentuan yang berlaku.</p>
+          </section>
+
+          <section id="security" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-lock"></i></div>
+            <h3>8. Keamanan Data</h3>
+            <p>Agung Developer berupaya menjaga aplikasi tetap aman dan menggunakan praktik pengembangan yang wajar untuk melindungi pengguna dari penyalahgunaan. Namun, tidak ada sistem digital yang dapat menjamin keamanan secara mutlak.</p>
+            <p>Pengguna disarankan mengunduh aplikasi hanya dari sumber resmi, memperbarui aplikasi secara berkala, dan tidak memberikan izin sistem kepada aplikasi yang tidak dipercaya.</p>
+          </section>
+
+          <section id="retention" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <h3>9. Penyimpanan Data</h3>
+            <p>Konfigurasi lokal aplikasi dapat disimpan di perangkat pengguna selama aplikasi masih terpasang atau sampai pengguna menghapus data aplikasi melalui pengaturan perangkat.</p>
+            <p>Data yang diproses oleh Google AdMob dikelola sesuai kebijakan retensi data Google dan pengaturan privasi pengguna.</p>
+          </section>
+
+          <section id="children" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-child-reaching"></i></div>
+            <h3>10. Privasi Anak</h3>
+            <p>Game Nuke tidak ditujukan khusus untuk anak-anak. Aplikasi ini tidak secara sengaja meminta data pribadi dari anak-anak. Jika orang tua atau wali mengetahui bahwa anak memberikan data pribadi melalui aplikasi ini, silakan hubungi pengembang agar dapat dilakukan peninjauan yang diperlukan.</p>
+          </section>
+
+          <section id="rights" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-user-check"></i></div>
+            <h3>11. Kontrol dan Hak Pengguna</h3>
+            <p>Pengguna dapat mengontrol aplikasi melalui pengaturan perangkat, termasuk mencabut izin, menghapus cache, menghapus data aplikasi, menghapus aplikasi, atau mengatur preferensi iklan pada perangkat Android.</p>
+            <p>Untuk data yang diproses oleh Google, pengguna dapat mengelola preferensi privasi melalui akun Google dan pengaturan iklan yang tersedia pada perangkat.</p>
+          </section>
+
+          <section id="changes" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-rotate"></i></div>
+            <h3>12. Perubahan Kebijakan Privasi</h3>
+            <p>Kebijakan Privasi ini dapat diperbarui dari waktu ke waktu untuk menyesuaikan perubahan fitur aplikasi, layanan pihak ketiga, kebijakan platform, atau peraturan yang berlaku. Perubahan akan ditampilkan pada halaman ini dengan tanggal pembaruan terbaru.</p>
+          </section>
+
+          <section id="contact" class="policy-card">
+            <div class="policy-icon"><i class="fa-solid fa-envelope"></i></div>
+            <h3>13. Kontak</h3>
+            <p>Jika pengguna memiliki pertanyaan tentang Kebijakan Privasi ini, pengguna dapat menghubungi pengembang melalui website resmi berikut:</p>
+            <div class="mt-5 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 p-5 text-white">
+              <p class="text-sm uppercase tracking-wider text-blue-100">Agung Developer</p>
+              <a href="https://neonmagisk.my.id" class="mt-2 inline-flex items-center gap-2 text-lg font-bold hover:underline">
+                <i class="fa-solid fa-globe"></i>
+                https://neonmagisk.my.id
+              </a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .policy-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgb(226 232 240);
+      background: rgb(255 255 255);
+      padding: 1.5rem;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+    }
+    .dark .policy-card {
+      border-color: rgb(30 41 59);
+      background: rgb(15 23 42);
+      box-shadow: none;
+    }
+    .policy-card h3 {
+      margin-top: 0.75rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .policy-card p {
+      margin-top: 1rem;
+      line-height: 1.8;
+      color: rgb(71 85 105);
+    }
+    .dark .policy-card p {
+      color: rgb(203 213 225);
+    }
+    .policy-icon {
+      display: inline-flex;
+      height: 2.75rem;
+      width: 2.75rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      background: rgb(239 246 255);
+      color: rgb(37 99 235);
+    }
+    .dark .policy-icon {
+      background: rgba(14, 165, 233, 0.12);
+      color: rgb(103 232 249);
+    }
+    .permission-item {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      border-radius: 1rem;
+      background: rgb(248 250 252);
+      padding: 1rem;
+      color: rgb(51 65 85);
+    }
+    .dark .permission-item {
+      background: rgba(30, 41, 59, 0.75);
+      color: rgb(203 213 225);
+    }
+    .permission-item i {
+      margin-top: 0.2rem;
+      color: rgb(37 99 235);
+      width: 1.25rem;
+      text-align: center;
+    }
+    .dark .permission-item i {
+      color: rgb(103 232 249);
+    }
+  </style>
+
+  <script>
+    function privacyPage() {
+      return {
+        darkMode: false,
+        sections: [
+          { id: 'intro', title: 'Pendahuluan', icon: 'fa-solid fa-circle-info' },
+          { id: 'developer', title: 'Pengembang', icon: 'fa-solid fa-code' },
+          { id: 'data', title: 'Data', icon: 'fa-solid fa-database' },
+          { id: 'admob', title: 'AdMob', icon: 'fa-brands fa-google' },
+          { id: 'use', title: 'Penggunaan', icon: 'fa-solid fa-gears' },
+          { id: 'permissions', title: 'Izin', icon: 'fa-solid fa-key' },
+          { id: 'sharing', title: 'Pihak Ketiga', icon: 'fa-solid fa-share-nodes' },
+          { id: 'security', title: 'Keamanan', icon: 'fa-solid fa-lock' },
+          { id: 'retention', title: 'Retensi', icon: 'fa-solid fa-clock-rotate-left' },
+          { id: 'children', title: 'Privasi Anak', icon: 'fa-solid fa-child-reaching' },
+          { id: 'rights', title: 'Hak Pengguna', icon: 'fa-solid fa-user-check' },
+          { id: 'changes', title: 'Perubahan', icon: 'fa-solid fa-rotate' },
+          { id: 'contact', title: 'Kontak', icon: 'fa-solid fa-envelope' }
+        ]
+      }
+    }
+  </script>
+</body>
+</html>
