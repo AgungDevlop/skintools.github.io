@@ -11,6 +11,7 @@ send_to_daemon() {
 show_alert() {
     local TITLE="$1"
     local MSG="$2"
+    local FALLBACK_MODE="FALSE"
     
     if command -v termux-dialog >/dev/null 2>&1; then
         T_RES=$(termux-dialog confirm -t "$TITLE" -i "$MSG" 2>/dev/null)
@@ -38,6 +39,7 @@ fi
 if [ "$1" == "daemon" ]; then
     termux-wake-lock 2>/dev/null
     LAST_FILE=$(ls -t /sdcard/Pictures/Screenshots/* /sdcard/DCIM/Screenshots/* 2>/dev/null | head -n 1)
+    TMP_B64="/data/local/tmp/vision_b64.txt"
     TMP_JSON="/data/local/tmp/vision_payload.json"
     
     while true; do
@@ -47,9 +49,16 @@ if [ "$1" == "daemon" ]; then
             sleep 1 
             LAST_FILE="$NEW_FILE"
             
-            printf '{"contents":[{"parts":[{"text":"Extract all text from this image. Only output the text."},{"inline_data":{"mime_type":"image/png","data":"' > "$TMP_JSON"
-            base64 -w 0 "$NEW_FILE" >> "$TMP_JSON"
-            printf '"}}]}]}' >> "$TMP_JSON"
+            base64 -w 0 "$NEW_FILE" > "$TMP_B64"
+            
+            jq -R -s '{
+              "contents": [{
+                "parts": [
+                  {"text": "Extract all text from this image. Only output the text."},
+                  {"inline_data": {"mime_type": "image/png", "data": (gsub("\n";"") | gsub("\r";""))}}
+                ]
+              }]
+            }' "$TMP_B64" > "$TMP_JSON"
             
             RESP=$(curl -s -X POST -H "Content-Type: application/json" -d @"$TMP_JSON" "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateContent?key=$API_KEY")
             
@@ -62,14 +71,14 @@ if [ "$1" == "daemon" ]; then
                 show_alert "Vision AI" "$TEXT"
             fi
             
-            rm -f "$TMP_JSON"
+            rm -f "$TMP_B64" "$TMP_JSON"
         fi
         sleep 2
     done
 fi
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  Vision AI (Termux UI + Auto Permission) "
+echo "  Vision AI (Termux UI + Auto Restart)    "
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 if ! nc -z 127.0.0.1 $PORT 2>/dev/null; then
@@ -77,30 +86,24 @@ if ! nc -z 127.0.0.1 $PORT 2>/dev/null; then
     exit 1
 fi
 
-echo "[*] Injeksi hak istimewa SYSTEM_ALERT_WINDOW via ADB..."
-send_to_daemon "appops set com.termux SYSTEM_ALERT_WINDOW allow"
-send_to_daemon "appops set com.termux.api SYSTEM_ALERT_WINDOW allow"
+send_to_daemon "appops set com.termux SYSTEM_ALERT_WINDOW allow >/dev/null 2>&1"
+send_to_daemon "appops set com.termux.api SYSTEM_ALERT_WINDOW allow >/dev/null 2>&1"
 
-echo "[*] Memeriksa dependencies sistem (curl, jq, termux-api)..."
 pkg install -y netcat-openbsd curl jq termux-api >/dev/null 2>&1
 
 if [ ! -d ~/storage/shared ]; then
     echo "[*] Meminta izin akses penyimpanan Termux..."
     termux-setup-storage
-    echo "    [!] Izinkan pop-up yang muncul di layar, lalu jalankan ulang perintah."
     exit 1
 fi
 
 if pgrep -f "screenread.sh daemon" >/dev/null; then
-    echo "[!] Daemon sudah beroperasi di latar belakang."
-    echo "    Untuk menghentikan: bash screenread.sh stop"
-    exit 0
+    echo "[!] Daemon lama terdeteksi. Memulai ulang dengan kode terbaru..."
+    pkill -f "screenread.sh daemon"
+    sleep 1
 fi
 
 echo "[+] Memicu proses daemon..."
 nohup bash "$0" daemon > /sdcard/vision_daemon.log 2>&1 &
 
 echo "[✓] ScreenMonitor Daemon AKTIF!"
-echo "    - Coba lakukan screenshot usap 3 jari sekarang."
-echo "    - UI Modal Termux dijamin otomatis menyembul."
-echo "    - Gunakan 'bash screenread.sh stop' untuk menghentikan AI."
