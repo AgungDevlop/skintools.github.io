@@ -3,6 +3,7 @@
 API_KEY="AIzaSyAnHG_bGWjvOxsUptlgsUb_FOpopzp4YDY"
 MODEL="gemini-2.5-flash"
 PORT=45555
+TMP_JSON="$HOME/vision_payload.json"
 
 send_to_daemon() {
     echo "$1" | nc 127.0.0.1 $PORT
@@ -50,8 +51,6 @@ if [ "$1" == "daemon" ]; then
     
     LAST_FILE=$(get_latest_screenshot)
     echo "[$(date)] Target pemantauan awal: $LAST_FILE" >> /sdcard/vision_daemon.log
-    
-    TMP_JSON="/data/local/tmp/vision_payload.json"
     
     while true; do
         NEW_FILE=$(get_latest_screenshot)
@@ -113,7 +112,7 @@ send_to_daemon "appops set com.termux SYSTEM_ALERT_WINDOW allow >/dev/null 2>&1"
 send_to_daemon "appops set com.termux.api SYSTEM_ALERT_WINDOW allow >/dev/null 2>&1"
 echo "[✓] Injeksi Bypass Izin Pop-Up berhasil."
 
-pkg install -y netcat-openbsd curl jq termux-api >/dev/null 2>&1
+pkg install -y netcat-openbsd curl jq termux-api coreutils >/dev/null 2>&1
 
 if [ ! -d ~/storage/shared ]; then
     echo "[X] GAGAL: Termux belum mendapat izin penyimpanan file."
