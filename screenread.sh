@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-API_KEY="AIzaSyAnHG_bGWjvOxsUptlgsUb_FOpopzp4YDY"
+API_KEY="AIzaSyDSmrsPvRweMnpEuB0UptUeQwKLYWOTUOQ"
 MODEL="gemini-2.5-flash"
 PORT=45555
 TMP_JSON="$HOME/vision_payload.json"
@@ -16,8 +16,10 @@ show_alert() {
     
     send_to_daemon "cmd notification post -S bigtext -t '$TITLE' 'Tag' '$SAFE_MSG'"
     
-    command -v termux-toast >/dev/null 2>&1 && termux-toast -c gray "$TITLE Selesai" &
-    command -v termux-dialog >/dev/null 2>&1 && termux-dialog confirm -t "$TITLE" -i "$MSG" >/dev/null 2>&1 &
+    if pm list packages 2>/dev/null | grep -q "com.termux.api"; then
+        termux-toast -c gray "$TITLE Selesai" &
+        termux-dialog confirm -t "$TITLE" -i "$MSG" >/dev/null 2>&1 &
+    fi
 }
 
 get_latest_screenshot() {
@@ -60,7 +62,9 @@ if [ "$1" == "daemon" ]; then
             sleep 2
             LAST_FILE="$NEW_FILE"
             
-            command -v termux-toast >/dev/null 2>&1 && termux-toast -c gray "AI sedang menganalisis layar..." &
+            if pm list packages 2>/dev/null | grep -q "com.termux.api"; then
+                termux-toast -c gray "AI sedang menganalisis layar..." &
+            fi
             
             MIME="image/png"
             [[ "$NEW_FILE" == *.jpg ]] || [[ "$NEW_FILE" == *.jpeg ]] && MIME="image/jpeg"
@@ -107,6 +111,12 @@ if ! nc -z 127.0.0.1 $PORT 2>/dev/null; then
     exit 1
 fi
 echo "[✓] Koneksi ke Port $PORT stabil."
+
+if ! pm list packages 2>/dev/null | grep -q "com.termux.api"; then
+    echo "[!] PERINGATAN: Aplikasi Android Termux:API belum diinstal!"
+    echo "    Toast dan Modal Termux tidak akan muncul, hanya notif ADB yang aktif."
+    echo "    Solusi: Silakan instal APK Termux:API dari F-Droid."
+fi
 
 send_to_daemon "appops set com.termux SYSTEM_ALERT_WINDOW allow >/dev/null 2>&1"
 send_to_daemon "appops set com.termux.api SYSTEM_ALERT_WINDOW allow >/dev/null 2>&1"
